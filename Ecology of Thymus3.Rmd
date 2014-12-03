@@ -19,7 +19,10 @@ Read in datafile generated from CellProfiler (1 cell type per file)
 ```{r WT1-11 cell types}   
 #Wildtype1-11 cell types
 
-setwd("~/Dropbox/R scripts/Datasets/Data with 11 cell types/Mutant1")
+# setwd("~/Desktop/ThymusGit/Datasets/Data with 11 cell types/Mutant1")
+
+# we need to find a way we can all call the data locally as we work on this, e.g. each set working directory locally and these calls should be generic to file structure in GIT
+
 
 Count1<-read.table("~/Dropbox/Mary's R scripts/Datasets/Data with 11 cell types/WT1/CD11c_1.txt",header=T,sep="\t",fill=TRUE)
 Count2<-read.table("~/Dropbox/Mary's R scripts/Datasets/Data with 11 cell types/WT1/CD11c_2.txt",header=T,sep="\t",fill=TRUE)
