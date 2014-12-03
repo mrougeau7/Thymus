@@ -12,6 +12,36 @@ The co-distribution of constituent species in a community is often used to indic
  
 ## Methods
 
+## Terminology
+
+I suggest an explanatory box for readers so that quadrat, section, composite, etc. can all be explained clearly in one place
+
+----------- ------- --------------- -------------------------
+   First    row                12.0 Example of a row that
+                                    spans multiple lines.
+
+  Second    row                 5.0 Here's another one. Note
+                                    the blank line between
+                                    rows.
+----------- ------- --------------- -------------------------
+
+: Here's a multiline table without headers.
+
+1. Where the mice come from and other necessary information about the Aire mutant line
+2. Information about the antibody stains, the frozen versus paraffin protocols
+3. Staining protocol and visualization with Cell Profiler: you need to explain whatever settings/parameters were used to obtain your data files, including how overlapping sections were lined up.
+4. Data Transformation
+5. Quadrat Selection and Rarefaction: you need to explain how you did this, and the next chunk can include the code you used to achieve this. That way, our results can include one plot and a brief discussion about the selection of that size quadrat and what it means for inclusion of cell types in a given quadrat
+6. Now get into the methods you already have in your R script, first setting K=2 and removing all quadrats that fall outside of the thymus from further analysis. You can do this using the subset command I think. We can then talk about more ways to maintain the identity of a given cluster of spatial quadrats (identity being the type of mouse, the section of thymus, and so on)
+
+6b. bray curtis
+
+6c. significant diffs between cell types?
+
+7. also Andrew Sornborger's approach for separating out the geometry/geography of clusters.
+
+8. jackknifing : removing one cell type at a time
+
 CellProfiler outputs X&Y coordinates in an excel file (which also contains other unnecessary info).  I delete the unnecessary info and add points ((0,0), (0,X), (X,0), (X,X)) to the X and Y columns in order to make a square so that the bin sizes in the matrix will be a consistent size.  I save this file as a .txt.  It is now ready to run through my script. The next step is to transform my data from individual .txt files into a community matrix that contains all the cell types. The community matrix is then used for Kmeans clustering.
 
 Read in datafile generated from CellProfiler (1 cell type per file)
@@ -1014,7 +1044,7 @@ input3.3 <- cbind(count3.3, count6.3, count9.3, count12.3, count15.3, count18.3,
 The next step is clustering. 
 First, download and load these packages:
 
-```{r}
+```{r clustering, cache=TRUE}
 library (vegan)
 library(labdsv)
 
@@ -1023,12 +1053,16 @@ library(labdsv)
 spe<-input
 spe1.1=input1.1
 spe1.2=input1.2
-spe1.2=input1.2
+#spe1.2=input1.2
+# CHECK THIS, IF FIXED CORRECTLY PLEASE THEN DELETE COMMENTS THAT ARE NOT NEEDED
+# why are these being called twice? should be spe1.3 <- input1.3 correct? same for spe2.2 and so on, and into the clustering calls below? I think I fixed all - JPW
+spe1.3<-input1.3
 
 spe2=input2
 spe2.1=input2.1
 spe2.2=input2.2
-spe2.2=input2.2
+#spe2.2=input2.2
+spe2.3<-input2.3
 
 spe3=input3
 spe3.1=input3.1
@@ -1042,37 +1076,38 @@ spe3.3=input3.3
 #spe.std <- decostand(spe, "normalize")  #You can also use "standardize". See 'help' for details.
 
 # Do the k-means clustering [read 'help' for the 'kmeans' function to see what the arguments "centers" (clusters or k) and "nstart" (randomizations) mean].
-spe.kmeans <- kmeans(spe, centers=4, nstart=100)
-spe.kmeans1.1 <- kmeans(spe1.1, centers=4, nstart=100)
-spe.kmeans1.2 <- kmeans(spe1.2, centers=4, nstart=100)
-spe.kmeans1.2 <- kmeans(spe1.2, centers=4, nstart=100)
+spe.kmeans <- kmeans(spe, centers=4, nstart=10)
+# each of these takes 5-10 minutes!
+spe.kmeans1.1 <- kmeans(spe1.1, centers=4, nstart=10)
+spe.kmeans1.2 <- kmeans(spe1.2, centers=4, nstart=10)
+spe.kmeans1.3 <- kmeans(spe1.3, centers=4, nstart=10)
 
-spe.kmeans2 <- kmeans(spe2, centers=4, nstart=100)
-spe.kmeans2.1 <- kmeans(spe2.1, centers=4, nstart=100)
-spe.kmeans2.2 <- kmeans(spe2.2, centers=4, nstart=100)
-spe.kmeans2.2 <- kmeans(spe2.2, centers=4, nstart=100)
+spe.kmeans2 <- kmeans(spe2, centers=4, nstart=10)
+spe.kmeans2.1 <- kmeans(spe2.1, centers=4, nstart=10)
+spe.kmeans2.2 <- kmeans(spe2.2, centers=4, nstart=10)
+spe.kmeans2.3 <- kmeans(spe2.3, centers=4, nstart=10)
 
-spe.kmeans3 <- kmeans(spe3, centers=4, nstart=1000)
-spe.kmeans3.1 <- kmeans(spe3.1, centers=4, nstart=100)
-spe.kmeans3.2 <- kmeans(spe3.2, centers=4, nstart=100)
-spe.kmeans3.2 <- kmeans(spe3.2, centers=4, nstart=100)
-#fix nstart before "real" science
+spe.kmeans3 <- kmeans(spe3, centers=4, nstart=10)
+spe.kmeans3.1 <- kmeans(spe3.1, centers=4, nstart=10)
+spe.kmeans3.2 <- kmeans(spe3.2, centers=4, nstart=10)
+spe.kmeans3.3 <- kmeans(spe3.3, centers=4, nstart=10)
+#fix nstart (1000?) before "real" science
 
 write.table(spe.kmeans$cluster, file="spe.kmeans_Thymus1WT_K4_100.csv", sep=",")
 write.table(spe.kmeans1.1$cluster, file="spe.kmeans_Thymus1WT_K4_100_Sec1.csv", sep=",")
 write.table(spe.kmeans1.2$cluster, file="spe.kmeans_Thymus1WT_K4_100_Sec2.csv", sep=",")
-write.table(spe.kmeans1.2$cluster, file="spe.kmeans_Thymus1WT_K4_100_Sec3.csv", sep=",")
+write.table(spe.kmeans1.3$cluster, file="spe.kmeans_Thymus1WT_K4_100_Sec3.csv", sep=",")
 
 
 write.table(spe.kmeans2$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100.csv", sep=",")
 write.table(spe.kmeans2.1$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100_Sec1.csv", sep=",")
 write.table(spe.kmeans2.2$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100_Sec2.csv", sep=",")
-write.table(spe.kmeans2.2$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100_Sec3.csv", sep=",")
+write.table(spe.kmeans2.3$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100_Sec3.csv", sep=",")
 
 write.table(spe.kmeans3$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100.csv", sep=",")
 write.table(spe.kmeans3.1$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec1.csv", sep=",")
 write.table(spe.kmeans3.2$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec2.csv", sep=",")
-write.table(spe.kmeans3.2$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec3.csv", sep=",")
+write.table(spe.kmeans3.3$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec3.csv", sep=",")
 #This file contains the clusters.  I reupload and reformat it back into a 2D matrix and add colors to show what the section looks like.
 
 library(gplots)
@@ -1080,49 +1115,50 @@ library(gplots)
 spe_1=read.table("spe.kmeans_Thymus1WT_K4_100.csv", head=T, sep=",")
 spe_1.1=read.table("spe.kmeans_Thymus1WT_K4_100_Sec1.csv", head=T, sep=",")
 spe_1.2=read.table("spe.kmeans_Thymus1WT_K4_100_Sec2.csv", head=T, sep=",")
-spe_1.2=read.table("spe.kmeans_Thymus1WT_K4_100_Sec3.csv", head=T, sep=",")
+spe_1.3=read.table("spe.kmeans_Thymus1WT_K4_100_Sec3.csv", head=T, sep=",")
 
 spe_2=read.table("spe.kmeans2_Thymus1Mutant_K4_100.csv", head=T, sep=",")
 spe_2.1=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec1.csv", head=T, sep=",")
 spe_2.2=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec2.csv", head=T, sep=",")
-spe_2.2=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec3.csv", head=T, sep=",")
+spe_2.3=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec3.csv", head=T, sep=",")
 
 spe_3=read.table("spe.kmeans3_Thymus2Mutant_K4_100.csv", head=T, sep=",")
 spe_3.1=read.table("spe.kmeans3_Thymus1Mutant_K4_100_Sec1.csv", head=T, sep=",")
 spe_3.2=read.table("spe.kmeans3_Thymus1Mutant_K4_100_Sec2.csv", head=T, sep=",")
-spe_3.2=read.table("spe.kmeans3_Thymus1Mutant_K4_100_Sec3.csv", head=T, sep=",")
+spe_3.3=read.table("spe.kmeans3_Thymus1Mutant_K4_100_Sec3.csv", head=T, sep=",")
 
 # DO NOT GET CONFUSED WITH THIS SPE2!!!!
+# Mary this is left over from our first attempt right? Try to clear up comments so we know which ones matter :)
 
 spematrix=data.matrix(spe_1)
 spematrix1.1=data.matrix(spe_1.1)
 spematrix1.2=data.matrix(spe_1.2)
-spematrix1.2=data.matrix(spe_1.2)
+spematrix1.3=data.matrix(spe_1.3)
 
 spematrix2=data.matrix(spe_2)
 spematrix2.1=data.matrix(spe_2.1)
 spematrix2.2=data.matrix(spe_2.2)
-spematrix2.2=data.matrix(spe_2.2)
+spematrix2.3=data.matrix(spe_2.3)
 
 spematrix3=data.matrix(spe_3)
 spematrix3.1=data.matrix(spe_3.1)
 spematrix3.2=data.matrix(spe_3.2)
-spematrix3.2=data.matrix(spe_3.2)
+spematrix3.3=data.matrix(spe_3.3)
 
 matrix = matrix(spematrix, nrow = 100, ncol=100)
 matrix1.1 = matrix(spematrix1.1, nrow = 100, ncol=100)
 matrix1.2 = matrix(spematrix1.2, nrow = 100, ncol=100)
-matrix1.2 = matrix(spematrix1.2, nrow = 100, ncol=100)
+matrix1.3 = matrix(spematrix1.3, nrow = 100, ncol=100)
 
 matrix2 = matrix(spematrix2, nrow = 100, ncol=100)
 matrix2.1 = matrix(spematrix2.1, nrow = 100, ncol=100)
 matrix2.2 = matrix(spematrix2.2, nrow = 100, ncol=100)
-matrix2.2 = matrix(spematrix2.2, nrow = 100, ncol=100)
+matrix2.3 = matrix(spematrix2.3, nrow = 100, ncol=100)
 
 matrix3 = matrix(spematrix3, nrow = 100, ncol=100)
 matrix3.1 = matrix(spematrix3.1, nrow = 100, ncol=100)
 matrix3.2 = matrix(spematrix3.2, nrow = 100, ncol=100)
-matrix3.2 = matrix(spematrix3.2, nrow = 100, ncol=100)
+matrix3.3 = matrix(spematrix3.3, nrow = 100, ncol=100)
 
 heatmap.2( matrix, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
@@ -1133,7 +1169,7 @@ heatmap.2( matrix1.1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix
 heatmap.2( matrix1.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1.2,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
-heatmap.2( matrix1.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1.2,
+heatmap.2( matrix1.3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1.2,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
 
@@ -1146,7 +1182,7 @@ heatmap.2( matrix2.1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix
 heatmap.2( matrix2.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2.2,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
-heatmap.2( matrix2.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2.2,
+heatmap.2( matrix2.3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2.2,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
 
@@ -1159,7 +1195,7 @@ heatmap.2( matrix3.1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix
 heatmap.2( matrix3.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3.2,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
-heatmap.2( matrix3.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3.2,
+heatmap.2( matrix3.3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3.2,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
 #change the colors to reflect the number of clusters.  Can also reorder so colors are consistent between sections.
@@ -1169,7 +1205,7 @@ heatmap.2( matrix3.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix
 Next Step: Figuring out how clustering is done
 We can see that we've asked R to take cell count info from 11 cell types and make 4 clusters
 
-```{r}
+```{r notsurewhat}
 #dimnames(spe.kmeans$centers)[2]
 #unique(spe.kmeans$cluster)
 ```
@@ -1177,7 +1213,7 @@ We can see that we've asked R to take cell count info from 11 cell types and mak
 It turns out that cluster 1 is just _empty_ space - but not clusters 2-4
 #need automatic way to identify _empty_ outside of thymus
 
-```{r}
+```{r panels}
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans$cluster)){ 
@@ -1265,7 +1301,7 @@ for (i in 1:max(spe.kmeans3.3$cluster)){
 
 We can make a running sum of all the counts of all cell types by cluster
 
-```{r}
+```{r counts}
 b2<-colSums(spe[which(spe.kmeans$cluster==1),])
 b3<-colSums(spe[which(spe.kmeans$cluster==3),])
 b4<-colSums(spe[which(spe.kmeans$cluster==4),])
@@ -1317,7 +1353,7 @@ b4.3_S3<-colSums(spe3.3[which(spe.kmeans3.3$cluster==1),])
 
 and normalize these so that each cluster type has the same total amount of cells (in other words, we're getting the proportion of cell types in each cluster)
 
-```{r}
+```{r normalize}
 b2<-b2/sum(b2)
 b3<-b3/sum(b3)
 b4<-b4/sum(b4)
@@ -1369,7 +1405,7 @@ b4.3_S3<-b4.3/sum(b4.3_S3)
 
 We can look at the difference between pairs of clusters to see which cell types are most different between clusters
 
-```{r}
+```{r clusterdiffs}
 par(mfrow=c(2,2))
 barplot(b2-b3,main="2-3")
 barplot(b2-b4,main="2-4")
@@ -1391,7 +1427,7 @@ df<-NULL
 df2<-NULL
 #these nulls are here to reset the dataframes from the rbind that is below, only important if iteratign across commands outside of KNITR
 
-```{r message=FALSE, comment=""}
+```{r braycurtis, message=FALSE, comment=""}
 library(vegan) # you may need to install this if you don't have it
 library(dplyr) # ditto (used for chaining and manipulation)  
 # http://blog.rstudio.org/2014/01/17/introducing-dplyr/
@@ -1476,8 +1512,27 @@ dfTOTAL<-rbind(df1.2,df2.2, df1.2, df1.2, df1.1, df1.1)
 BrayCurtis<-vegdist(dfTOTAL,method="bray")
 print(BrayCurtis)
 hc<-hclust(BrayCurtis)
-plot(hc,labels=two$rownames)
+plot(hc,labels=dfTOTAL$rownames)
 ```
 
+# Results
 
+1. How many mice of each type, how many replicates of mouse x thymus x prep method. 
+2. Size of quadrat selected, and what this says about number of individual quadrats examined, number of total cell counts. People love those sorts of numbers!
+3. Clustering and K selection
+4. Using BC to validate how different clusters are, importance of composite versus individual layers.
+5. Geography: Sornborger
+6. etc.
+
+# Discussion
+
+To an extent, as K goes up it may be that spatial weighting is important, but we choose to avoid the problems that weighting brings up; it may also be possible that some of the areas defined as K approaches 10+ are legitimate microenvironments and this will be addressed in a later paper.
+
+1. I can generate a map of the thymus that supports previous discussion of the geography of the thymus, but it is automatic and dependent on objective criteria of sorting the functional cell types in a spatially explicit way.
+2. We believe we have identified subregions in the medulla. This is cool.
+3. Though our replication is minimal, we can say that there is/is not quantifiable distinction between the spatial organization of WT and Aire- mice. This has been debated in the literature and we resolve it.
+4. There is much more we can do with this approach. 
+5. Ecologically, it is unusual to have the problem of such complete sampling of an ecosystem. Our approach to sampling this has strengths and concerns, generally associated with K-means clustering which has its subjective/ambiguous problems but is the best we can do!
+
+# Literature Cited
 
