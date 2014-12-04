@@ -46,7 +46,7 @@ CellProfiler outputs X&Y coordinates in an excel file (which also contains other
 
 Read in datafile generated from CellProfiler (1 cell type per file)
 
-```{r WT1-11 cell types}   
+```{r WT1-11 cell types, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}   
 #Wildtype1-11 cell types
 
 # setwd("~/Desktop/ThymusGit/Datasets/Data with 11 cell types/Mutant1")
@@ -382,7 +382,7 @@ input1.3 <- cbind(count3, count6, count9, count12, count15, count18, count21, co
 #This outputs the community matrix that I use for clustering.  I then open this file and remove the first column (it's just numbering the column)
 ```
 
-```{r Mutant1-11 cell types} 
+```{r Mutant1-11 cell types, echo=FALSE, warning=FALSE, message=FALSE, results='hide'} 
 
 Count1.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD11c_1_mutant.txt",header=T,sep="\t",fill=TRUE)
 Count2.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD11c_2_mutant.txt",header=T,sep="\t",fill=TRUE)
@@ -715,7 +715,7 @@ input2.3 <- cbind(count3.2, count6.2, count9.2, count12.2, count15.2, count18.2,
 ```
 
 
-```{r Mutant2-11 cell types}
+```{r Mutant2-11 cell types, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 #Mutant2
 Count1.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD11c_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
 Count2.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD11c_mutant2_3.txt",header=T,sep="\t",fill=TRUE)
@@ -1044,9 +1044,11 @@ input3.3 <- cbind(count3.3, count6.3, count9.3, count12.3, count15.3, count18.3,
 The next step is clustering. 
 First, download and load these packages:
 
-```{r clustering, cache=TRUE}
+```{r clustering, cache=TRUE, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 library (vegan)
 library(labdsv)
+
+# this may be good opportunity for flexible SHINY output until we settle on what ultimately goes into paper. each plot should get name and you determine when/where they come out, not all of them!
 
 # Load the files after reformatting them from CellProfiler
 #spe<-read.table("Totalcounts100_Thymus1Mutant.txt", head=T, sep="\t")
@@ -1112,6 +1114,9 @@ write.table(spe.kmeans3.3$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec3.c
 
 library(gplots)
 
+#KNITR gets confused with this read.table call. chunk compiles on its own though? and individual calls work fine. WHY send data out to .csv and then read back in? 
+# Seems you are swapping in and out of same DF a lot?
+
 spe_1=read.table("spe.kmeans_Thymus1WT_K4_100.csv", head=T, sep=",")
 spe_1.1=read.table("spe.kmeans_Thymus1WT_K4_100_Sec1.csv", head=T, sep=",")
 spe_1.2=read.table("spe.kmeans_Thymus1WT_K4_100_Sec2.csv", head=T, sep=",")
@@ -1123,9 +1128,11 @@ spe_2.2=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec2.csv", head=T, sep=",")
 spe_2.3=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec3.csv", head=T, sep=",")
 
 spe_3=read.table("spe.kmeans3_Thymus2Mutant_K4_100.csv", head=T, sep=",")
-spe_3.1=read.table("spe.kmeans3_Thymus1Mutant_K4_100_Sec1.csv", head=T, sep=",")
-spe_3.2=read.table("spe.kmeans3_Thymus1Mutant_K4_100_Sec2.csv", head=T, sep=",")
-spe_3.3=read.table("spe.kmeans3_Thymus1Mutant_K4_100_Sec3.csv", head=T, sep=",")
+spe_3.1=read.table("spe.kmeans3_Thymus2Mutant_K4_100_Sec1.csv", head=T, sep=",")
+spe_3.2=read.table("spe.kmeans3_Thymus2Mutant_K4_100_Sec2.csv", head=T, sep=",")
+spe_3.3=read.table("spe.kmeans3_Thymus2Mutant_K4_100_Sec3.csv", head=T, sep=",")
+
+# these were calling the wrong files. last batch was calling thymus1Mutant. fixed.
 
 # DO NOT GET CONFUSED WITH THIS SPE2!!!!
 # Mary this is left over from our first attempt right? Try to clear up comments so we know which ones matter :)
@@ -1205,7 +1212,7 @@ heatmap.2( matrix3.3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix
 Next Step: Figuring out how clustering is done
 We can see that we've asked R to take cell count info from 11 cell types and make 4 clusters
 
-```{r notsurewhat}
+```{r notsurewhat, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 #dimnames(spe.kmeans$centers)[2]
 #unique(spe.kmeans$cluster)
 ```
@@ -1213,7 +1220,7 @@ We can see that we've asked R to take cell count info from 11 cell types and mak
 It turns out that cluster 1 is just _empty_ space - but not clusters 2-4
 #need automatic way to identify _empty_ outside of thymus
 
-```{r panels}
+```{r panels, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans$cluster)){ 
@@ -1301,7 +1308,7 @@ for (i in 1:max(spe.kmeans3.3$cluster)){
 
 We can make a running sum of all the counts of all cell types by cluster
 
-```{r counts}
+```{r counts, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 b2<-colSums(spe[which(spe.kmeans$cluster==1),])
 b3<-colSums(spe[which(spe.kmeans$cluster==3),])
 b4<-colSums(spe[which(spe.kmeans$cluster==4),])
@@ -1353,7 +1360,7 @@ b4.3_S3<-colSums(spe3.3[which(spe.kmeans3.3$cluster==1),])
 
 and normalize these so that each cluster type has the same total amount of cells (in other words, we're getting the proportion of cell types in each cluster)
 
-```{r normalize}
+```{r normalize, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 b2<-b2/sum(b2)
 b3<-b3/sum(b3)
 b4<-b4/sum(b4)
@@ -1405,7 +1412,7 @@ b4.3_S3<-b4.3/sum(b4.3_S3)
 
 We can look at the difference between pairs of clusters to see which cell types are most different between clusters
 
-```{r clusterdiffs}
+```{r clusterdiffs, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 par(mfrow=c(2,2))
 barplot(b2-b3,main="2-3")
 barplot(b2-b4,main="2-4")

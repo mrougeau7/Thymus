@@ -1,0 +1,1540 @@
+title: Ecology of the Thymus
+Authors :Mary Browning, John Wares, Nancy Manley
+output: word_document
+========================================================
+## Introduction
+
+Within the field of organ biology, there is a lack of quantitative methods for analyzing the organization, as opposed to the composition, of organs, tissues, and cells.  Without quantitative methods for assessing organization, a significant aspect of organ and tissue biology is inaccessible to analysis and contrast.  Fortunately, a striking comparison can be drawn between the interactions that occur within organs and those that occur within ecosystems.  For instance, cell types in an organ, like species in an ecosystem, are influenced by the availability of space and resources as well as by the presence of other species. The presence or absence of one type may alter the functional role and dominance of another, or the overall service the community provides to the larger system [e.g., @wooton05].  By comparing cell types within a biological organ to species in an ecosystem, quantitative methods used for ecological analyses can be directly applied. Through analysis of the exact spatial location and co-location of component cell types, in an approach that uses the analytical toolkit of community ecologists and biogeographers, we gain a better understanding of which interactions can be validated by independent approach and analysis, as well as which interactions or even cell types we are likely to be need more information about.  
+
+The co-distribution of constituent species in a community is often used to indicate interaction - whether competitive, trophic, or facilitative [@verberk11;@angel11]. By analyzing the exact spatial location and co-location of component cell types across the domain of a particular tissue or organ, we may gain a better understanding of which interactions - indicated by codistribution and sufficient density - can be validated by independent approach and analysis.  To an extent, we recapitulate the spatial scales described above: we explore the differentiation of distinct habitats within the environment (biogeography: identifying regions of endemicity or dramatically shifted abundance), the colocalization of particular sub-groups of cells (community ecology), and we use the tenets of macroecology to the extent that we can generalize that cells need a particular density to be viable interactors, and to the extent that common cells have a larger overall distribution (this is not tautological, this follows from the first: you cannot be rare and widespread in a functional sense).  Our overall goal is development of a cellular ecology, where we can understand interactions at a quantitative level that does not yet exist in developmental biology, particularly in this system.  We seek to create a map of a healthy adult organ using cell location and abundance, and then to spatially characterize the organ by applying ecological theory directly to the produced map (something that has never been done before).  The results from this analysis can be used to make comparisons with organs in states of disequilibrium, such as diseased or mutant organs, in order to see what organizational differences occur. 
+
+ We performed this analysis on our model organ, the thymus.  The thymus was chosen because it is an intriguing example of cellular level organization, with a strong connection between organization and function.  The thymus consists of developing T cells supported by a complex cellular environment containing a variety of resident cell types, including thymic epithelial cells (TECs), dendritic cells, vasculature, and mesenchymal cells.  These cell types comprise multiple microenvironments that direct and support thymocytes to develop from immature progenitors into mature T cells that are both self-tolerant and self-restricted.  T cell development in the thymus requires interactions with the thymic microenvironments that provide signals for their survival, proliferation, and differentiation [1].  Despite their critical role in the generation of cellular immunity and the clinical importance of thymic regeneration, the composition and organization of thymic microenvironments and the mechanisms that promote their proper development and function are not fully understood, in part due to a lack of technical and theoretical approaches for quantifying tissue-level properties.  Thus, the thymus has many characteristics that make it an excellent system for developing and testing quantitative modeling: a diverse cellular composition that can be identified with cell type-specific markers, regional organization that is required for maximal organ function,  genetic models with diverse effects on organ composition and function, assays for experimentally inducing organ degeneration and regeneration, and high biomedical relevance.   To date, there are no quantitative models of thymus organ structure and function and no established methods for generating one.  We seek to address this by developing a quantitative theoretical model of the organization of cell types that can be used to better understand thymic function as well as evaluate diseased states. Our approach uses immunostaining on sagittal serial sections of a wildtype mouse thymus in order to identify distinct cellular subsets, followed by the use of novel computational approaches in order to quantitatively identify known and cryptic cellular spatial relationships.  We then take this approach one step further by comparing a wildtype and a mutant (Aire knockout) mouse thymus in an effort to identify differences in organizational characteristics.
+ 
+## Methods
+
+## Terminology
+
+I suggest an explanatory box for readers so that quadrat, section, composite, etc. can all be explained clearly in one place
+
+----------- ------- --------------- -------------------------
+   First    row                12.0 Example of a row that
+                                    spans multiple lines.
+
+  Second    row                 5.0 Here's another one. Note
+                                    the blank line between
+                                    rows.
+----------- ------- --------------- -------------------------
+
+: Here's a multiline table without headers.
+
+1. Where the mice come from and other necessary information about the Aire mutant line
+2. Information about the antibody stains, the frozen versus paraffin protocols
+3. Staining protocol and visualization with Cell Profiler: you need to explain whatever settings/parameters were used to obtain your data files, including how overlapping sections were lined up.
+4. Data Transformation
+5. Quadrat Selection and Rarefaction: you need to explain how you did this, and the next chunk can include the code you used to achieve this. That way, our results can include one plot and a brief discussion about the selection of that size quadrat and what it means for inclusion of cell types in a given quadrat
+6. Now get into the methods you already have in your R script, first setting K=2 and removing all quadrats that fall outside of the thymus from further analysis. You can do this using the subset command I think. We can then talk about more ways to maintain the identity of a given cluster of spatial quadrats (identity being the type of mouse, the section of thymus, and so on)
+
+6b. bray curtis
+
+6c. significant diffs between cell types?
+
+7. also Andrew Sornborger's approach for separating out the geometry/geography of clusters.
+
+8. jackknifing : removing one cell type at a time
+
+CellProfiler outputs X&Y coordinates in an excel file (which also contains other unnecessary info).  I delete the unnecessary info and add points ((0,0), (0,X), (X,0), (X,X)) to the X and Y columns in order to make a square so that the bin sizes in the matrix will be a consistent size.  I save this file as a .txt.  It is now ready to run through my script. The next step is to transform my data from individual .txt files into a community matrix that contains all the cell types. The community matrix is then used for Kmeans clustering.
+
+Read in datafile generated from CellProfiler (1 cell type per file)
+
+```{r WT1-11 cell types}   
+#Wildtype1-11 cell types
+
+# setwd("~/Desktop/ThymusGit/Datasets/Data with 11 cell types/Mutant1")
+
+# we need to find a way we can all call the data locally as we work on this, e.g. each set working directory locally and these calls should be generic to file structure in GIT
+
+
+Count1<-read.table("Datasets/Data with 11 cell types/WT1/CD11c_1.txt",header=T,sep="\t",fill=TRUE)
+Count2<-read.table("Datasets/Data with 11 cell types/WT1/CD11c_2.txt",header=T,sep="\t",fill=TRUE)
+Count3<-read.table("Datasets/Data with 11 cell types/WT1/CD11c_3.txt",header=T,sep="\t",fill=TRUE)
+Count4<-read.table("Datasets/Data with 11 cell types/WT1/CD25_1.txt",header=T,sep="\t",fill=TRUE)
+Count5<-read.table("Datasets/Data with 11 cell types/WT1/CD25_2.txt",header=T,sep="\t",fill=TRUE)
+Count6<-read.table("Datasets/Data with 11 cell types/WT1/CD25_3.txt",header=T,sep="\t",fill=TRUE)
+Count7<-read.table("Datasets/Data with 11 cell types/WT1/CD31_1.txt",header=T,sep="\t",fill=TRUE)
+Count8<-read.table("Datasets/Data with 11 cell types/WT1/CD31_2.txt",header=T,sep="\t",fill=TRUE)
+Count9<-read.table("Datasets/Data with 11 cell types/WT1/CD31_3.txt",header=T,sep="\t",fill=TRUE)
+Count10<-read.table("Datasets/Data with 11 cell types/WT1/CD205_1.txt",header=T,sep="\t",fill=TRUE)
+Count11<-read.table("Datasets/Data with 11 cell types/WT1/CD205_2.txt",header=T,sep="\t",fill=TRUE)
+Count12<-read.table("Datasets/Data with 11 cell types/WT1/CD205_3.txt",header=T,sep="\t",fill=TRUE)
+Count13<-read.table("Datasets/Data with 11 cell types/WT1/Claud5_1.txt",header=T,sep="\t",fill=TRUE)
+Count14<-read.table("Datasets/Data with 11 cell types/WT1/Claud5_2.txt",header=T,sep="\t",fill=TRUE)
+Count15<-read.table("Datasets/Data with 11 cell types/WT1/Claud5_3.txt",header=T,sep="\t",fill=TRUE)
+Count16<-read.table("Datasets/Data with 11 cell types/WT1/Claud34_1.txt",header=T,sep="\t",fill=TRUE)
+Count17<-read.table("Datasets/Data with 11 cell types/WT1/Claud34_2.txt",header=T,sep="\t",fill=TRUE)
+Count18<-read.table("Datasets/Data with 11 cell types/WT1/Claud34_3.txt",header=T,sep="\t",fill=TRUE)
+Count19<-read.table("Datasets/Data with 11 cell types/WT1/Foxp3_1.txt",header=T,sep="\t",fill=TRUE)
+Count20<-read.table("Datasets/Data with 11 cell types/WT1/Foxp3_2.txt",header=T,sep="\t",fill=TRUE)
+Count21<-read.table("Datasets/Data with 11 cell types/WT1/Foxp3_3.txt",header=T,sep="\t",fill=TRUE)
+Count22<-read.table("Datasets/Data with 11 cell types/WT1/K5_1.txt",header=T,sep="\t",fill=TRUE)
+Count23<-read.table("Datasets/Data with 11 cell types/WT1/K5_2.txt",header=T,sep="\t",fill=TRUE)
+Count24<-read.table("Datasets/Data with 11 cell types/WT1/K5_3.txt",header=T,sep="\t",fill=TRUE)
+Count25<-read.table("Datasets/Data with 11 cell types/WT1/K14_1.txt",header=T,sep="\t",fill=TRUE)
+Count26<-read.table("Datasets/Data with 11 cell types/WT1/K14_2.txt",header=T,sep="\t",fill=TRUE)
+Count27<-read.table("Datasets/Data with 11 cell types/WT1/K14_3.txt",header=T,sep="\t",fill=TRUE)
+Count28<-read.table("Datasets/Data with 11 cell types/WT1/PDGFRb_1.txt",header=T,sep="\t",fill=TRUE)
+Count29<-read.table("Datasets/Data with 11 cell types/WT1/PDGFRb_2.txt",header=T,sep="\t",fill=TRUE)
+Count30<-read.table("Datasets/Data with 11 cell types/WT1/PDGFRb_3.txt",header=T,sep="\t",fill=TRUE)
+Count31<-read.table("Datasets/Data with 11 cell types/WT1/UEA1_1.txt",header=T,sep="\t",fill=TRUE)
+Count32<-read.table("Datasets/Data with 11 cell types/WT1/UEA1_2.txt",header=T,sep="\t",fill=TRUE)
+Count33<-read.table("Datasets/Data with 11 cell types/WT1/UEA1_3.txt",header=T,sep="\t",fill=TRUE)
+
+#load library that generates hist2d plot
+library(gplots)
+
+#generates hist2d plot; creates 100x100 bins;you can change this to whatever matrix size you want (200x200, 300x300, etc)
+my.xy1<-hist2d(Count1$X,Count1$Y,nbins=c(100,100))
+my.xy2<-hist2d(Count2$X,Count2$Y,nbins=c(100,100))
+my.xy3<-hist2d(Count3$X,Count3$Y,nbins=c(100,100))
+my.xy4<-hist2d(Count4$X,Count4$Y,nbins=c(100,100))
+my.xy5<-hist2d(Count5$X,Count5$Y,nbins=c(100,100))
+my.xy6<-hist2d(Count6$X,Count6$Y,nbins=c(100,100))
+my.xy7<-hist2d(Count7$X,Count7$Y,nbins=c(100,100))
+my.xy8<-hist2d(Count8$X,Count8$Y,nbins=c(100,100))
+my.xy9<-hist2d(Count9$X,Count9$Y,nbins=c(100,100))
+my.xy10<-hist2d(Count10$X,Count10$Y,nbins=c(100,100))
+my.xy11<-hist2d(Count11$X,Count11$Y,nbins=c(100,100))
+my.xy12<-hist2d(Count12$X,Count12$Y,nbins=c(100,100))
+my.xy13<-hist2d(Count13$X,Count13$Y,nbins=c(100,100))
+my.xy14<-hist2d(Count14$X,Count14$Y,nbins=c(100,100))
+my.xy15<-hist2d(Count15$X,Count15$Y,nbins=c(100,100))
+my.xy16<-hist2d(Count16$X,Count16$Y,nbins=c(100,100))
+my.xy17<-hist2d(Count17$X,Count17$Y,nbins=c(100,100))
+my.xy18<-hist2d(Count18$X,Count18$Y,nbins=c(100,100))
+my.xy19<-hist2d(Count19$X,Count19$Y,nbins=c(100,100))
+my.xy20<-hist2d(Count20$X,Count20$Y,nbins=c(100,100))
+my.xy21<-hist2d(Count21$X,Count21$Y,nbins=c(100,100))
+my.xy22<-hist2d(Count22$X,Count22$Y,nbins=c(100,100))
+my.xy23<-hist2d(Count23$X,Count23$Y,nbins=c(100,100))
+my.xy24<-hist2d(Count24$X,Count24$Y,nbins=c(100,100))
+my.xy25<-hist2d(Count25$X,Count25$Y,nbins=c(100,100))
+my.xy26<-hist2d(Count26$X,Count26$Y,nbins=c(100,100))
+my.xy27<-hist2d(Count27$X,Count27$Y,nbins=c(100,100))
+my.xy28<-hist2d(Count28$X,Count28$Y,nbins=c(100,100))
+my.xy29<-hist2d(Count29$X,Count29$Y,nbins=c(100,100))
+my.xy30<-hist2d(Count30$X,Count30$Y,nbins=c(100,100))
+my.xy31<-hist2d(Count31$X,Count31$Y,nbins=c(100,100))
+my.xy32<-hist2d(Count32$X,Count32$Y,nbins=c(100,100))
+my.xy33<-hist2d(Count32$X,Count32$Y,nbins=c(100,100))
+
+#assigns name to counts produced from hist2d
+obj1 <- my.xy1$counts
+obj2 <- my.xy2$counts
+obj3 <- my.xy3$counts
+obj4 <- my.xy4$counts
+obj5 <- my.xy5$counts
+obj6 <- my.xy6$counts
+obj7 <- my.xy7$counts
+obj8 <- my.xy8$counts
+obj9 <- my.xy9$counts
+obj10 <- my.xy10$counts
+obj11 <- my.xy11$counts
+obj12 <- my.xy12$counts
+obj13 <- my.xy13$counts
+obj14 <- my.xy14$counts
+obj15 <- my.xy15$counts
+obj16 <- my.xy16$counts
+obj17 <- my.xy17$counts
+obj18 <- my.xy18$counts
+obj19 <- my.xy19$counts
+obj20 <- my.xy20$counts
+obj21 <- my.xy21$counts
+obj22 <- my.xy22$counts
+obj23 <- my.xy23$counts
+obj24 <- my.xy24$counts
+obj25 <- my.xy25$counts
+obj26 <- my.xy26$counts
+obj27 <- my.xy27$counts
+obj28 <- my.xy28$counts
+obj29 <- my.xy29$counts
+obj30 <- my.xy30$counts
+obj31 <- my.xy31$counts
+obj32 <- my.xy32$counts
+obj33 <- my.xy33$counts
+
+#Removes points added in to make section square ( I added these points into the csv file myself)
+
+obj1[1,1] = obj1[1,1]-1
+obj1[100,1] = obj1[100,1]-1
+obj1[1,100] = obj1[1,100]-1
+obj1[100,100]=obj1[100,100]-1
+
+obj2[1,1] = obj2[1,1]-1
+obj2[100,1] = obj2[100,1]-1
+obj2[1,100] = obj2[1,100]-1
+obj2[100,100]=obj2[100,100]-1
+
+obj3[1,1] = obj3[1,1]-1
+obj3[100,1] = obj3[100,1]-1
+obj3[1,100] = obj3[1,100]-1
+obj3[100,100]=obj3[100,100]-1
+
+obj4[1,1] = obj4[1,1]-1
+obj4[100,1] = obj4[100,1]-1
+obj4[1,100] = obj4[1,100]-1
+obj4[100,100]=obj4[100,100]-1
+
+obj5[1,1] = obj5[1,1]-1
+obj5[100,1] = obj5[100,1]-1
+obj5[1,100] = obj5[1,100]-1
+obj5[100,100]=obj5[100,100]-1
+
+obj6[1,1] = obj6[1,1]-1
+obj6[100,1] = obj6[100,1]-1
+obj6[1,100] = obj6[1,100]-1
+obj6[100,100]=obj6[100,100]-1
+
+obj7[1,1] = obj7[1,1]-1
+obj7[100,1] = obj7[100,1]-1
+obj7[1,100] = obj7[1,100]-1
+obj7[100,100]=obj7[100,100]-1
+
+obj8[1,1] = obj8[1,1]-1
+obj8[100,1] = obj8[100,1]-1
+obj8[1,100] = obj8[1,100]-1
+obj8[100,100]=obj8[100,100]-1
+
+obj9[1,1] = obj9[1,1]-1
+obj9[100,1] = obj9[100,1]-1
+obj9[1,100] = obj9[1,100]-1
+obj9[100,100]=obj9[100,100]-1
+
+obj10[1,1] = obj10[1,1]-1
+obj10[100,1] = obj10[100,1]-1
+obj10[1,100] = obj10[1,100]-1
+obj10[100,100]=obj10[100,100]-1
+
+obj11[1,1] = obj11[1,1]-1
+obj11[100,1] = obj11[100,1]-1
+obj11[1,100] = obj11[1,100]-1
+obj11[100,100]=obj11[100,100]-1
+
+obj12[1,1] = obj12[1,1]-1
+obj12[100,1] = obj12[100,1]-1
+obj12[1,100] = obj12[1,100]-1
+obj12[100,100]=obj12[100,100]-1
+
+obj13[1,1] = obj13[1,1]-1
+obj13[100,1] = obj13[100,1]-1
+obj13[1,100] = obj13[1,100]-1
+obj13[100,100]=obj13[100,100]-1
+
+obj14[1,1] = obj14[1,1]-1
+obj14[100,1] = obj14[100,1]-1
+obj14[1,100] = obj14[1,100]-1
+obj14[100,100]=obj14[100,100]-1
+
+obj15[1,1] = obj15[1,1]-1
+obj15[100,1] = obj15[100,1]-1
+obj15[1,100] = obj15[1,100]-1
+obj15[100,100]=obj15[100,100]-1
+
+obj16[1,1] = obj16[1,1]-1
+obj16[100,1] = obj16[100,1]-1
+obj16[1,100] = obj16[1,100]-1
+obj16[100,100]=obj16[100,100]-1
+
+obj17[1,1] = obj17[1,1]-1
+obj17[100,1] = obj17[100,1]-1
+obj17[1,100] = obj17[1,100]-1
+obj17[100,100]=obj17[100,100]-1
+
+obj18[1,1] = obj18[1,1]-1
+obj18[100,1] = obj18[100,1]-1
+obj18[1,100] = obj18[1,100]-1
+obj18[100,100]=obj18[100,100]-1
+
+obj19[1,1] = obj19[1,1]-1
+obj19[100,1] = obj19[100,1]-1
+obj19[1,100] = obj19[1,100]-1
+obj19[100,100]=obj19[100,100]-1
+
+obj20[1,1] = obj20[1,1]-1
+obj20[100,1] = obj20[100,1]-1
+obj20[1,100] = obj20[1,100]-1
+obj20[100,100]=obj20[100,100]-1
+
+obj21[1,1] = obj21[1,1]-1
+obj21[100,1] = obj21[100,1]-1
+obj21[1,100] = obj21[1,100]-1
+obj21[100,100]=obj1[100,100]-1
+
+obj22[1,1] = obj22[1,1]-1
+obj22[100,1] = obj22[100,1]-1
+obj22[1,100] = obj22[1,100]-1
+obj22[100,100]=obj22[100,100]-1
+
+obj23[1,1] = obj23[1,1]-1
+obj23[100,1] = obj23[100,1]-1
+obj23[1,100] = obj23[1,100]-1
+obj23[100,100]=obj23[100,100]-1
+
+obj24[1,1] = obj24[1,1]-1
+obj24[100,1] = obj24[100,1]-1
+obj24[1,100] = obj24[1,100]-1
+obj24[100,100]=obj24[100,100]-1
+
+obj25[1,1] = obj25[1,1]-1
+obj25[100,1] = obj25[100,1]-1
+obj25[1,100] = obj25[1,100]-1
+obj25[100,100]=obj25[100,100]-1
+
+obj26[1,1] = obj26[1,1]-1
+obj26[100,1] = obj26[100,1]-1
+obj26[1,100] = obj26[1,100]-1
+obj26[100,100]=obj26[100,100]-1
+
+obj27[1,1] = obj27[1,1]-1
+obj27[100,1] = obj27[100,1]-1
+obj27[1,100] = obj27[1,100]-1
+obj27[100,100]=obj27[100,100]-1
+
+obj28[1,1] = obj28[1,1]-1
+obj28[100,1] = obj28[100,1]-1
+obj28[1,100] = obj28[1,100]-1
+obj28[100,100]=obj28[100,100]-1
+
+obj29[1,1] = obj29[1,1]-1
+obj29[100,1] = obj29[100,1]-1
+obj29[1,100] = obj29[1,100]-1
+obj29[100,100]=obj29[100,100]-1
+
+obj30[1,1] = obj30[1,1]-1
+obj30[100,1] = obj30[100,1]-1
+obj30[1,100] = obj30[1,100]-1
+obj30[100,100]=obj30[100,100]-1
+
+obj31[1,1] = obj31[1,1]-1
+obj31[100,1] = obj31[100,1]-1
+obj31[1,100] = obj31[1,100]-1
+obj31[100,100]=obj31[100,100]-1
+
+obj32[1,1] = obj32[1,1]-1
+obj32[100,1] = obj32[100,1]-1
+obj32[1,100] = obj32[1,100]-1
+obj32[100,100]=obj32[100,100]-1
+
+obj33[1,1] = obj33[1,1]-1
+obj33[100,1] = obj33[100,1]-1
+obj33[1,100] = obj33[1,100]-1
+obj33[100,100]=obj33[100,100]-1
+
+# turn your species count matrices into vector; script won't work unless you do this
+count1 <- as.vector(obj1)
+count2 <- as.vector(obj2)
+count3 <- as.vector(obj3)
+count4 <- as.vector(obj4)
+count5 <- as.vector(obj5)
+count6 <- as.vector(obj6)
+count7 <- as.vector(obj7)
+count8 <- as.vector(obj8)
+count9 <- as.vector(obj9)
+count10 <- as.vector(obj10)
+count11 <- as.vector(obj11)
+count12 <- as.vector(obj12)
+count13 <- as.vector(obj13)
+count14 <- as.vector(obj14)
+count15 <- as.vector(obj15)
+count16 <- as.vector(obj16)
+count17 <- as.vector(obj17)
+count18 <- as.vector(obj18)
+count19 <- as.vector(obj19)
+count20 <- as.vector(obj20)
+count21 <- as.vector(obj21)
+count22 <- as.vector(obj22)
+count23 <- as.vector(obj23)
+count24 <- as.vector(obj24)
+count25 <- as.vector(obj25)
+count26 <- as.vector(obj26)
+count27 <- as.vector(obj27)
+count28 <- as.vector(obj28)
+count29 <- as.vector(obj29)
+count30 <- as.vector(obj30)
+count31 <- as.vector(obj31)
+count32 <- as.vector(obj32)
+count33 <- as.vector(obj33)
+
+# get coordinates for your species count matrices
+rownumber <- rep(seq(1,nrow(obj1),by=1), times=ncol(obj1))
+colnumber <- rep(1:ncol(obj1), each = nrow(obj1)) 
+
+# turn coordinates and species counts into new matrix that can be input into vegan
+input <- cbind(count1, count2, count3, count4, count5, count6, count7, count8, count9, count10, count11, count12, count13, count14, count15, count16, count17, count18, count19,count20, count21, count22, count23, count24, count25, count26, count27, count28, count29, count30, count31, count32, count33)
+
+input1.1 <- cbind(count1, count4, count7, count10, count13, count16, count19, count22, count25, count28, count31)
+
+input1.2 <- cbind(count2, count5, count8, count11, count14, count17, count20, count23, count26, count29, count32)
+
+input1.3 <- cbind(count3, count6, count9, count12, count15, count18, count21, count24, count27, count30, count33)
+
+
+
+#write.csv(input, file="Totalcounts100_Thymus1Mutant.txt")
+#This outputs the community matrix that I use for clustering.  I then open this file and remove the first column (it's just numbering the column)
+```
+
+```{r Mutant1-11 cell types} 
+
+Count1.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD11c_1_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count2.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD11c_2_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count3.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD11c_4_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count4.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD25_2_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count5.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD25_3_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count6.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD25_4_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count7.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD31_2_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count8.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD31_3_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count9.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD31_4_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count10.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD205_1_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count11.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD205_2_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count12.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD205_4_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count13.2<-read.table("Datasets/Data with 11 cell types/Mutant1/Claud5_2_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count14.2<-read.table("Datasets/Data with 11 cell types/Mutant1/Claud5_4_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count15.2<-read.table("Datasets/Data with 11 cell types/Mutant1/Claud5_5_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count16.2<-read.table("Datasets/Data with 11 cell types/Mutant1/Claud34_2_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count17.2<-read.table("Datasets/Data with 11 cell types/Mutant1/Claud34_3_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count18.2<-read.table("Datasets/Data with 11 cell types/Mutant1/Claud34_4_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count19.2<-read.table("Datasets/Data with 11 cell types/Mutant1/Foxp3_2_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count20.2<-read.table("Datasets/Data with 11 cell types/Mutant1/Foxp3_4_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count21.2<-read.table("Datasets/Data with 11 cell types/Mutant1/Foxp3_5_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count22.2<-read.table("Datasets/Data with 11 cell types/Mutant1/K5_2_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count23.2<-read.table("Datasets/Data with 11 cell types/Mutant1/K5_4_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count24.2<-read.table("Datasets/Data with 11 cell types/Mutant1/K5_5_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count25.2<-read.table("Datasets/Data with 11 cell types/Mutant1/K14_2_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count26.2<-read.table("Datasets/Data with 11 cell types/Mutant1/K14_4_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count27.2<-read.table("Datasets/Data with 11 cell types/Mutant1/K14_5_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count28.2<-read.table("Datasets/Data with 11 cell types/Mutant1/PDGFRb_1_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count29.2<-read.table("Datasets/Data with 11 cell types/Mutant1/PDGFRb_2_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count30.2<-read.table("Datasets/Data with 11 cell types/Mutant1/PDGFRb_4_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count31.2<-read.table("Datasets/Data with 11 cell types/Mutant1/UEA1_2_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count32.2<-read.table("Datasets/Data with 11 cell types/Mutant1/UEA1_3_mutant.txt",header=T,sep="\t",fill=TRUE)
+Count33.2<-read.table("Datasets/Data with 11 cell types/Mutant1/UEA1_4_mutant.txt",header=T,sep="\t",fill=TRUE)
+
+#load library that generates hist2d plot
+library(gplots)
+
+#generates hist2d plot; creates 100x100 bins;you can change this to whatever matrix size you want (200x200, 300x300, etc)
+my.xy1.2<-hist2d(Count1.2$X,Count1.2$Y,nbins=c(100,100))
+my.xy2.2<-hist2d(Count2$X,Count2$Y,nbins=c(100,100))
+my.xy3.2<-hist2d(Count3.2$X,Count3.2$Y,nbins=c(100,100))
+my.xy4.2<-hist2d(Count4.2$X,Count4.2$Y,nbins=c(100,100))
+my.xy5.2<-hist2d(Count5.2$X,Count5.2$Y,nbins=c(100,100))
+my.xy6.2<-hist2d(Count6.2$X,Count6.2$Y,nbins=c(100,100))
+my.xy7.2<-hist2d(Count7.2$X,Count7.2$Y,nbins=c(100,100))
+my.xy8.2<-hist2d(Count8.2$X,Count8.2$Y,nbins=c(100,100))
+my.xy9.2<-hist2d(Count9.2$X,Count9.2$Y,nbins=c(100,100))
+my.xy10.2<-hist2d(Count10.2$X,Count10.2$Y,nbins=c(100,100))
+my.xy11.2<-hist2d(Count11.2$X,Count11.2$Y,nbins=c(100,100))
+my.xy12.2<-hist2d(Count12.2$X,Count12.2$Y,nbins=c(100,100))
+my.xy13.2<-hist2d(Count13.2$X,Count13.2$Y,nbins=c(100,100))
+my.xy14.2<-hist2d(Count14.2$X,Count14.2$Y,nbins=c(100,100))
+my.xy15.2<-hist2d(Count15.2$X,Count15.2$Y,nbins=c(100,100))
+my.xy16.2<-hist2d(Count16.2$X,Count16.2$Y,nbins=c(100,100))
+my.xy17.2<-hist2d(Count17.2$X,Count17.2$Y,nbins=c(100,100))
+my.xy18.2<-hist2d(Count18.2$X,Count18.2$Y,nbins=c(100,100))
+my.xy19.2<-hist2d(Count19.2$X,Count19.2$Y,nbins=c(100,100))
+my.xy20.2<-hist2d(Count20.2$X,Count20.2$Y,nbins=c(100,100))
+my.xy21.2<-hist2d(Count21.2$X,Count21.2$Y,nbins=c(100,100))
+my.xy22.2<-hist2d(Count22.2$X,Count22.2$Y,nbins=c(100,100))
+my.xy23.2<-hist2d(Count23.2$X,Count23.2$Y,nbins=c(100,100))
+my.xy24.2<-hist2d(Count24.2$X,Count24.2$Y,nbins=c(100,100))
+my.xy25.2<-hist2d(Count25.2$X,Count25.2$Y,nbins=c(100,100))
+my.xy26.2<-hist2d(Count26.2$X,Count26.2$Y,nbins=c(100,100))
+my.xy27.2<-hist2d(Count27.2$X,Count27.2$Y,nbins=c(100,100))
+my.xy28.2<-hist2d(Count28.2$X,Count28.2$Y,nbins=c(100,100))
+my.xy29.2<-hist2d(Count29.2$X,Count29.2$Y,nbins=c(100,100))
+my.xy30.2<-hist2d(Count30.2$X,Count30.2$Y,nbins=c(100,100))
+my.xy31.2<-hist2d(Count31.2$X,Count31.2$Y,nbins=c(100,100))
+my.xy32.2<-hist2d(Count32.2$X,Count32.2$Y,nbins=c(100,100))
+my.xy33.2<-hist2d(Count32.2$X,Count32.2$Y,nbins=c(100,100))
+
+#assigns name to counts produced from hist2d
+obj1.2 <- my.xy1.2$counts
+obj2.2 <- my.xy2.2$counts
+obj3.2 <- my.xy3.2$counts
+obj4.2 <- my.xy4.2$counts
+obj5.2 <- my.xy5.2$counts
+obj6.2 <- my.xy6.2$counts
+obj7.2 <- my.xy7.2$counts
+obj8.2 <- my.xy8.2$counts
+obj9.2 <- my.xy9.2$counts
+obj10.2 <- my.xy10.2$counts
+obj11.2 <- my.xy11.2$counts
+obj12.2 <- my.xy12.2$counts
+obj13.2 <- my.xy13.2$counts
+obj14.2 <- my.xy14.2$counts
+obj15.2 <- my.xy15.2$counts
+obj16.2 <- my.xy16.2$counts
+obj17.2 <- my.xy17.2$counts
+obj18.2 <- my.xy18.2$counts
+obj19.2 <- my.xy19.2$counts
+obj20.2 <- my.xy20.2$counts
+obj21.2 <- my.xy21.2$counts
+obj22.2 <- my.xy22.2$counts
+obj23.2 <- my.xy23.2$counts
+obj24.2 <- my.xy24.2$counts
+obj25.2 <- my.xy25.2$counts
+obj26.2 <- my.xy26.2$counts
+obj27.2 <- my.xy27.2$counts
+obj28.2 <- my.xy28.2$counts
+obj29.2 <- my.xy29.2$counts
+obj30.2 <- my.xy30.2$counts
+obj31.2 <- my.xy31.2$counts
+obj32.2 <- my.xy32.2$counts
+obj33.2 <- my.xy33.2$counts
+
+#Removes points added in to make section square ( I added these points into the csv file myself)
+
+obj1.2[1,1] = obj1.2[1,1]-1
+obj1.2[100,1] = obj1.2[100,1]-1
+obj1.2[1,100] = obj1.2[1,100]-1
+obj1.2[100,100]=obj1.2[100,100]-1
+
+obj2.2[1,1] = obj2.2[1,1]-1
+obj2.2[100,1] = obj2.2[100,1]-1
+obj2.2[1,100] = obj2.2[1,100]-1
+obj2.2[100,100]=obj2.2[100,100]-1
+
+obj3.2[1,1] = obj3.2[1,1]-1
+obj3.2[100,1] = obj3.2[100,1]-1
+obj3.2[1,100] = obj3.2[1,100]-1
+obj3.2[100,100]=obj3.2[100,100]-1
+
+obj4.2[1,1] = obj4.2[1,1]-1
+obj4.2[100,1] = obj4.2[100,1]-1
+obj4.2[1,100] = obj4.2[1,100]-1
+obj4.2[100,100]=obj4.2[100,100]-1
+
+obj5.2[1,1] = obj5.2[1,1]-1
+obj5.2[100,1] = obj5.2[100,1]-1
+obj5.2[1,100] = obj5.2[1,100]-1
+obj5.2[100,100]=obj5.2[100,100]-1
+
+obj6.2[1,1] = obj6.2[1,1]-1
+obj6.2[100,1] = obj6.2[100,1]-1
+obj6.2[1,100] = obj6.2[1,100]-1
+obj6.2[100,100]=obj6.2[100,100]-1
+
+obj7.2[1,1] = obj7.2[1,1]-1
+obj7.2[100,1] = obj7.2[100,1]-1
+obj7.2[1,100] = obj7.2[1,100]-1
+obj7.2[100,100]=obj7.2[100,100]-1
+
+obj8.2[1,1] = obj8.2[1,1]-1
+obj8.2[100,1] = obj8.2[100,1]-1
+obj8.2[1,100] = obj8.2[1,100]-1
+obj8.2[100,100]=obj8.2[100,100]-1
+
+obj9.2[1,1] = obj9.2[1,1]-1
+obj9.2[100,1] = obj9.2[100,1]-1
+obj9.2[1,100] = obj9.2[1,100]-1
+obj9.2[100,100]=obj9.2[100,100]-1
+
+obj10.2[1,1] = obj10.2[1,1]-1
+obj10.2[100,1] = obj10.2[100,1]-1
+obj10.2[1,100] = obj10.2[1,100]-1
+obj10.2[100,100]=obj10.2[100,100]-1
+
+obj11.2[1,1] = obj11.2[1,1]-1
+obj11.2[100,1] = obj11.2[100,1]-1
+obj11.2[1,100] = obj11.2[1,100]-1
+obj11.2[100,100]=obj11.2[100,100]-1
+
+obj12.2[1,1] = obj12.2[1,1]-1
+obj12.2[100,1] = obj12.2[100,1]-1
+obj12.2[1,100] = obj12.2[1,100]-1
+obj12.2[100,100]=obj12.2[100,100]-1
+
+obj13.2[1,1] = obj13.2[1,1]-1
+obj13.2[100,1] = obj13.2[100,1]-1
+obj13.2[1,100] = obj13.2[1,100]-1
+obj13.2[100,100]=obj13.2[100,100]-1
+
+obj14.2[1,1] = obj14.2[1,1]-1
+obj14.2[100,1] = obj14.2[100,1]-1
+obj14.2[1,100] = obj14.2[1,100]-1
+obj14.2[100,100]=obj14.2[100,100]-1
+
+obj15.2[1,1] = obj15.2[1,1]-1
+obj15.2[100,1] = obj15.2[100,1]-1
+obj15.2[1,100] = obj15.2[1,100]-1
+obj15.2[100,100]=obj15.2[100,100]-1
+
+obj16.2[1,1] = obj16.2[1,1]-1
+obj16.2[100,1] = obj16.2[100,1]-1
+obj16.2[1,100] = obj16.2[1,100]-1
+obj16.2[100,100]=obj16.2[100,100]-1
+
+obj17.2[1,1] = obj17.2[1,1]-1
+obj17.2[100,1] = obj17.2[100,1]-1
+obj17.2[1,100] = obj17.2[1,100]-1
+obj17.2[100,100]=obj17.2[100,100]-1
+
+obj18.2[1,1] = obj18.2[1,1]-1
+obj18.2[100,1] = obj18.2[100,1]-1
+obj18.2[1,100] = obj18.2[1,100]-1
+obj18.2[100,100]=obj18.2[100,100]-1
+
+obj19.2[1,1] = obj19.2[1,1]-1
+obj19.2[100,1] = obj19.2[100,1]-1
+obj19.2[1,100] = obj19.2[1,100]-1
+obj19.2[100,100]=obj19.2[100,100]-1
+
+obj20.2[1,1] = obj20.2[1,1]-1
+obj20.2[100,1] = obj20.2[100,1]-1
+obj20.2[1,100] = obj20.2[1,100]-1
+obj20.2[100,100]=obj20.2[100,100]-1
+
+obj21.2[1,1] = obj21.2[1,1]-1
+obj21.2[100,1] = obj21.2[100,1]-1
+obj21.2[1,100] = obj21.2[1,100]-1
+obj21.2[100,100]=obj21.2[100,100]-1
+
+obj22.2[1,1] = obj22.2[1,1]-1
+obj22.2[100,1] = obj22.2[100,1]-1
+obj22.2[1,100] = obj22.2[1,100]-1
+obj22.2[100,100]=obj22.2[100,100]-1
+
+obj23.2[1,1] = obj23.2[1,1]-1
+obj23.2[100,1] = obj23.2[100,1]-1
+obj23.2[1,100] = obj23.2[1,100]-1
+obj23.2[100,100]=obj23.2[100,100]-1
+
+obj24.2[1,1] = obj24.2[1,1]-1
+obj24.2[100,1] = obj24.2[100,1]-1
+obj24.2[1,100] = obj24.2[1,100]-1
+obj24.2[100,100]=obj24.2[100,100]-1
+
+obj25.2[1,1] = obj25.2[1,1]-1
+obj25.2[100,1] = obj25.2[100,1]-1
+obj25.2[1,100] = obj25.2[1,100]-1
+obj25.2[100,100]=obj25.2[100,100]-1
+
+obj26.2[1,1] = obj26.2[1,1]-1
+obj26.2[100,1] = obj26.2[100,1]-1
+obj26.2[1,100] = obj26.2[1,100]-1
+obj26.2[100,100]=obj26.2[100,100]-1
+
+obj27.2[1,1] = obj27.2[1,1]-1
+obj27.2[100,1] = obj27.2[100,1]-1
+obj27.2[1,100] = obj27.2[1,100]-1
+obj27.2[100,100]=obj27.2[100,100]-1
+
+obj28.2[1,1] = obj28.2[1,1]-1
+obj28.2[100,1] = obj28.2[100,1]-1
+obj28.2[1,100] = obj28.2[1,100]-1
+obj28.2[100,100]=obj28.2[100,100]-1
+
+obj29.2[1,1] = obj29.2[1,1]-1
+obj29.2[100,1] = obj29.2[100,1]-1
+obj29.2[1,100] = obj29.2[1,100]-1
+obj29.2[100,100]=obj29.2[100,100]-1
+
+obj30.2[1,1] = obj30.2[1,1]-1
+obj30.2[100,1] = obj30.2[100,1]-1
+obj30.2[1,100] = obj30.2[1,100]-1
+obj30.2[100,100]=obj30.2[100,100]-1
+
+obj31.2[1,1] = obj31.2[1,1]-1
+obj31.2[100,1] = obj31.2[100,1]-1
+obj31.2[1,100] = obj31.2[1,100]-1
+obj31.2[100,100]=obj31.2[100,100]-1
+
+obj32.2[1,1] = obj32.2[1,1]-1
+obj32.2[100,1] = obj32.2[100,1]-1
+obj32.2[1,100] = obj32.2[1,100]-1
+obj32.2[100,100]=obj32.2[100,100]-1
+
+obj33.2[1,1] = obj33.2[1,1]-1
+obj33.2[100,1] = obj33.2[100,1]-1
+obj33.2[1,100] = obj33.2[1,100]-1
+obj33.2[100,100]=obj33.2[100,100]-1
+
+# turn your species count matrices into vector; script won't work unless you do this
+count1.2 <- as.vector(obj1.2)
+count2.2 <- as.vector(obj2.2)
+count3.2 <- as.vector(obj3.2)
+count4.2 <- as.vector(obj4.2)
+count5.2 <- as.vector(obj5.2)
+count6.2 <- as.vector(obj6.2)
+count7.2 <- as.vector(obj7.2)
+count8.2 <- as.vector(obj8.2)
+count9.2 <- as.vector(obj9.2)
+count10.2 <- as.vector(obj10.2)
+count11.2 <- as.vector(obj11.2)
+count12.2 <- as.vector(obj12.2)
+count13.2 <- as.vector(obj13.2)
+count14.2 <- as.vector(obj14.2)
+count15.2 <- as.vector(obj15.2)
+count16.2 <- as.vector(obj16.2)
+count17.2 <- as.vector(obj17.2)
+count18.2 <- as.vector(obj18.2)
+count19.2 <- as.vector(obj19.2)
+count20.2 <- as.vector(obj20.2)
+count21.2 <- as.vector(obj21.2)
+count22.2 <- as.vector(obj22.2)
+count23.2 <- as.vector(obj23.2)
+count24.2 <- as.vector(obj24.2)
+count25.2 <- as.vector(obj25.2)
+count26.2 <- as.vector(obj26.2)
+count27.2 <- as.vector(obj27.2)
+count28.2 <- as.vector(obj28.2)
+count29.2 <- as.vector(obj29.2)
+count30.2 <- as.vector(obj30.2)
+count31.2 <- as.vector(obj31.2)
+count32.2 <- as.vector(obj32.2)
+count33.2 <- as.vector(obj33.2)
+
+# get coordinates for your species count matrices
+rownumber2 <- rep(seq(1,nrow(obj1.2),by=1), times=ncol(obj1.2))
+colnumber2 <- rep(1:ncol(obj1.2), each = nrow(obj1.2)) 
+
+# turn coordinates and species counts into new matrix that can be input into vegan
+#input2 <- cbind(count1.2, count2.2, count3.2, count4.2, count5.2, count6.2, count7.2, count8.2, count9.2, count10.2, count11.2, count12.2, count13.2, count14.2, count15.2, count16.2, count17.2, count18.2, count19.2,count20.2, count21.2, count22.2, count23.2, count24.2, count25.2, count26.2, count27.2, count28.2, count29.2, count30.2, count31.2, count32.2, count33.2)
+
+input2 <- cbind(count1.2, count2.2, count3.2, count4.2, count5.2, count6.2, count7.2, count8.2, count9.2, count10.2, count11.2, count12.2, count13.2, count14.2, count15.2, count16.2, count17.2, count18.2, count19.2,count20.2, count21.2, count22.2, count23.2, count24.2, count25.2, count26.2, count27.2, count28.2, count29.2, count30.2, count31.2, count32.2, count33.2)
+#i think it has to do with the names of the columns...
+#input2<-cbind(count1, count2, count3, count4, count5, count6, count7, count8, count9, count10, count11, count12, count13, count14, count15, count16, count17, count18, count19,count20, count21, count22, count23, count24, count25, count26, count27, count28, count29, count30, count31, count32, count33)
+
+input2.1 <- cbind(count1.2, count4.2, count7.2, count10.2, count13.2, count16.2, count19.2, count22.2, count25.2, count28.2, count31.2)
+
+input2.2 <- cbind(count2.2, count5.2, count8.2, count11.2, count14.2, count17.2, count20.2, count23.2, count26.2, count29.2, count32.2)
+
+input2.3 <- cbind(count3.2, count6.2, count9.2, count12.2, count15.2, count18.2, count21.2, count24.2, count27.2, count30.2, count33.2)
+
+#write.csv(input, file="Totalcounts100_Thymus1Mutant.txt")
+#This outputs the community matrix that I use for clustering.  I then open this file and remove the first column (it's just numbering the column)
+```
+
+
+```{r Mutant2-11 cell types}
+#Mutant2
+Count1.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD11c_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
+Count2.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD11c_mutant2_3.txt",header=T,sep="\t",fill=TRUE)
+Count3.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD11c_mutant2_4.txt",header=T,sep="\t",fill=TRUE)
+Count4.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD25_mutant2_1.txt",header=T,sep="\t",fill=TRUE)
+Count5.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD25_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
+Count6.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD25_mutant2_3.txt",header=T,sep="\t",fill=TRUE)
+Count7.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD31_mutant2_1.txt",header=T,sep="\t",fill=TRUE)
+Count8.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD31_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
+Count9.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD31_mutant2_3.txt",header=T,sep="\t",fill=TRUE)
+Count10.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD205_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
+Count11.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD205_mutant2_3.txt",header=T,sep="\t",fill=TRUE)
+Count12.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD205_mutant2_4.txt",header=T,sep="\t",fill=TRUE)
+Count13.3<-read.table("Datasets/Data with 11 cell types/Mutant2/Claud5_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
+Count14.3<-read.table("Datasets/Data with 11 cell types/Mutant2/Claud5_mutant2_3.txt",header=T,sep="\t",fill=TRUE)
+Count15.3<-read.table("Datasets/Data with 11 cell types/Mutant2/Claud5_mutant2_4.txt",header=T,sep="\t",fill=TRUE)
+Count16.3<-read.table("Datasets/Data with 11 cell types/Mutant2/Claud34_mutant2_1.txt",header=T,sep="\t",fill=TRUE)
+Count17.3<-read.table("Datasets/Data with 11 cell types/Mutant2/Claud34_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
+Count18.3<-read.table("Datasets/Data with 11 cell types/Mutant2/Claud34_mutant2_3.txt",header=T,sep="\t",fill=TRUE)
+Count19.3<-read.table("Datasets/Data with 11 cell types/Mutant2/Foxp3_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
+Count20.3<-read.table("Datasets/Data with 11 cell types/Mutant2/Foxp3_mutant2_3.txt",header=T,sep="\t",fill=TRUE)
+Count21.3<-read.table("Datasets/Data with 11 cell types/Mutant2/Foxp3_mutant2_4.txt",header=T,sep="\t",fill=TRUE)
+Count22.3<-read.table("Datasets/Data with 11 cell types/Mutant2/K5_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
+Count23.3<-read.table("Datasets/Data with 11 cell types/Mutant2/K5_mutant2_3.txt",header=T,sep="\t",fill=TRUE)
+Count24.3<-read.table("Datasets/Data with 11 cell types/Mutant2/K5_mutant2_4.txt",header=T,sep="\t",fill=TRUE)
+Count25.3<-read.table("Datasets/Data with 11 cell types/Mutant2/K14_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
+Count26.3<-read.table("Datasets/Data with 11 cell types/Mutant2/K14_mutant2_3.txt",header=T,sep="\t",fill=TRUE)
+Count27.3<-read.table("Datasets/Data with 11 cell types/Mutant2/K14_mutant2_4.txt",header=T,sep="\t",fill=TRUE)
+Count28.3<-read.table("Datasets/Data with 11 cell types/Mutant2/PDGFRb_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
+Count29.3<-read.table("Datasets/Data with 11 cell types/Mutant2/PDGFRb_mutant2_3.txt",header=T,sep="\t",fill=TRUE)
+Count30.3<-read.table("Datasets/Data with 11 cell types/Mutant2/PDGFRb_mutant2_4.txt",header=T,sep="\t",fill=TRUE)
+Count31.3<-read.table("Datasets/Data with 11 cell types/Mutant2/UEA1_mutant2_1.txt",header=T,sep="\t",fill=TRUE)
+Count32.3<-read.table("Datasets/Data with 11 cell types/Mutant2/UEA1_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
+Count33.3<-read.table("Datasets/Data with 11 cell types/Mutant2/UEA1_mutant2_3.txt",header=T,sep="\t",fill=TRUE)
+
+#load library that generates hist2d plot
+library(gplots)
+
+#generates hist2d plot; creates 100x100 bins;you can change this to whatever matrix size you want (200x200, 300x300, etc)
+my.xy1.3<-hist2d(Count1.3$X,Count1.3$Y,nbins=c(100,100))
+my.xy2.3<-hist2d(Count2.3$X,Count2.3$Y,nbins=c(100,100))
+my.xy3.3<-hist2d(Count3.3$X,Count3.3$Y,nbins=c(100,100))
+my.xy4.3<-hist2d(Count4.3$X,Count4.3$Y,nbins=c(100,100))
+my.xy5.3<-hist2d(Count5.3$X,Count5.3$Y,nbins=c(100,100))
+my.xy6.3<-hist2d(Count6.3$X,Count6.3$Y,nbins=c(100,100))
+my.xy7.3<-hist2d(Count7.3$X,Count7.3$Y,nbins=c(100,100))
+my.xy8.3<-hist2d(Count8.3$X,Count8.3$Y,nbins=c(100,100))
+my.xy9.3<-hist2d(Count9.3$X,Count9.3$Y,nbins=c(100,100))
+my.xy10.3<-hist2d(Count10.3$X,Count10.3$Y,nbins=c(100,100))
+my.xy11.3<-hist2d(Count11.3$X,Count11.3$Y,nbins=c(100,100))
+my.xy12.3<-hist2d(Count12.3$X,Count12.3$Y,nbins=c(100,100))
+my.xy13.3<-hist2d(Count13.3$X,Count13.3$Y,nbins=c(100,100))
+my.xy14.3<-hist2d(Count14.3$X,Count14.3$Y,nbins=c(100,100))
+my.xy15.3<-hist2d(Count15.3$X,Count15.3$Y,nbins=c(100,100))
+my.xy16.3<-hist2d(Count16.3$X,Count16.3$Y,nbins=c(100,100))
+my.xy17.3<-hist2d(Count17.3$X,Count17.3$Y,nbins=c(100,100))
+my.xy18.3<-hist2d(Count18.3$X,Count18.3$Y,nbins=c(100,100))
+my.xy19.3<-hist2d(Count19.3$X,Count19.3$Y,nbins=c(100,100))
+my.xy20.3<-hist2d(Count20.3$X,Count20.3$Y,nbins=c(100,100))
+my.xy21.3<-hist2d(Count21.3$X,Count21.3$Y,nbins=c(100,100))
+my.xy22.3<-hist2d(Count22.3$X,Count22.3$Y,nbins=c(100,100))
+my.xy23.3<-hist2d(Count23.3$X,Count23.3$Y,nbins=c(100,100))
+my.xy24.3<-hist2d(Count24.3$X,Count24.3$Y,nbins=c(100,100))
+my.xy25.3<-hist2d(Count25.3$X,Count25.3$Y,nbins=c(100,100))
+my.xy26.3<-hist2d(Count26.3$X,Count26.3$Y,nbins=c(100,100))
+my.xy27.3<-hist2d(Count27.3$X,Count27.3$Y,nbins=c(100,100))
+my.xy28.3<-hist2d(Count28.3$X,Count28.3$Y,nbins=c(100,100))
+my.xy29.3<-hist2d(Count29.3$X,Count29.3$Y,nbins=c(100,100))
+my.xy30.3<-hist2d(Count30.3$X,Count30.3$Y,nbins=c(100,100))
+my.xy31.3<-hist2d(Count31.3$X,Count31.3$Y,nbins=c(100,100))
+my.xy32.3<-hist2d(Count32.3$X,Count32.3$Y,nbins=c(100,100))
+my.xy33.3<-hist2d(Count32.3$X,Count32.3$Y,nbins=c(100,100))
+
+#assigns name to counts produced from hist2d
+obj1.3 <- my.xy1.3$counts
+obj2.3 <- my.xy2.3$counts
+obj3.3 <- my.xy3.3$counts
+obj4.3 <- my.xy4.3$counts
+obj5.3 <- my.xy5.3$counts
+obj6.3 <- my.xy6.3$counts
+obj7.3 <- my.xy7.3$counts
+obj8.3 <- my.xy8.3$counts
+obj9.3 <- my.xy9.3$counts
+obj10.3 <- my.xy10.3$counts
+obj11.3 <- my.xy11.3$counts
+obj12.3 <- my.xy12.3$counts
+obj13.3 <- my.xy13.3$counts
+obj14.3 <- my.xy14.3$counts
+obj15.3 <- my.xy15.3$counts
+obj16.3 <- my.xy16.3$counts
+obj17.3 <- my.xy17.3$counts
+obj18.3 <- my.xy18.3$counts
+obj19.3 <- my.xy19.3$counts
+obj20.3 <- my.xy20.3$counts
+obj21.3 <- my.xy21.3$counts
+obj22.3 <- my.xy22.3$counts
+obj23.3 <- my.xy23.3$counts
+obj24.3 <- my.xy24.3$counts
+obj25.3 <- my.xy25.3$counts
+obj26.3 <- my.xy26.3$counts
+obj27.3 <- my.xy27.3$counts
+obj28.3 <- my.xy28.3$counts
+obj29.3 <- my.xy29.3$counts
+obj30.3 <- my.xy30.3$counts
+obj31.3 <- my.xy31.3$counts
+obj32.3 <- my.xy32.3$counts
+obj33.3 <- my.xy33.3$counts
+
+#Removes points added in to make section square ( I added these points into the csv file myself)
+
+obj1.3[1,1] = obj1.3[1,1]-1
+obj1.3[100,1] = obj1.3[100,1]-1
+obj1.3[1,100] = obj1.3[1,100]-1
+obj1.3[100,100]=obj1.3[100,100]-1
+
+obj2.3[1,1] = obj2.3[1,1]-1
+obj2.3[100,1] = obj2.3[100,1]-1
+obj2.3[1,100] = obj2.3[1,100]-1
+obj2.3[100,100]=obj2.3[100,100]-1
+
+obj3.3[1,1] = obj3.3[1,1]-1
+obj3.3[100,1] = obj3.3[100,1]-1
+obj3.3[1,100] = obj3.3[1,100]-1
+obj3.3[100,100]=obj3.3[100,100]-1
+
+obj4.3[1,1] = obj4.3[1,1]-1
+obj4.3[100,1] = obj4.3[100,1]-1
+obj4.3[1,100] = obj4.3[1,100]-1
+obj4.3[100,100]=obj4.3[100,100]-1
+
+obj5.3[1,1] = obj5.3[1,1]-1
+obj5.3[100,1] = obj5.3[100,1]-1
+obj5.3[1,100] = obj5.3[1,100]-1
+obj5.3[100,100]=obj5.3[100,100]-1
+
+obj6.3[1,1] = obj6.3[1,1]-1
+obj6.3[100,1] = obj6.3[100,1]-1
+obj6.3[1,100] = obj6.3[1,100]-1
+obj6.3[100,100]=obj6.3[100,100]-1
+
+obj7.3[1,1] = obj7.3[1,1]-1
+obj7.3[100,1] = obj7.3[100,1]-1
+obj7.3[1,100] = obj7.3[1,100]-1
+obj7.3[100,100]=obj7.3[100,100]-1
+
+obj8.3[1,1] = obj8.3[1,1]-1
+obj8.3[100,1] = obj8.3[100,1]-1
+obj8.3[1,100] = obj8.3[1,100]-1
+obj8.3[100,100]=obj8.3[100,100]-1
+
+obj9.3[1,1] = obj9.3[1,1]-1
+obj9.3[100,1] = obj9.3[100,1]-1
+obj9.3[1,100] = obj9.3[1,100]-1
+obj9.3[100,100]=obj9.3[100,100]-1
+
+obj10.3[1,1] = obj10.3[1,1]-1
+obj10.3[100,1] = obj10.3[100,1]-1
+obj10.3[1,100] = obj10.3[1,100]-1
+obj10.3[100,100]=obj10.3[100,100]-1
+
+obj11.3[1,1] = obj11.3[1,1]-1
+obj11.3[100,1] = obj11.3[100,1]-1
+obj11.3[1,100] = obj11.3[1,100]-1
+obj11.3[100,100]=obj11.3[100,100]-1
+
+obj12.3[1,1] = obj12.3[1,1]-1
+obj12.3[100,1] = obj12.3[100,1]-1
+obj12.3[1,100] = obj12.3[1,100]-1
+obj12.3[100,100]=obj12.3[100,100]-1
+
+obj13.3[1,1] = obj13.3[1,1]-1
+obj13.3[100,1] = obj13.3[100,1]-1
+obj13.3[1,100] = obj13.3[1,100]-1
+obj13.3[100,100]=obj13.3[100,100]-1
+
+obj14.3[1,1] = obj14.3[1,1]-1
+obj14.3[100,1] = obj14.3[100,1]-1
+obj14.3[1,100] = obj14.3[1,100]-1
+obj14.3[100,100]=obj14.3[100,100]-1
+
+obj15.3[1,1] = obj15.3[1,1]-1
+obj15.3[100,1] = obj15.3[100,1]-1
+obj15.3[1,100] = obj15.3[1,100]-1
+obj15.3[100,100]=obj15.3[100,100]-1
+
+obj16.3[1,1] = obj16.3[1,1]-1
+obj16.3[100,1] = obj16.3[100,1]-1
+obj16.3[1,100] = obj16.3[1,100]-1
+obj16.3[100,100]=obj16.3[100,100]-1
+
+obj17.3[1,1] = obj17.3[1,1]-1
+obj17.3[100,1] = obj17.3[100,1]-1
+obj17.3[1,100] = obj17.3[1,100]-1
+obj17.3[100,100]=obj17.3[100,100]-1
+
+obj18.3[1,1] = obj18.3[1,1]-1
+obj18.3[100,1] = obj18.3[100,1]-1
+obj18.3[1,100] = obj18.3[1,100]-1
+obj18.3[100,100]=obj18.3[100,100]-1
+
+obj19.3[1,1] = obj19.3[1,1]-1
+obj19.3[100,1] = obj19.3[100,1]-1
+obj19.3[1,100] = obj19.3[1,100]-1
+obj19.3[100,100]=obj19.3[100,100]-1
+
+obj20.3[1,1] = obj20.3[1,1]-1
+obj20.3[100,1] = obj20.3[100,1]-1
+obj20.3[1,100] = obj20.3[1,100]-1
+obj20.3[100,100]=obj20.3[100,100]-1
+
+obj21.3[1,1] = obj21.3[1,1]-1
+obj21.3[100,1] = obj21.3[100,1]-1
+obj21.3[1,100] = obj21.3[1,100]-1
+obj21.3[100,100]=obj21.3[100,100]-1
+
+obj22.3[1,1] = obj22.3[1,1]-1
+obj22.3[100,1] = obj22.3[100,1]-1
+obj22.3[1,100] = obj22.3[1,100]-1
+obj22.3[100,100]=obj22.3[100,100]-1
+
+obj23.3[1,1] = obj23.3[1,1]-1
+obj23.3[100,1] = obj23.3[100,1]-1
+obj23.3[1,100] = obj23.3[1,100]-1
+obj23.3[100,100]=obj23.3[100,100]-1
+
+obj24.3[1,1] = obj24.3[1,1]-1
+obj24.3[100,1] = obj24.3[100,1]-1
+obj24.3[1,100] = obj24.3[1,100]-1
+obj24.3[100,100]=obj24.3[100,100]-1
+
+obj25.3[1,1] = obj25.3[1,1]-1
+obj25.3[100,1] = obj25.3[100,1]-1
+obj25.3[1,100] = obj25.3[1,100]-1
+obj25.3[100,100]=obj25.3[100,100]-1
+
+obj26.3[1,1] = obj26.3[1,1]-1
+obj26.3[100,1] = obj26.3[100,1]-1
+obj26.3[1,100] = obj26.3[1,100]-1
+obj26.3[100,100]=obj26.3[100,100]-1
+
+obj27.3[1,1] = obj27.3[1,1]-1
+obj27.3[100,1] = obj27.3[100,1]-1
+obj27.3[1,100] = obj27.3[1,100]-1
+obj27.3[100,100]=obj27.3[100,100]-1
+
+obj28.3[1,1] = obj28.3[1,1]-1
+obj28.3[100,1] = obj28.3[100,1]-1
+obj28.3[1,100] = obj28.3[1,100]-1
+obj28.3[100,100]=obj28.3[100,100]-1
+
+obj29.3[1,1] = obj29.3[1,1]-1
+obj29.3[100,1] = obj29.3[100,1]-1
+obj29.3[1,100] = obj29.3[1,100]-1
+obj29.3[100,100]=obj29.3[100,100]-1
+
+obj30.3[1,1] = obj30.3[1,1]-1
+obj30.3[100,1] = obj30.3[100,1]-1
+obj30.3[1,100] = obj30.3[1,100]-1
+obj30.3[100,100]=obj30.3[100,100]-1
+
+obj31.3[1,1] = obj31.3[1,1]-1
+obj31.3[100,1] = obj31.3[100,1]-1
+obj31.3[1,100] = obj31.3[1,100]-1
+obj31.3[100,100]=obj31.3[100,100]-1
+
+obj32.3[1,1] = obj32.3[1,1]-1
+obj32.3[100,1] = obj32.3[100,1]-1
+obj32.3[1,100] = obj32.3[1,100]-1
+obj32.3[100,100]=obj32.3[100,100]-1
+
+obj33.3[1,1] = obj33.3[1,1]-1
+obj33.3[100,1] = obj33.3[100,1]-1
+obj33.3[1,100] = obj33.3[1,100]-1
+obj33.3[100,100]=obj33.3[100,100]-1
+
+# turn your species count matrices into vector; script won't work unless you do this
+count1.3 <- as.vector(obj1.3)
+count2.3 <- as.vector(obj2.3)
+count3.3 <- as.vector(obj3.3)
+count4.3 <- as.vector(obj4.3)
+count5.3 <- as.vector(obj5.3)
+count6.3 <- as.vector(obj6.3)
+count7.3 <- as.vector(obj7.3)
+count8.3 <- as.vector(obj8.3)
+count9.3 <- as.vector(obj9.3)
+count10.3 <- as.vector(obj10.3)
+count11.3 <- as.vector(obj11.3)
+count12.3 <- as.vector(obj12.3)
+count13.3 <- as.vector(obj13.3)
+count14.3 <- as.vector(obj14.3)
+count15.3 <- as.vector(obj15.3)
+count16.3 <- as.vector(obj16.3)
+count17.3 <- as.vector(obj17.3)
+count18.3 <- as.vector(obj18.3)
+count19.3 <- as.vector(obj19.3)
+count20.3 <- as.vector(obj20.3)
+count21.3 <- as.vector(obj21.3)
+count22.3 <- as.vector(obj22.3)
+count23.3 <- as.vector(obj23.3)
+count24.3 <- as.vector(obj24.3)
+count25.3 <- as.vector(obj25.3)
+count26.3 <- as.vector(obj26.3)
+count27.3 <- as.vector(obj27.3)
+count28.3 <- as.vector(obj28.3)
+count29.3 <- as.vector(obj29.3)
+count30.3 <- as.vector(obj30.3)
+count31.3 <- as.vector(obj31.3)
+count32.3 <- as.vector(obj32.3)
+count33.3 <- as.vector(obj33.3)
+
+# get coordinates for your species count matrices
+rownumber3 <- rep(seq(1,nrow(obj1.3),by=1), times=ncol(obj1.3))
+colnumber3 <- rep(1:ncol(obj1.3), each = nrow(obj1.3)) 
+
+
+input3 <- cbind(count1.3, count2.3, count3.3, count4.3, count5.3, count6.3, count7.3, count8.3, count9.3, count10.3, count11.3, count12.3, count13.3, count14.3, count15.3, count16.3, count17.3, count18.3, count19.3,count20.3, count21.3, count22.3, count23.3, count24.3, count25.3, count26.3, count27.3, count28.3, count29.3, count30.3, count31.3, count32.3, count33.3)
+
+input3.1 <- cbind(count1.3, count4.3, count7.3, count10.3, count13.3, count16.3, count19.3, count22.3, count25.3, count28.3, count31.3)
+
+input3.2 <- cbind(count2.3, count5.3, count8.3, count11.3, count14.3, count17.3, count20.3, count23.3, count26.3, count29.3, count32.3)
+
+input3.3 <- cbind(count3.3, count6.3, count9.3, count12.3, count15.3, count18.3, count21.3, count24.3, count27.3, count30.3, count33.3)
+```
+
+
+The next step is clustering. 
+First, download and load these packages:
+
+```{r clustering, cache=TRUE}
+library (vegan)
+library(labdsv)
+
+# Load the files after reformatting them from CellProfiler
+#spe<-read.table("Totalcounts100_Thymus1Mutant.txt", head=T, sep="\t")
+spe<-input
+spe1.1=input1.1
+spe1.2=input1.2
+#spe1.2=input1.2
+# CHECK THIS, IF FIXED CORRECTLY PLEASE THEN DELETE COMMENTS THAT ARE NOT NEEDED
+# why are these being called twice? should be spe1.3 <- input1.3 correct? same for spe2.2 and so on, and into the clustering calls below? I think I fixed all - JPW
+spe1.3<-input1.3
+
+spe2=input2
+spe2.1=input2.1
+spe2.2=input2.2
+#spe2.2=input2.2
+spe2.3<-input2.3
+
+spe3=input3
+spe3.1=input3.1
+spe3.2=input3.2
+spe3.3=input3.3
+
+
+#only use one of above; if spe<-input works then you don't have to manipulate in Excel :)
+
+# This step normalizes your data and is optional.
+#spe.std <- decostand(spe, "normalize")  #You can also use "standardize". See 'help' for details.
+
+# Do the k-means clustering [read 'help' for the 'kmeans' function to see what the arguments "centers" (clusters or k) and "nstart" (randomizations) mean].
+spe.kmeans <- kmeans(spe, centers=4, nstart=10)
+# each of these takes 5-10 minutes!
+spe.kmeans1.1 <- kmeans(spe1.1, centers=4, nstart=10)
+spe.kmeans1.2 <- kmeans(spe1.2, centers=4, nstart=10)
+spe.kmeans1.3 <- kmeans(spe1.3, centers=4, nstart=10)
+
+spe.kmeans2 <- kmeans(spe2, centers=4, nstart=10)
+spe.kmeans2.1 <- kmeans(spe2.1, centers=4, nstart=10)
+spe.kmeans2.2 <- kmeans(spe2.2, centers=4, nstart=10)
+spe.kmeans2.3 <- kmeans(spe2.3, centers=4, nstart=10)
+
+spe.kmeans3 <- kmeans(spe3, centers=4, nstart=10)
+spe.kmeans3.1 <- kmeans(spe3.1, centers=4, nstart=10)
+spe.kmeans3.2 <- kmeans(spe3.2, centers=4, nstart=10)
+spe.kmeans3.3 <- kmeans(spe3.3, centers=4, nstart=10)
+#fix nstart (1000?) before "real" science
+
+write.table(spe.kmeans$cluster, file="spe.kmeans_Thymus1WT_K4_100.csv", sep=",")
+write.table(spe.kmeans1.1$cluster, file="spe.kmeans_Thymus1WT_K4_100_Sec1.csv", sep=",")
+write.table(spe.kmeans1.2$cluster, file="spe.kmeans_Thymus1WT_K4_100_Sec2.csv", sep=",")
+write.table(spe.kmeans1.3$cluster, file="spe.kmeans_Thymus1WT_K4_100_Sec3.csv", sep=",")
+
+
+write.table(spe.kmeans2$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100.csv", sep=",")
+write.table(spe.kmeans2.1$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100_Sec1.csv", sep=",")
+write.table(spe.kmeans2.2$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100_Sec2.csv", sep=",")
+write.table(spe.kmeans2.3$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100_Sec3.csv", sep=",")
+
+write.table(spe.kmeans3$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100.csv", sep=",")
+write.table(spe.kmeans3.1$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec1.csv", sep=",")
+write.table(spe.kmeans3.2$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec2.csv", sep=",")
+write.table(spe.kmeans3.3$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec3.csv", sep=",")
+#This file contains the clusters.  I reupload and reformat it back into a 2D matrix and add colors to show what the section looks like.
+
+library(gplots)
+
+#KNITR gets confused with this read.table call. chunk compiles on its own though? and individual calls work fine. 
+
+spe_1=read.table("spe.kmeans_Thymus1WT_K4_100.csv", head=T, sep=",")
+spe_1.1=read.table("spe.kmeans_Thymus1WT_K4_100_Sec1.csv", head=T, sep=",")
+spe_1.2=read.table("spe.kmeans_Thymus1WT_K4_100_Sec2.csv", head=T, sep=",")
+spe_1.3=read.table("spe.kmeans_Thymus1WT_K4_100_Sec3.csv", head=T, sep=",")
+
+spe_2=read.table("spe.kmeans2_Thymus1Mutant_K4_100.csv", head=T, sep=",")
+spe_2.1=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec1.csv", head=T, sep=",")
+spe_2.2=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec2.csv", head=T, sep=",")
+spe_2.3=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec3.csv", head=T, sep=",")
+
+spe_3=read.table("spe.kmeans3_Thymus2Mutant_K4_100.csv", head=T, sep=",")
+spe_3.1=read.table("spe.kmeans3_Thymus1Mutant_K4_100_Sec1.csv", head=T, sep=",")
+spe_3.2=read.table("spe.kmeans3_Thymus1Mutant_K4_100_Sec2.csv", head=T, sep=",")
+spe_3.3=read.table("spe.kmeans3_Thymus1Mutant_K4_100_Sec3.csv", head=T, sep=",")
+
+# DO NOT GET CONFUSED WITH THIS SPE2!!!!
+# Mary this is left over from our first attempt right? Try to clear up comments so we know which ones matter :)
+
+spematrix=data.matrix(spe_1)
+spematrix1.1=data.matrix(spe_1.1)
+spematrix1.2=data.matrix(spe_1.2)
+spematrix1.3=data.matrix(spe_1.3)
+
+spematrix2=data.matrix(spe_2)
+spematrix2.1=data.matrix(spe_2.1)
+spematrix2.2=data.matrix(spe_2.2)
+spematrix2.3=data.matrix(spe_2.3)
+
+spematrix3=data.matrix(spe_3)
+spematrix3.1=data.matrix(spe_3.1)
+spematrix3.2=data.matrix(spe_3.2)
+spematrix3.3=data.matrix(spe_3.3)
+
+matrix = matrix(spematrix, nrow = 100, ncol=100)
+matrix1.1 = matrix(spematrix1.1, nrow = 100, ncol=100)
+matrix1.2 = matrix(spematrix1.2, nrow = 100, ncol=100)
+matrix1.3 = matrix(spematrix1.3, nrow = 100, ncol=100)
+
+matrix2 = matrix(spematrix2, nrow = 100, ncol=100)
+matrix2.1 = matrix(spematrix2.1, nrow = 100, ncol=100)
+matrix2.2 = matrix(spematrix2.2, nrow = 100, ncol=100)
+matrix2.3 = matrix(spematrix2.3, nrow = 100, ncol=100)
+
+matrix3 = matrix(spematrix3, nrow = 100, ncol=100)
+matrix3.1 = matrix(spematrix3.1, nrow = 100, ncol=100)
+matrix3.2 = matrix(spematrix3.2, nrow = 100, ncol=100)
+matrix3.3 = matrix(spematrix3.3, nrow = 100, ncol=100)
+
+heatmap.2( matrix, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
+heatmap.2( matrix1.1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1.1,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
+heatmap.2( matrix1.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1.2,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
+heatmap.2( matrix1.3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1.2,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
+
+heatmap.2( matrix2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+heatmap.2( matrix2.1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2.1,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+heatmap.2( matrix2.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2.2,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+heatmap.2( matrix2.3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2.2,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+
+heatmap.2( matrix3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+heatmap.2( matrix3.1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3.1,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+heatmap.2( matrix3.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3.2,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+heatmap.2( matrix3.3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3.2,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+#change the colors to reflect the number of clusters.  Can also reorder so colors are consistent between sections.
+
+```
+
+Next Step: Figuring out how clustering is done
+We can see that we've asked R to take cell count info from 11 cell types and make 4 clusters
+
+```{r notsurewhat}
+#dimnames(spe.kmeans$centers)[2]
+#unique(spe.kmeans$cluster)
+```
+
+It turns out that cluster 1 is just _empty_ space - but not clusters 2-4
+#need automatic way to identify _empty_ outside of thymus
+
+```{r panels}
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans$cluster)){ 
+  barplot(colSums(spe[which(spe.kmeans$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans1.1$cluster)){ 
+  barplot(colSums(spe1.1[which(spe.kmeans1.1$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans1.2$cluster)){ 
+  barplot(colSums(spe1.2[which(spe.kmeans1.2$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans1.2$cluster)){ 
+  barplot(colSums(spe1.2[which(spe.kmeans1.2$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans2$cluster)){ 
+  barplot(colSums(spe2[which(spe.kmeans2$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans2.1$cluster)){ 
+  barplot(colSums(spe2.1[which(spe.kmeans2.1$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans2.2$cluster)){ 
+  barplot(colSums(spe2.2[which(spe.kmeans2.2$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans2.2$cluster)){ 
+  barplot(colSums(spe2.2[which(spe.kmeans2.2$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans3$cluster)){ 
+  barplot(colSums(spe3[which(spe.kmeans3$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans3.1$cluster)){ 
+  barplot(colSums(spe3.1[which(spe.kmeans3.1$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans3.2$cluster)){ 
+  barplot(colSums(spe3.2[which(spe.kmeans3.2$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans3.3$cluster)){ 
+  barplot(colSums(spe3.3[which(spe.kmeans3.3$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+```
+
+We can make a running sum of all the counts of all cell types by cluster
+
+```{r counts}
+b2<-colSums(spe[which(spe.kmeans$cluster==1),])
+b3<-colSums(spe[which(spe.kmeans$cluster==3),])
+b4<-colSums(spe[which(spe.kmeans$cluster==4),])
+
+b2_S1<-colSums(spe1.1[which(spe.kmeans1.1$cluster==1),])
+b3_S1<-colSums(spe1.1[which(spe.kmeans1.1$cluster==2),])
+b4_S1<-colSums(spe1.1[which(spe.kmeans1.1$cluster==3),])
+
+b2_S2<-colSums(spe1.2[which(spe.kmeans1.2$cluster==4),])
+b3_S2<-colSums(spe1.2[which(spe.kmeans1.2$cluster==1),])
+b4_S2<-colSums(spe1.2[which(spe.kmeans1.2$cluster==2),])
+
+b2_S3<-colSums(spe1.2[which(spe.kmeans1.2$cluster==2),])
+b3_S3<-colSums(spe1.2[which(spe.kmeans1.2$cluster==4),])
+b4_S3<-colSums(spe1.2[which(spe.kmeans1.2$cluster==1),])
+
+b2.2<-colSums(spe2[which(spe.kmeans2$cluster==2),])
+b3.2<-colSums(spe2[which(spe.kmeans2$cluster==3),])
+b4.2<-colSums(spe2[which(spe.kmeans2$cluster==1),])
+
+b2.2_S1<-colSums(spe2.1[which(spe.kmeans2.1$cluster==1),])
+b3.2_S1<-colSums(spe2.1[which(spe.kmeans2.1$cluster==3),])
+b4.2_S1<-colSums(spe2.1[which(spe.kmeans2.1$cluster==2),])
+
+b2.2_S2<-colSums(spe2.2[which(spe.kmeans2.2$cluster==4),])
+b3.2_S2<-colSums(spe2.2[which(spe.kmeans2.2$cluster==2),])
+b4.2_S2<-colSums(spe2.2[which(spe.kmeans2.2$cluster==1),])
+
+b2.2_S3<-colSums(spe2.2[which(spe.kmeans2.2$cluster==4),])
+b3.2_S3<-colSums(spe2.2[which(spe.kmeans2.2$cluster==2),])
+b4.2_S3<-colSums(spe2.2[which(spe.kmeans2.2$cluster==1),])
+
+b2.3<-colSums(spe3[which(spe.kmeans3$cluster==2),])
+b3.3<-colSums(spe3[which(spe.kmeans3$cluster==3),])
+b4.3<-colSums(spe3[which(spe.kmeans3$cluster==1),])
+
+b2.3_S1<-colSums(spe3.1[which(spe.kmeans3.1$cluster==2),])
+b3.3_S1<-colSums(spe3.1[which(spe.kmeans3.1$cluster==3),])
+b4.3_S1<-colSums(spe3.1[which(spe.kmeans3.1$cluster==1),])
+
+b2.3_S2<-colSums(spe3.2[which(spe.kmeans3.2$cluster==2),])
+b3.3_S2<-colSums(spe3.2[which(spe.kmeans3.2$cluster==3),])
+b4.3_S2<-colSums(spe3.2[which(spe.kmeans3.2$cluster==1),])
+
+b2.3_S3<-colSums(spe3.3[which(spe.kmeans3.3$cluster==2),])
+b3.3_S3<-colSums(spe3.3[which(spe.kmeans3.3$cluster==3),])
+b4.3_S3<-colSums(spe3.3[which(spe.kmeans3.3$cluster==1),])
+```
+
+and normalize these so that each cluster type has the same total amount of cells (in other words, we're getting the proportion of cell types in each cluster)
+
+```{r normalize}
+b2<-b2/sum(b2)
+b3<-b3/sum(b3)
+b4<-b4/sum(b4)
+
+b2_S1<-b2/sum(b2_S1)
+b3_S1<-b3/sum(b3_S1)
+b4_S1<-b4/sum(b4_S1)
+
+b2_S2<-b2/sum(b2_S2)
+b3_S2<-b3/sum(b3_S2)
+b4_S2<-b4/sum(b4_S2)
+
+b2_S3<-b2/sum(b2_S3)
+b3_S3<-b3/sum(b3_S3)
+b4_S3<-b4/sum(b4_S3)
+
+b2.2<-b2.2/sum(b2.2)
+b3.2<-b3.2/sum(b3.2)
+b4.2<-b4.2/sum(b4.2)
+
+b2.2_S1<-b2.2/sum(b2.2_S1)
+b3.2_S1<-b3.2/sum(b3.2_S1)
+b4.2_S1<-b4.2/sum(b4.2_S1)
+
+b2.2_S2<-b2.2/sum(b2.2_S2)
+b3.2_S2<-b3.2/sum(b3.2_S2)
+b4.2_S2<-b4.2/sum(b4.2_S2)
+
+b2.2_S3<-b2.2/sum(b2.2_S3)
+b3.2_S3<-b3.2/sum(b3.2_S3)
+b4.2_S3<-b4.2/sum(b4.2_S3)
+
+b2.3<-b2.3/sum(b2.3)
+b3.3<-b3.3/sum(b3.3)
+b4.3<-b4.3/sum(b4.3)
+
+b2.3_S1<-b2.3/sum(b2.3_S1)
+b3.3_S1<-b3.3/sum(b3.3_S1)
+b4.3_S1<-b4.3/sum(b4.3_S1)
+
+b2.3_S2<-b2.3/sum(b2.3_S2)
+b3.3_S2<-b3.3/sum(b3.3_S2)
+b4.3_S2<-b4.3/sum(b4.3_S2)
+
+b2.3_S3<-b2.3/sum(b2.3_S3)
+b3.3_S3<-b3.3/sum(b3.3_S3)
+b4.3_S3<-b4.3/sum(b4.3_S3)
+```
+
+We can look at the difference between pairs of clusters to see which cell types are most different between clusters
+
+```{r clusterdiffs}
+par(mfrow=c(2,2))
+barplot(b2-b3,main="2-3")
+barplot(b2-b4,main="2-4")
+barplot(b3-b4,main="3-4")
+
+par(mfrow=c(2,2))
+barplot(b2.2-b3.2,main="2-3")
+barplot(b2.2-b4.2,main="2-4")
+barplot(b3.2-b4.2,main="3-4")
+```
+
+The way to read the last plots is for something like "2-3", positive bars mean that cell type is more common in cluster 2 (than 3); negative bars mean the opposite. The higher the absolute number on the y-axis, the greater the difference is in that cell count between the two clusters. I think (as John suggested), that we can move ahead and be more formal with this analysis (e.g. Bray Curtis dissimilarity), but this is a useful first step.
+
+## Mary's plan for Bray Curtis
+
+In R, the analogy to re-oarganizing data by either pivot tables, or manual calculation and pasting into a new sheet, is to manipulate one data frame to another. The 'dplyr' package or the 'aggregate' function can both help you here. For most standard ecology metrics there are usually one or more packages that make our life easier. Here the 'vegan' package is useful. In this example, we work out Bray-Curtis for all clusters (pairwise comparison)
+
+df<-NULL
+df2<-NULL
+#these nulls are here to reset the dataframes from the rbind that is below, only important if iteratign across commands outside of KNITR
+
+```{r braycurtis, message=FALSE, comment=""}
+library(vegan) # you may need to install this if you don't have it
+library(dplyr) # ditto (used for chaining and manipulation)  
+# http://blog.rstudio.org/2014/01/17/introducing-dplyr/
+#df<-spe[which(spe.kmeans$cluster==1),] %>% colSums() %>% t() # example of chaining. 
+#reads as: take only cluster 1 data from 'spe', then take column sums (i.e. total cell type count) 
+#then transpose (swap rows/cols needed for bray curtis calc)
+
+# each of these 
+df<-spe[which(spe.kmeans$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp<-spe[which(spe.kmeans$cluster==j),] %>% colSums() %>% t() 
+  df<-rbind(df,tmp)
+}
+
+df1.1<-spe1.1[which(spe.kmeans1.1$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp1.1<-spe1.1[which(spe.kmeans1.1$cluster==j),] %>% colSums() %>% t() 
+  df1.1<-rbind(df1.1,tmp1.1)
+}
+
+df1.2<-spe1.2[which(spe.kmeans1.2$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp1.2<-spe1.2[which(spe.kmeans1.2$cluster==j),] %>% colSums() %>% t() 
+  df1.2<-rbind(df1.2,tmp1.2)
+}
+
+df1.2<-spe1.2[which(spe.kmeans1.2$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp1.2<-spe1.2[which(spe.kmeans1.2$cluster==j),] %>% colSums() %>% t() 
+  df1.2<-rbind(df1.2,tmp1.2)
+}
+
+df2<-spe2[which(spe.kmeans2$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp2<-spe2[which(spe.kmeans2$cluster==j),] %>% colSums() %>% t() 
+  df2<-rbind(df2,tmp2)
+}
+
+df2.1<-spe2.1[which(spe.kmeans2.1$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp2.1<-spe2.1[which(spe.kmeans2.1$cluster==j),] %>% colSums() %>% t() 
+  df2.1<-rbind(df2.1,tmp2.1)
+}
+
+df2.2<-spe2.2[which(spe.kmeans2.2$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp2.2<-spe2.2[which(spe.kmeans2.2$cluster==j),] %>% colSums() %>% t() 
+  df2.2<-rbind(df2.2,tmp2.2)
+}
+
+df2.2<-spe2.2[which(spe.kmeans2.2$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp2.2<-spe2.2[which(spe.kmeans2.2$cluster==j),] %>% colSums() %>% t() 
+  df2.2<-rbind(df2.2,tmp2.2)
+}
+
+rownames(df)<-c("cluster1","cluster2","cluster3","cluster4")
+
+df<-apply(df,2,as.integer) %>% as.data.frame()
+df1.1<-apply(df1.1,2,as.integer) %>% as.data.frame()
+df1.2<-apply(df1.2,2,as.integer) %>% as.data.frame()
+df1.2<-apply(df1.2,2,as.integer) %>% as.data.frame()
+
+df2<-apply(df2,2,as.integer) %>% as.data.frame()
+df2.1<-apply(df2.1,2,as.integer) %>% as.data.frame()
+df2.2<-apply(df2.2,2,as.integer) %>% as.data.frame()
+df2.2<-apply(df2.2,2,as.integer) %>% as.data.frame()
+
+#need same number of columns to bind them.
+colnames(df2)<-colnames(df)
+
+colnames(df1.1)=colnames(df2.1)
+colnames(df1.2)<-colnames(df2.1)
+colnames(df1.2)<-colnames(df2.1)
+colnames(df2.1)<-colnames(df2.1)
+colnames(df2.2)<-colnames(df2.1)
+colnames(df2.2)<-colnames(df2.1)
+# this is it column names were wrong
+
+dfTOTAL<-rbind(df1.2,df2.2, df1.2, df1.2, df1.1, df1.1)
+
+BrayCurtis<-vegdist(dfTOTAL,method="bray")
+print(BrayCurtis)
+hc<-hclust(BrayCurtis)
+plot(hc,labels=dfTOTAL$rownames)
+```
+
+# Results
+
+1. How many mice of each type, how many replicates of mouse x thymus x prep method. 
+2. Size of quadrat selected, and what this says about number of individual quadrats examined, number of total cell counts. People love those sorts of numbers!
+3. Clustering and K selection
+4. Using BC to validate how different clusters are, importance of composite versus individual layers.
+5. Geography: Sornborger
+6. etc.
+
+# Discussion
+
+To an extent, as K goes up it may be that spatial weighting is important, but we choose to avoid the problems that weighting brings up; it may also be possible that some of the areas defined as K approaches 10+ are legitimate microenvironments and this will be addressed in a later paper.
+
+1. I can generate a map of the thymus that supports previous discussion of the geography of the thymus, but it is automatic and dependent on objective criteria of sorting the functional cell types in a spatially explicit way.
+2. We believe we have identified subregions in the medulla. This is cool.
+3. Though our replication is minimal, we can say that there is/is not quantifiable distinction between the spatial organization of WT and Aire- mice. This has been debated in the literature and we resolve it.
+4. There is much more we can do with this approach. 
+5. Ecologically, it is unusual to have the problem of such complete sampling of an ecosystem. Our approach to sampling this has strengths and concerns, generally associated with K-means clustering which has its subjective/ambiguous problems but is the best we can do!
+
+# Literature Cited
+
