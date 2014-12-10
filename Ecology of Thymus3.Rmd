@@ -1,7 +1,11 @@
-title: Ecology of the Thymus
-Authors :Mary Browning, John Wares, Nancy Manley
-output: word_document
-========================================================
+---
+title: "Ecology of the Thymus"
+author: Mary Browning, John Wares, Nancy Manley
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+output: pdf_document
+bibliography: thymus.bib
+---
+
 ## Introduction
 
 Within the field of organ biology, there is a lack of quantitative methods for analyzing the organization, as opposed to the composition, of organs, tissues, and cells.  Without quantitative methods for assessing organization, a significant aspect of organ and tissue biology is inaccessible to analysis and contrast.  Fortunately, a striking comparison can be drawn between the interactions that occur within organs and those that occur within ecosystems.  For instance, cell types in an organ, like species in an ecosystem, are influenced by the availability of space and resources as well as by the presence of other species. The presence or absence of one type may alter the functional role and dominance of another, or the overall service the community provides to the larger system [e.g., @wooton05].  By comparing cell types within a biological organ to species in an ecosystem, quantitative methods used for ecological analyses can be directly applied. Through analysis of the exact spatial location and co-location of component cell types, in an approach that uses the analytical toolkit of community ecologists and biogeographers, we gain a better understanding of which interactions can be validated by independent approach and analysis, as well as which interactions or even cell types we are likely to be need more information about.  
@@ -12,22 +16,31 @@ The co-distribution of constituent species in a community is often used to indic
  
 ## Methods
 
-## Terminology
+### Terminology
 
-I suggest an explanatory box for readers so that quadrat, section, composite, etc. can all be explained clearly in one place
+I suggest an explanatory box for readers so that quadrat, section, composite, etc. can all be explained clearly in one place.
 
------------ ------- --------------- -------------------------
-   First    row                12.0 Example of a row that
-                                    spans multiple lines.
+----------- ---------- -------------------------
+   quadrat    spatial     sampled unit within
+                          domain; cell types in
+                          quadrats used to find
+                          regions of similar
+                          composition
 
-  Second    row                 5.0 Here's another one. Note
-                                    the blank line between
-                                    rows.
------------ ------- --------------- -------------------------
+  transect    spatial     linear array of 
+                          sampled units 
+                          (quadrats), may be
+                          comprehensively or
+                          randomly sampled
+                          
+  layer      tissue       actual tissue sample
+                          used to assay 
+                          single-cell thickness
+                          composition
+----------- ---------- -------------------------
 
-: Here's a multiline table without headers.
 
-1. Where the mice come from and other necessary information about the Aire mutant line
+1. Where the mice come from and other necessary information about the Aire mutant line (Mary, Nancy)
 2. Information about the antibody stains, the frozen versus paraffin protocols
 3. Staining protocol and visualization with Cell Profiler: you need to explain whatever settings/parameters were used to obtain your data files, including how overlapping sections were lined up.
 4. Data Transformation
@@ -38,7 +51,7 @@ I suggest an explanatory box for readers so that quadrat, section, composite, et
 
 6c. significant diffs between cell types?
 
-7. also Andrew Sornborger's approach for separating out the geometry/geography of clusters.
+7. also Andrew Sornborger's approach for separating out the geometry/geography of clusters., and/or using connected component labeling to identify size, centroid, distance of centroids among clusters
 
 8. jackknifing : removing one cell type at a time
 
@@ -46,15 +59,43 @@ CellProfiler outputs X&Y coordinates in an excel file (which also contains other
 
 Read in datafile generated from CellProfiler (1 cell type per file)
 
-```{r WT1-11 cell types, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}   
+```{r use a shell type command to read in any *.txt, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'}
+
+celltypes<-c("CD11c","CD25","CD31","CD205","Claud5","Claud34","Foxp3","K5","K14","PDGFRb","UEA1")
+numcells<-length(celltypes)
+layers<-3
+numfiles<-(numcells*layers)
+
+#setwd("~Desktop/ThymusGit/Datasets/Data with 11 cell types/WT1")
+#WT1 <- lapply(Sys.glob("*.txt"), read.table) #this puts ALL from this directory into a list of dataframes, but they don't have names e.g. they go in order but not by cell type
+
+#Count1<-read.table("CD11c_1.txt",header=T,sep="\t",fill=TRUE)
+
+#nb the first in WT1 is not the same as Count1 so need to do better job on this (JPW)
+
+#still working on this!
+# IDEALLY the variables being passed through the rest of the document are more informative and/or can be looped across more easily than the way they are pulled in currently.
+# e.g. name of thymus with indices for cell type and layer WT1[2,1]
+
+    
+  
+
+```
+
+```{r WT1-11 cell types, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'}   
 #Wildtype1-11 cell types
 
 # setwd("~/Desktop/ThymusGit/Datasets/Data with 11 cell types/Mutant1")
 
 # we need to find a way we can all call the data locally as we work on this, e.g. each set working directory locally and these calls should be generic to file structure in GIT
 
+Count<-list()
 
 Count1<-read.table("Datasets/Data with 11 cell types/WT1/CD11c_1.txt",header=T,sep="\t",fill=TRUE)
+Count[[1]]<-read.table("Datasets/Data with 11 cell types/WT1/CD11c_1.txt",header=T,sep="\t",fill=TRUE)
+
+# full path: read in a given data table; use hist2d to set quadrats; put a name on that cell count in quadrat; remove dummy points; turn that into vector
+
 Count2<-read.table("Datasets/Data with 11 cell types/WT1/CD11c_2.txt",header=T,sep="\t",fill=TRUE)
 Count3<-read.table("Datasets/Data with 11 cell types/WT1/CD11c_3.txt",header=T,sep="\t",fill=TRUE)
 Count4<-read.table("Datasets/Data with 11 cell types/WT1/CD25_1.txt",header=T,sep="\t",fill=TRUE)
@@ -90,6 +131,8 @@ Count33<-read.table("Datasets/Data with 11 cell types/WT1/UEA1_3.txt",header=T,s
 
 #load library that generates hist2d plot
 library(gplots)
+
+msz <- 100 # 'msz' is matrix size, e.g. the histogram binning of the total counts. larger number means smaller quadrats.
 
 #generates hist2d plot; creates 100x100 bins;you can change this to whatever matrix size you want (200x200, 300x300, etc)
 my.xy1<-hist2d(Count1$X,Count1$Y,nbins=c(100,100))
@@ -162,6 +205,7 @@ obj32 <- my.xy32$counts
 obj33 <- my.xy33$counts
 
 #Removes points added in to make section square ( I added these points into the csv file myself)
+# is this dependent on the total size of the thymus, or the number of quadrats?
 
 obj1[1,1] = obj1[1,1]-1
 obj1[100,1] = obj1[100,1]-1
@@ -329,6 +373,9 @@ obj33[1,100] = obj33[1,100]-1
 obj33[100,100]=obj33[100,100]-1
 
 # turn your species count matrices into vector; script won't work unless you do this
+
+# what if at this point the names for these vector objects was now made informative? 
+
 count1 <- as.vector(obj1)
 count2 <- as.vector(obj2)
 count3 <- as.vector(obj3)
@@ -382,7 +429,7 @@ input1.3 <- cbind(count3, count6, count9, count12, count15, count18, count21, co
 #This outputs the community matrix that I use for clustering.  I then open this file and remove the first column (it's just numbering the column)
 ```
 
-```{r Mutant1-11 cell types, echo=FALSE, warning=FALSE, message=FALSE, results='hide'} 
+```{r Mutant1-11 cell types, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'} 
 
 Count1.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD11c_1_mutant.txt",header=T,sep="\t",fill=TRUE)
 Count2.2<-read.table("Datasets/Data with 11 cell types/Mutant1/CD11c_2_mutant.txt",header=T,sep="\t",fill=TRUE)
@@ -715,7 +762,7 @@ input2.3 <- cbind(count3.2, count6.2, count9.2, count12.2, count15.2, count18.2,
 ```
 
 
-```{r Mutant2-11 cell types, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+```{r Mutant2-11 cell types, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'}
 #Mutant2
 Count1.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD11c_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
 Count2.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD11c_mutant2_3.txt",header=T,sep="\t",fill=TRUE)
