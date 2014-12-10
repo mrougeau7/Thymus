@@ -6,7 +6,7 @@ output: pdf_document
 bibliography: thymus.bib
 ---
 
-## Introduction2
+## Introduction
 
 Within the field of organ biology, there is a lack of quantitative methods for analyzing the organization, as opposed to the composition, of organs, tissues, and cells.  Without quantitative methods for assessing organization, a significant aspect of organ and tissue biology is inaccessible to analysis and contrast.  Fortunately, a striking comparison can be drawn between the interactions that occur within organs and those that occur within ecosystems.  For instance, cell types in an organ, like species in an ecosystem, are influenced by the availability of space and resources as well as by the presence of other species. The presence or absence of one type may alter the functional role and dominance of another, or the overall service the community provides to the larger system [e.g., @wootton05].  By comparing cell types within a biological organ to species in an ecosystem, quantitative methods used for ecological analyses can be directly applied. Through analysis of the exact spatial location and co-location of component cell types, in an approach that uses the analytical toolkit of community ecologists and biogeographers, we gain a better understanding of which interactions can be validated by independent approach and analysis, as well as which interactions or even cell types we are likely to be need more information about.  
 
@@ -57,9 +57,9 @@ layers<-3
 numfiles<-(numcells*layers)
 
 #setwd("~Desktop/ThymusGit/Datasets/Data with 11 cell types/WT1")
-#WT1 <- lapply(Sys.glob("*.txt"), read.table) #this puts ALL from this directory into a list of dataframes, but they don't have names e.g. they go in order but not by cell type
+WT1 <- lapply(Sys.glob("*.txt"), read.table) #this puts ALL from this directory into a list of dataframes, but they don't have names e.g. they go in order but not by cell type
 
-#Count1<-read.table("CD11c_1.txt",header=T,sep="\t",fill=TRUE)
+Count1<-read.table("CD11c_1.txt",header=T,sep="\t",fill=TRUE)
 
 #nb the first in WT1 is not the same as Count1 so need to do better job on this (JPW)
 
@@ -79,10 +79,10 @@ numfiles<-(numcells*layers)
 
 # we need to find a way we can all call the data locally as we work on this, e.g. each set working directory locally and these calls should be generic to file structure in GIT
 
-Count<-list()
+WT1Count<-list()
 
 Count1<-read.table("Datasets/Data with 11 cell types/WT1/CD11c_1.txt",header=T,sep="\t",fill=TRUE)
-Count[[1]]<-read.table("Datasets/Data with 11 cell types/WT1/CD11c_1.txt",header=T,sep="\t",fill=TRUE)
+WT1Count[[1]]<-read.table("Datasets/Data with 11 cell types/WT1/CD11c_1.txt",header=T,sep="\t",fill=TRUE)
 
 # full path: read in a given data table; use hist2d to set quadrats; put a name on that cell count in quadrat; remove dummy points; turn that into vector
 
@@ -1131,36 +1131,36 @@ spe3.3=input3.3
 # Do the k-means clustering [read 'help' for the 'kmeans' function to see what the arguments "centers" (clusters or k) and "nstart" (randomizations) mean].
 spe.kmeans <- kmeans(spe, centers=4, nstart=10)
 # each of these takes 5-10 minutes!
-spe.kmeans1.1 <- kmeans(spe1.1, centers=4, nstart=10)
-spe.kmeans1.2 <- kmeans(spe1.2, centers=4, nstart=10)
-spe.kmeans1.3 <- kmeans(spe1.3, centers=4, nstart=10)
+#spe.kmeans1.1 <- kmeans(spe1.1, centers=4, nstart=10)
+#spe.kmeans1.2 <- kmeans(spe1.2, centers=4, nstart=10)
+#spe.kmeans1.3 <- kmeans(spe1.3, centers=4, nstart=10)
 
-spe.kmeans2 <- kmeans(spe2, centers=4, nstart=10)
-spe.kmeans2.1 <- kmeans(spe2.1, centers=4, nstart=10)
-spe.kmeans2.2 <- kmeans(spe2.2, centers=4, nstart=10)
-spe.kmeans2.3 <- kmeans(spe2.3, centers=4, nstart=10)
+#spe.kmeans2 <- kmeans(spe2, centers=4, nstart=10)
+#spe.kmeans2.1 <- kmeans(spe2.1, centers=4, nstart=10)
+#spe.kmeans2.2 <- kmeans(spe2.2, centers=4, nstart=10)
+#spe.kmeans2.3 <- kmeans(spe2.3, centers=4, nstart=10)
 
-spe.kmeans3 <- kmeans(spe3, centers=4, nstart=10)
-spe.kmeans3.1 <- kmeans(spe3.1, centers=4, nstart=10)
-spe.kmeans3.2 <- kmeans(spe3.2, centers=4, nstart=10)
-spe.kmeans3.3 <- kmeans(spe3.3, centers=4, nstart=10)
+#spe.kmeans3 <- kmeans(spe3, centers=4, nstart=10)
+#spe.kmeans3.1 <- kmeans(spe3.1, centers=4, nstart=10)
+#spe.kmeans3.2 <- kmeans(spe3.2, centers=4, nstart=10)
+#spe.kmeans3.3 <- kmeans(spe3.3, centers=4, nstart=10)
 #fix nstart (1000?) before "real" science
 
 write.table(spe.kmeans$cluster, file="spe.kmeans_Thymus1WT_K4_100.csv", sep=",")
-write.table(spe.kmeans1.1$cluster, file="spe.kmeans_Thymus1WT_K4_100_Sec1.csv", sep=",")
-write.table(spe.kmeans1.2$cluster, file="spe.kmeans_Thymus1WT_K4_100_Sec2.csv", sep=",")
-write.table(spe.kmeans1.3$cluster, file="spe.kmeans_Thymus1WT_K4_100_Sec3.csv", sep=",")
+#write.table(spe.kmeans1.1$cluster, file="spe.kmeans_Thymus1WT_K4_100_Sec1.csv", sep=",")
+#write.table(spe.kmeans1.2$cluster, file="spe.kmeans_Thymus1WT_K4_100_Sec2.csv", sep=",")
+#write.table(spe.kmeans1.3$cluster, file="spe.kmeans_Thymus1WT_K4_100_Sec3.csv", sep=",")
 
 
-write.table(spe.kmeans2$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100.csv", sep=",")
-write.table(spe.kmeans2.1$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100_Sec1.csv", sep=",")
-write.table(spe.kmeans2.2$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100_Sec2.csv", sep=",")
-write.table(spe.kmeans2.3$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100_Sec3.csv", sep=",")
+#write.table(spe.kmeans2$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100.csv", sep=",")
+#write.table(spe.kmeans2.1$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100_Sec1.csv", sep=",")
+#write.table(spe.kmeans2.2$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100_Sec2.csv", sep=",")
+#write.table(spe.kmeans2.3$cluster, file="spe.kmeans2_Thymus1Mutant_K4_100_Sec3.csv", sep=",")
 
-write.table(spe.kmeans3$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100.csv", sep=",")
-write.table(spe.kmeans3.1$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec1.csv", sep=",")
-write.table(spe.kmeans3.2$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec2.csv", sep=",")
-write.table(spe.kmeans3.3$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec3.csv", sep=",")
+#write.table(spe.kmeans3$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100.csv", sep=",")
+#write.table(spe.kmeans3.1$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec1.csv", sep=",")
+#write.table(spe.kmeans3.2$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec2.csv", sep=",")
+#write.table(spe.kmeans3.3$cluster, file="spe.kmeans3_Thymus2Mutant_K4_100_Sec3.csv", sep=",")
 #This file contains the clusters.  I reupload and reformat it back into a 2D matrix and add colors to show what the section looks like.
 
 library(gplots)
@@ -1169,19 +1169,19 @@ library(gplots)
 # Seems you are swapping in and out of same DF a lot?
 
 spe_1=read.table("spe.kmeans_Thymus1WT_K4_100.csv", head=T, sep=",")
-spe_1.1=read.table("spe.kmeans_Thymus1WT_K4_100_Sec1.csv", head=T, sep=",")
-spe_1.2=read.table("spe.kmeans_Thymus1WT_K4_100_Sec2.csv", head=T, sep=",")
-spe_1.3=read.table("spe.kmeans_Thymus1WT_K4_100_Sec3.csv", head=T, sep=",")
+#spe_1.1=read.table("spe.kmeans_Thymus1WT_K4_100_Sec1.csv", head=T, sep=",")
+#spe_1.2=read.table("spe.kmeans_Thymus1WT_K4_100_Sec2.csv", head=T, sep=",")
+#spe_1.3=read.table("spe.kmeans_Thymus1WT_K4_100_Sec3.csv", head=T, sep=",")
 
-spe_2=read.table("spe.kmeans2_Thymus1Mutant_K4_100.csv", head=T, sep=",")
-spe_2.1=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec1.csv", head=T, sep=",")
-spe_2.2=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec2.csv", head=T, sep=",")
-spe_2.3=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec3.csv", head=T, sep=",")
+#spe_2=read.table("spe.kmeans2_Thymus1Mutant_K4_100.csv", head=T, sep=",")
+#spe_2.1=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec1.csv", head=T, sep=",")
+#spe_2.2=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec2.csv", head=T, sep=",")
+#spe_2.3=read.table("spe.kmeans2_Thymus1Mutant_K4_100_Sec3.csv", head=T, sep=",")
 
-spe_3=read.table("spe.kmeans3_Thymus2Mutant_K4_100.csv", head=T, sep=",")
-spe_3.1=read.table("spe.kmeans3_Thymus2Mutant_K4_100_Sec1.csv", head=T, sep=",")
-spe_3.2=read.table("spe.kmeans3_Thymus2Mutant_K4_100_Sec2.csv", head=T, sep=",")
-spe_3.3=read.table("spe.kmeans3_Thymus2Mutant_K4_100_Sec3.csv", head=T, sep=",")
+#spe_3=read.table("spe.kmeans3_Thymus2Mutant_K4_100.csv", head=T, sep=",")
+#spe_3.1=read.table("spe.kmeans3_Thymus2Mutant_K4_100_Sec1.csv", head=T, sep=",")
+#spe_3.2=read.table("spe.kmeans3_Thymus2Mutant_K4_100_Sec2.csv", head=T, sep=",")
+#spe_3.3=read.table("spe.kmeans3_Thymus2Mutant_K4_100_Sec3.csv", head=T, sep=",")
 
 # these were calling the wrong files. last batch was calling thymus1Mutant. fixed.
 
@@ -1203,7 +1203,7 @@ spematrix3.1=data.matrix(spe_3.1)
 spematrix3.2=data.matrix(spe_3.2)
 spematrix3.3=data.matrix(spe_3.3)
 
-matrix = matrix(spematrix, nrow = 100, ncol=100)
+matrix1tot = matrix(spematrix, nrow = 100, ncol=100)
 matrix1.1 = matrix(spematrix1.1, nrow = 100, ncol=100)
 matrix1.2 = matrix(spematrix1.2, nrow = 100, ncol=100)
 matrix1.3 = matrix(spematrix1.3, nrow = 100, ncol=100)
@@ -1218,7 +1218,7 @@ matrix3.1 = matrix(spematrix3.1, nrow = 100, ncol=100)
 matrix3.2 = matrix(spematrix3.2, nrow = 100, ncol=100)
 matrix3.3 = matrix(spematrix3.3, nrow = 100, ncol=100)
 
-heatmap.2( matrix, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix,
+heatmap.2( matrix1tot, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1tot,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
 #heatmap.2( matrix1.1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1.1,
