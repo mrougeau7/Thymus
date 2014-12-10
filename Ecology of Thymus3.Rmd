@@ -1,6 +1,6 @@
 ---
 title: "Ecology of the Thymus"
-author: Mary Browning, John Wares, Nancy Manley
+author: "Mary Browning, John Wares, Nancy Manley"
 date: '`r format(Sys.time(), "%d %B, %Y")`'
 output: pdf_document
 bibliography: thymus.bib
@@ -8,7 +8,7 @@ bibliography: thymus.bib
 
 ## Introduction
 
-Within the field of organ biology, there is a lack of quantitative methods for analyzing the organization, as opposed to the composition, of organs, tissues, and cells.  Without quantitative methods for assessing organization, a significant aspect of organ and tissue biology is inaccessible to analysis and contrast.  Fortunately, a striking comparison can be drawn between the interactions that occur within organs and those that occur within ecosystems.  For instance, cell types in an organ, like species in an ecosystem, are influenced by the availability of space and resources as well as by the presence of other species. The presence or absence of one type may alter the functional role and dominance of another, or the overall service the community provides to the larger system [e.g., @wooton05].  By comparing cell types within a biological organ to species in an ecosystem, quantitative methods used for ecological analyses can be directly applied. Through analysis of the exact spatial location and co-location of component cell types, in an approach that uses the analytical toolkit of community ecologists and biogeographers, we gain a better understanding of which interactions can be validated by independent approach and analysis, as well as which interactions or even cell types we are likely to be need more information about.  
+Within the field of organ biology, there is a lack of quantitative methods for analyzing the organization, as opposed to the composition, of organs, tissues, and cells.  Without quantitative methods for assessing organization, a significant aspect of organ and tissue biology is inaccessible to analysis and contrast.  Fortunately, a striking comparison can be drawn between the interactions that occur within organs and those that occur within ecosystems.  For instance, cell types in an organ, like species in an ecosystem, are influenced by the availability of space and resources as well as by the presence of other species. The presence or absence of one type may alter the functional role and dominance of another, or the overall service the community provides to the larger system [e.g., @wootton05].  By comparing cell types within a biological organ to species in an ecosystem, quantitative methods used for ecological analyses can be directly applied. Through analysis of the exact spatial location and co-location of component cell types, in an approach that uses the analytical toolkit of community ecologists and biogeographers, we gain a better understanding of which interactions can be validated by independent approach and analysis, as well as which interactions or even cell types we are likely to be need more information about.  
 
 The co-distribution of constituent species in a community is often used to indicate interaction - whether competitive, trophic, or facilitative [@verberk11;@angel11]. By analyzing the exact spatial location and co-location of component cell types across the domain of a particular tissue or organ, we may gain a better understanding of which interactions - indicated by codistribution and sufficient density - can be validated by independent approach and analysis.  To an extent, we recapitulate the spatial scales described above: we explore the differentiation of distinct habitats within the environment (biogeography: identifying regions of endemicity or dramatically shifted abundance), the colocalization of particular sub-groups of cells (community ecology), and we use the tenets of macroecology to the extent that we can generalize that cells need a particular density to be viable interactors, and to the extent that common cells have a larger overall distribution (this is not tautological, this follows from the first: you cannot be rare and widespread in a functional sense).  Our overall goal is development of a cellular ecology, where we can understand interactions at a quantitative level that does not yet exist in developmental biology, particularly in this system.  We seek to create a map of a healthy adult organ using cell location and abundance, and then to spatially characterize the organ by applying ecological theory directly to the produced map (something that has never been done before).  The results from this analysis can be used to make comparisons with organs in states of disequilibrium, such as diseased or mutant organs, in order to see what organizational differences occur. 
 
@@ -39,25 +39,13 @@ I suggest an explanatory box for readers so that quadrat, section, composite, et
                           composition
 ----------- ---------- -------------------------
 
+### System and Data Collection
 
 1. Where the mice come from and other necessary information about the Aire mutant line (Mary, Nancy)
 2. Information about the antibody stains, the frozen versus paraffin protocols
 3. Staining protocol and visualization with Cell Profiler: you need to explain whatever settings/parameters were used to obtain your data files, including how overlapping sections were lined up.
-4. Data Transformation
-5. Quadrat Selection and Rarefaction: you need to explain how you did this, and the next chunk can include the code you used to achieve this. That way, our results can include one plot and a brief discussion about the selection of that size quadrat and what it means for inclusion of cell types in a given quadrat
-6. Now get into the methods you already have in your R script, first setting K=2 and removing all quadrats that fall outside of the thymus from further analysis. You can do this using the subset command I think. We can then talk about more ways to maintain the identity of a given cluster of spatial quadrats (identity being the type of mouse, the section of thymus, and so on)
-
-6b. bray curtis
-
-6c. significant diffs between cell types?
-
-7. also Andrew Sornborger's approach for separating out the geometry/geography of clusters., and/or using connected component labeling to identify size, centroid, distance of centroids among clusters
-
-8. jackknifing : removing one cell type at a time
-
-CellProfiler outputs X&Y coordinates in an excel file (which also contains other unnecessary info).  I delete the unnecessary info and add points ((0,0), (0,X), (X,0), (X,X)) to the X and Y columns in order to make a square so that the bin sizes in the matrix will be a consistent size.  I save this file as a .txt.  It is now ready to run through my script. The next step is to transform my data from individual .txt files into a community matrix that contains all the cell types. The community matrix is then used for Kmeans clustering.
-
-Read in datafile generated from CellProfiler (1 cell type per file)
+4. Data Transformation: 
+CellProfiler outputs X&Y coordinates in an excel file (which also contains other unnecessary info).  I delete the unnecessary info and add points ((0,0), (0,X), (X,0), (X,X)) to the X and Y columns in order to make a square so that the QUADRAT sizes in the matrix will be a consistent size.  I save this file as a .txt.  It is now ready to run through my script. The next step is to transform my data from individual .txt files into a community matrix that contains all the cell types. The community matrix is then used for Kmeans clustering.
 
 ```{r use a shell type command to read in any *.txt, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'}
 
@@ -761,7 +749,6 @@ input2.3 <- cbind(count3.2, count6.2, count9.2, count12.2, count15.2, count18.2,
 #This outputs the community matrix that I use for clustering.  I then open this file and remove the first column (it's just numbering the column)
 ```
 
-
 ```{r Mutant2-11 cell types, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'}
 #Mutant2
 Count1.3<-read.table("Datasets/Data with 11 cell types/Mutant2/CD11c_mutant2_2.txt",header=T,sep="\t",fill=TRUE)
@@ -1087,15 +1074,30 @@ input3.2 <- cbind(count2.3, count5.3, count8.3, count11.3, count14.3, count17.3,
 input3.3 <- cbind(count3.3, count6.3, count9.3, count12.3, count15.3, count18.3, count21.3, count24.3, count27.3, count30.3, count33.3)
 ```
 
+### Identification of Scale
+
+As thymic epithelial cells vary in size from X to X', we considered the problem of how to generate sampled regions (quadrats) that contained sufficient information about the local community of cells that these regions could be classified. In other words, we need to have lots of data in each quadrat to have statistical power for clustering; we need lots of quadrats to improve the spatial resolution. Identifying the best scale is done how?
+
+5. Quadrat Selection and Rarefaction: you need to explain how you did this, and the next chunk can include the code you used to achieve this. That way, our results can include one plot and a brief discussion about the selection of that size quadrat and what it means for inclusion of cell types in a given quadrat
+
+```{r rarefaction}
+
+# note that you may DO the analysis in one place, and save the output plot to be generated elsewhere (in results)
+
+```
+
+
+6. Now get into the methods you already have in your R script, first setting K=2 and removing all quadrats that fall outside of the thymus from further analysis. You can do this using the subset command I think. We can then talk about more ways to maintain the identity of a given cluster of spatial quadrats (identity being the type of mouse, the section of thymus, and so on)
+
 
 The next step is clustering. 
-First, download and load these packages:
+
 
 ```{r clustering, cache=TRUE, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 library (vegan)
 library(labdsv)
 
-# this may be good opportunity for flexible SHINY output until we settle on what ultimately goes into paper. each plot should get name and you determine when/where they come out, not all of them!
+# FOR NOW I WANT YOU TO FOCUS ON CLEAN OUTPUT OF JUST ONE EXEMPLAR FIGURE
 
 # Load the files after reformatting them from CellProfiler
 #spe<-read.table("Totalcounts100_Thymus1Mutant.txt", head=T, sep="\t")
@@ -1217,41 +1219,42 @@ matrix3.3 = matrix(spematrix3.3, nrow = 100, ncol=100)
 heatmap.2( matrix, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
-heatmap.2( matrix1.1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1.1,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
-heatmap.2( matrix1.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1.2,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
-heatmap.2( matrix1.3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1.2,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
+#heatmap.2( matrix1.1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1.1,
+#           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+#           margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
+#heatmap.2( matrix1.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1.2,
+#           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+#           margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
+#heatmap.2( matrix1.3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1.2,
+#           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+#           margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
 
-heatmap.2( matrix2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
-heatmap.2( matrix2.1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2.1,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
-heatmap.2( matrix2.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2.2,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
-heatmap.2( matrix2.3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2.2,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+#heatmap.2( matrix2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2,
+#           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+#           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+#heatmap.2( matrix2.1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2.1,
+#           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+#           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+#heatmap.2( matrix2.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2.2,
+#           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+#           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+#heatmap.2( matrix2.3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix2.2,
+#           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+#           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
 
-heatmap.2( matrix3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
-heatmap.2( matrix3.1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3.1,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
-heatmap.2( matrix3.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3.2,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
-heatmap.2( matrix3.3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3.2,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+#heatmap.2( matrix3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3,
+#           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+#           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+#heatmap.2( matrix3.1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3.1,
+#           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+#           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+#heatmap.2( matrix3.2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3.2,
+#           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+#           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+#heatmap.2( matrix3.3, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix3.2,
+#           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+#           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+
 #change the colors to reflect the number of clusters.  Can also reorder so colors are consistent between sections.
 
 ```
@@ -1267,7 +1270,7 @@ We can see that we've asked R to take cell count info from 11 cell types and mak
 It turns out that cluster 1 is just _empty_ space - but not clusters 2-4
 #need automatic way to identify _empty_ outside of thymus
 
-```{r panels, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+```{r panels, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans$cluster)){ 
@@ -1355,7 +1358,7 @@ for (i in 1:max(spe.kmeans3.3$cluster)){
 
 We can make a running sum of all the counts of all cell types by cluster
 
-```{r counts, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+```{r counts, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
 b2<-colSums(spe[which(spe.kmeans$cluster==1),])
 b3<-colSums(spe[which(spe.kmeans$cluster==3),])
 b4<-colSums(spe[which(spe.kmeans$cluster==4),])
@@ -1407,7 +1410,7 @@ b4.3_S3<-colSums(spe3.3[which(spe.kmeans3.3$cluster==1),])
 
 and normalize these so that each cluster type has the same total amount of cells (in other words, we're getting the proportion of cell types in each cluster)
 
-```{r normalize, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+```{r normalize, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
 b2<-b2/sum(b2)
 b3<-b3/sum(b3)
 b4<-b4/sum(b4)
@@ -1471,6 +1474,15 @@ barplot(b2.2-b4.2,main="2-4")
 barplot(b3.2-b4.2,main="3-4")
 ```
 
+
+6b. bray curtis
+
+6c. significant diffs between cell types?
+
+7. also Andrew Sornborger's approach for separating out the geometry/geography of clusters., and/or using connected component labeling to identify size, centroid, distance of centroids among clusters
+
+8. jackknifing : removing one cell type at a time
+
 The way to read the last plots is for something like "2-3", positive bars mean that cell type is more common in cluster 2 (than 3); negative bars mean the opposite. The higher the absolute number on the y-axis, the greater the difference is in that cell count between the two clusters. I think (as John suggested), that we can move ahead and be more formal with this analysis (e.g. Bray Curtis dissimilarity), but this is a useful first step.
 
 ## Mary's plan for Bray Curtis
@@ -1481,7 +1493,7 @@ df<-NULL
 df2<-NULL
 #these nulls are here to reset the dataframes from the rbind that is below, only important if iteratign across commands outside of KNITR
 
-```{r braycurtis, message=FALSE, comment=""}
+```{r braycurtis, message=FALSE, comment="", echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 library(vegan) # you may need to install this if you don't have it
 library(dplyr) # ditto (used for chaining and manipulation)  
 # http://blog.rstudio.org/2014/01/17/introducing-dplyr/
@@ -1564,7 +1576,7 @@ colnames(df2.2)<-colnames(df2.1)
 dfTOTAL<-rbind(df1.2,df2.2, df1.2, df1.2, df1.1, df1.1)
 
 BrayCurtis<-vegdist(dfTOTAL,method="bray")
-print(BrayCurtis)
+#print(BrayCurtis)
 hc<-hclust(BrayCurtis)
 plot(hc,labels=dfTOTAL$rownames)
 ```
