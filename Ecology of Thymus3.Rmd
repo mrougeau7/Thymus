@@ -16,6 +16,8 @@ The co-distribution of constituent species in a community is often used to indic
  
 ## Methods
 
+Add a line to Methods.
+
 ### Terminology
 
 I suggest an explanatory box for readers so that quadrat, section, composite, etc. can all be explained clearly in one place.
