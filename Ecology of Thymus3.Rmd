@@ -141,7 +141,8 @@ for(i in 1:length(txtfiles)){
   tmp = read.table(txtfiles[i], sep="\t", head=T)
   X=tmp[[1]]
   Y=tmp[[2]]
-  my.xy1<-hist2d(X,Y,nbins=c(msz,msz))
+  my.xy<-hist2d(X,Y,nbins=c(msz,msz))
+  
   
 }
 
