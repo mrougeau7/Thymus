@@ -8,8 +8,12 @@ bibliography: thymus.bib
 
 <<<<<<< HEAD
 ## Introduction2
-I'm just testing this to see if I can get it to work.
-Still testing
+
+Abstract
+
+The correct organization and abundance of distinct cell types is important for optimal organ performance.  Identifying recurrent cellular patterns could help us to better understand healthy functional organ states and how dysfunctional organ cellular equilibrium is altered.  However, the ability to qualitatively identify patterns among multiple cell types within an organ has provided a significant barrier to better understanding organ behavior.   Here we have developed  novel molecular and computational approaches to better understand the "biogeography" of the thymus by using location and abundance information for different cell types. We used this approach to produce a thymic "map", which can be further analyzed through the use of ecological approaches in order to better understand thymic spatial patterns.  By comparing cell types within the thymus to species within an ecosystem, quantitative theoretical approaches used in ecology can be directly applied to determine spatial relationships within the thymus.  We will produce a thymic map to be used as a baseline comparative model to better understand the compositional and aggregational characteristics of a steady-state adult mouse thymus. This model can be used to make informative comparisons of thymic tissues under different developmental, mutant, or disease conditions. 
+ 
+
 =======
 ## Introduction
 >>>>>>> origin/master
@@ -20,9 +24,59 @@ The co-distribution of constituent species in a community is often used to indic
 
  We performed this analysis on our model organ, the thymus.  The thymus was chosen because it is an intriguing example of cellular level organization, with a strong connection between organization and function.  The thymus consists of developing T cells supported by a complex cellular environment containing a variety of resident cell types, including thymic epithelial cells (TECs), dendritic cells, vasculature, and mesenchymal cells.  These cell types comprise multiple microenvironments that direct and support thymocytes to develop from immature progenitors into mature T cells that are both self-tolerant and self-restricted.  T cell development in the thymus requires interactions with the thymic microenvironments that provide signals for their survival, proliferation, and differentiation [1].  Despite their critical role in the generation of cellular immunity and the clinical importance of thymic regeneration, the composition and organization of thymic microenvironments and the mechanisms that promote their proper development and function are not fully understood, in part due to a lack of technical and theoretical approaches for quantifying tissue-level properties.  Thus, the thymus has many characteristics that make it an excellent system for developing and testing quantitative modeling: a diverse cellular composition that can be identified with cell type-specific markers, regional organization that is required for maximal organ function,  genetic models with diverse effects on organ composition and function, assays for experimentally inducing organ degeneration and regeneration, and high biomedical relevance.   To date, there are no quantitative models of thymus organ structure and function and no established methods for generating one.  We seek to address this by developing a quantitative theoretical model of the organization of cell types that can be used to better understand thymic function as well as evaluate diseased states. Our approach uses immunostaining on sagittal serial sections of a wildtype mouse thymus in order to identify distinct cellular subsets, followed by the use of novel computational approaches in order to quantitatively identify known and cryptic cellular spatial relationships.  We then take this approach one step further by comparing a wildtype and a mutant (Aire knockout) mouse thymus in an effort to identify differences in organizational characteristics.
  
+ Specific hypotheses and how tested..
+
+I predict that the distribution and abundance of cell types is sufficient for automated clustering of thymic regions.  The organization of a wild-type, mature thymus will either organize into more discrete regions than a mutant thymus, or the regionalization will be more variable and less discrete.
+Next, we will examine cellular absence/presence with respect to other cell types to see if any patterns emerge
+By using a well characterized dissimilarity index (Bray Curtis Dissimilarity Index), we will determine the degree of similarity between different regions and subregions.
+
+ 
 ## Methods
 
+Mice
+Aire knockout and WT male mice at 5-6 weeks of age were obtained from Dr. Mark Anderson's lab at the University of California, San Francisco. N=2 for WT and mutant mice.
+
+Isolation and preparation of dissected thymii
+Intact thymuses were removed and the right and left lobes were separated, placed in OCT compound, and immediately frozen before being shipped to the Manley lab.
+
+Antibodies
+Primary antibodies used in this work include the biotinylated hamster CD11c (Cat#, 1:100), rabbit Claudin 3 (Cat#:  , 1:200), rabbit Claudin 4 (Cat#: , 1:200), supernatant hamster CD31 (Cat#, 1:50), rat CD25 (Cat#: , 1:50), biotinylated UEA1 (Cat#: , 1:200), conjugated mouse Claudin5 (Cat#: , 1:100), rabbit Keratin5 (Cat#, 1:200), biotin rat Foxp3 (Cat#, 1:50), goat Keratin14 (Cat#, 1:200), goat PDGFRb (Cat#, 1:100), and rat CD205 (Cat#, 1:200). 
+Secondary antibodies were purchased from Invitrogen
+ 
+Frozen Sample Preparation
+The entire left lobe was cut into 10-micron serial sagittal sections using a Leica CM3050 S cryostat. Sections were collected on glass slides and assigned a number corresponding to their location.  The middle third of these slides were selected for IHC.  Of these middle third, 9 sections from each sample that passed quality control standards were used for IHC.  These sections were fixed in -20 degree C acetone for 20 seconds immediately prior to application of blocking solution (10% donkey serum/PBS) for 30 minutes at room temperature.
+
+IHC
+Primary antibodies were mixed in PBS and incubated overnight at 4C.  The slides were rinsed with PBS 2x 5 minutes and the secondary antibodies were mixed in PBS (1:800) and applied to the slides for 30 minutes.  Slides were rinsed with PBS 2x5 minutes, mounted in FluorGel (EMS) and coverslipped.   Marker combinations were determined by availability,  biological and technical considerations such as anticipated abundance, distribution of cell types, and reagent compatibility (antibody species of origin). 
+
+Microscopy, PTGui, and CellProfiler
+The stained sections were assessed by specific quality control criteria such as lack of section flaws, clarity of image collection, and signal to noise ration.  Sections that passed the QC measures  were photographed at 20x as tiled, overlapping images  on the Zeiss  microscope and reconstructed using PTGui.  The image produced was optimized in Adobe Photoshop in an effort to reduce background and increase signal intensity.  The produced image was too large to work in CellProfiler, so the size of the image was decreased by taking the image width and dividing by 4.  CellProfiler was used to generate cell counts using intensity of signal and the results were input into R for the spatial analysis.  CellProfiler was chosen because it had the capability of quickly, accurately, and efficiently producing cell count number as well as position information  (x and y, centroid) for a large number of cells.  Results from the cell counts were  manually checked for accuracy.  CellProfiler uploaded the image, cropped the image around the section boarder (this was done by drawing a line around the section boarder), identified primary objects, and exported the primary objects in an excel file as x and y coordinates. 
+
+R
+Files containing the X and Y coordinates from CellProfiler were uploaded into R and reformatted into a community matrix.  The K-means function in R's stats package was used to cluster the data. The  Bray-Curtis function in the Vegan package was used to calculate the Bray-Curtis index for the different regions produced from K-means clustering.  
+
 Add a line to Methods.
+
+###Discussion
+Why this approach is novel 
+Coolest thing we found, how to explain it
+If we did not find a big shift in organization between treatment, it is probably because what was turned off in mutant was not a 'foundational species' in this system (see http://bioscience.oxfordjournals.org/content/61/10/782.full ) as such is a minor perturbation for organization of system, even if ecosystem service ie functionality of thymus is affected. We have to separate these effects after all! It is also important to note that the cell types are not independent arrivals in the thymic ecosystem. As a developmental process, the analogy is not complete: this would be like a coral reef developing with functionally distinct polyps spatially arranged to improve net fitness (i.e. reproductive capacity); this of course does happen in certain colonial species (hydrozoans for example) and as such this may generate its own numerical/mathematical patterns distinct from the standards of community ecology (e.g. species-area hypothesis).
+Second coolest thing
+Concern we would like to address
+
+Next step for application of this approach - also bigger picture stuff.
+Comparison - a manipulated salt marsh ecosystem and how B-C was used to compare treatment and sites
+http://www.mass.gov/eea/docs/czm/habitat/wetlands/cape-cod-report-v2.pdf
+another
+http://books.google.com/books?id=Kpi9TjDQO8QC&pg=PA28&lpg=PA28&dq=bray-curtis+salt+marsh&source=bl&ots=iiISZsY9Jf&sig=YGSLp0cG06oKxB1Ung56AS2EQgw&hl=en&sa=X&ei=M44yVP-_CYylyASMioLgCQ&ved=0CDgQ6AEwAw#v=onepage&q=bray-curtis%20salt%20marsh&f=false
+useful comparison because of similar taxonomic diveristy (?)
+http://www.scielo.br/scielo.php?pid=S1516-89132009000600013&script=sci_arttext
+
+http://www.researchgate.net/publication/259146839_Dissimilarity_in_plant_species_diversity_between_salt_marsh_and_neighboring_environments_decreases_as_environmental_harshness_increases
+
+http://www.tandfonline.com/doi/full/10.1080/19425120.2014.893467#.VDKQQkuoVss
+there are many more. we can learn from the methods..
+
 
 ### Terminology
 
