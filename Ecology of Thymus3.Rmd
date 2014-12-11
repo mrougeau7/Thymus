@@ -127,6 +127,11 @@ Count1<-read.table("CD11c_1.txt",header=T,sep="\t",fill=TRUE)
 # IDEALLY the variables being passed through the rest of the document are more informative and/or can be looped across more easily than the way they are pulled in currently.
 # e.g. name of thymus with indices for cell type and layer WT1[2,1]
 
+##Mary's work
+dir()
+setwd("where your .csv files are")
+data <- lapply(dir(),read.table)
+head(data[1])
     
   
 
