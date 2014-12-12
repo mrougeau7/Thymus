@@ -123,7 +123,7 @@ for(i in 1:length(txtfiles)){
 
 
 # define vectors to store results (mean sortable silt values)
-results = data.frame(txtfiles, means)
+#will fix this later results = data.frame(txtfiles, means)
 print(results)
     
   
