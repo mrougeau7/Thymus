@@ -22,7 +22,7 @@ Within the field of organ biology, there is a lack of quantitative methods for a
 
 The co-distribution of constituent species in a community is often used to indicate interaction - whether competitive, trophic, or facilitative [@verberk11;@angel11]. By analyzing the exact spatial location and co-location of component cell types across the domain of a particular tissue or organ, we may gain a better understanding of which interactions - indicated by codistribution and sufficient density - can be validated by independent approach and analysis.  To an extent, we recapitulate the spatial scales described above: we explore the differentiation of distinct habitats within the environment (biogeography: identifying regions of endemicity or dramatically shifted abundance), the colocalization of particular sub-groups of cells (community ecology), and we use the tenets of macroecology to the extent that we can generalize that cells need a particular density to be viable interactors, and to the extent that common cells have a larger overall distribution (this is not tautological, this follows from the first: you cannot be rare and widespread in a functional sense).  Our overall goal is development of a cellular ecology, where we can understand interactions at a quantitative level that does not yet exist in developmental biology, particularly in this system.  We seek to create a map of a healthy adult organ using cell location and abundance, and then to spatially characterize the organ by applying ecological theory directly to the produced map (something that has never been done before).  The results from this analysis can be used to make comparisons with organs in states of disequilibrium, such as diseased or mutant organs, in order to see what organizational differences occur. 
 
- We performed this analysis on our model organ, the thymus.  The thymus was chosen because it is an intriguing example of cellular level organization, with a strong connection between organization and function.  The thymus consists of developing T cells supported by a complex cellular environment containing a variety of resident cell types, including thymic epithelial cells (TECs), dendritic cells, vasculature, and mesenchymal cells.  These cell types comprise multiple microenvironments that direct and support thymocytes to develop from immature progenitors into mature T cells that are both self-tolerant and self-restricted.  T cell development in the thymus requires interactions with the thymic microenvironments that provide signals for their survival, proliferation, and differentiation [1].  Despite their critical role in the generation of cellular immunity and the clinical importance of thymic regeneration, the composition and organization of thymic microenvironments and the mechanisms that promote their proper development and function are not fully understood, in part due to a lack of technical and theoretical approaches for quantifying tissue-level properties.  Thus, the thymus has many characteristics that make it an excellent system for developing and testing quantitative modeling: a diverse cellular composition that can be identified with cell type-specific markers, regional organization that is required for maximal organ function,  genetic models with diverse effects on organ composition and function, assays for experimentally inducing organ degeneration and regeneration, and high biomedical relevance.   To date, there are no quantitative models of thymus organ structure and function and no established methods for generating one.  We seek to address this by developing a quantitative theoretical model of the organization of cell types that can be used to better understand thymic function as well as evaluate diseased states. Our approach uses immunostaining on sagittal serial sections of a wildtype mouse thymus in order to identify distinct cellular subsets, followed by the use of novel computational approaches in order to quantitatively identify known and cryptic cellular spatial relationships.  We then take this approach one step further by comparing a wildtype and a mutant (Aire knockout) mouse thymus in an effort to identify differences in organizational characteristics. The Aire knockout mutant was selected in order to test whether dendritic organization is altered with the removal of Aire; there are differing reports.
+ We performed this analysis on our model organ, the thymus.  The thymus was chosen because it is an intriguing example of cellular level organization, with a strong connection between organization and function.  The thymus consists of developing T cells supported by a complex cellular environment containing a variety of resident cell types, including thymic epithelial cells (TECs), dendritic cells, vasculature, and mesenchymal cells.  These cell types comprise multiple microenvironments that direct and support thymocytes to develop from immature progenitors into mature T cells that are both self-tolerant and self-restricted.  T cell development in the thymus requires interactions with the thymic microenvironments that provide signals for their survival, proliferation, and differentiation [1].  Despite their critical role in the generation of cellular immunity and the clinical importance of thymic regeneration, the composition and organization of thymic microenvironments and the mechanisms that promote their proper development and function are not fully understood, in part due to a lack of technical and theoretical approaches for quantifying tissue-level properties.  Thus, the thymus has many characteristics that make it an excellent system for developing and testing quantitative modeling: a diverse cellular composition that can be identified with cell type-specific markers, regional organization that is required for maximal organ function,  genetic models with diverse effects on organ composition and function, assays for experimentally inducing organ degeneration and regeneration, and high biomedical relevance.   To date, there are no quantitative models of thymus organ structure and function and no established methods for generating one.  We seek to develop a quantitative theoretical model of the organization of cell types that can be used to better understand thymic function as well as evaluate diseased states. Our approach uses immunostaining on sagittal serial sections of a wildtype mouse thymus in order to identify distinct cellular subsets, followed by the use of novel computational approaches in order to quantitatively identify known and cryptic cellular spatial relationships.  We then take this approach one step further by applying these same approaches to a mutant (Aire knockout) mouse thymus to determine if there are differences in organization compared to the wildtype. The Aire knockout mutant was selected in order to test whether dendritic organization is altered with the removal of Aire (as well as doubling of K14?); there are differing reports in the literature.
  
 ### Hypotheses
 
@@ -60,7 +60,7 @@ I suggest an explanatory box for readers so that quadrat, section, composite, et
 ### System and Data Collection
 
 #### Mice
-C57BL/6 male mice at 5-6 weeks of age were purchased from Jackson Laboratories (Bar Harbor, Maine). Aire knockout (N=2) and WT male (N=2) mice at 5-6 weeks of age were obtained from Dr. Mark Anderson's lab at the University of California, San Francisco. N=2 for WT and mutant mice.
+C57BL/6 male mice (N=4) at 5-6 weeks of age were purchased from Jackson Laboratories (Bar Harbor, Maine). Aire knockout (N=2) and WT male (N=2) mice at 5-6 weeks of age were obtained from Dr. Mark Anderson's lab at the University of California, San Francisco.
 
 #### Tissue Preparation
 
@@ -69,7 +69,7 @@ Intact thymuses were removed and the right and left lobes were separated, placed
 #### Antibodies
 
 Primary antibodies used in this work include the biotinylated hamster CD11c (Cat#, 1:100), rabbit Claudin 3 (Cat#:  , 1:200), rabbit Claudin 4 (Cat#: , 1:200), supernatant hamster CD31 (Cat#, 1:50), rat CD25 (Cat#: , 1:50), biotinylated UEA1 (Cat#: , 1:200), conjugated mouse Claudin5 (Cat#: , 1:100), rabbit Keratin5 (Cat#, 1:200), biotin rat Foxp3 (Cat#, 1:50), goat Keratin14 (Cat#, 1:200), goat PDGFRb (Cat#, 1:100), and rat CD205 (Cat#, 1:200). 
-Secondary antibodies were purchased from Invitrogen
+Secondary antibodies were purchased from Invitrogen.
  
 #### Frozen Sample Preparation
 The entire left lobe was cut into 10-micron serial sagittal sections using a Leica CM3050 S cryostat. Sections were collected on glass slides and assigned a number corresponding to their location.  The middle third of these slides were selected for IHC.  Of these middle third, 9 sections from each sample that passed quality control standards were used for IHC.  These sections were fixed in -20 degree C acetone for 20 seconds immediately prior to application of blocking solution (10% donkey serum/PBS) for 30 minutes at room temperature.
@@ -119,7 +119,29 @@ for(i in 1:length(txtfiles)){
   my.xy<-hist2d(X,Y,nbins=c(msz,msz))
   
   
+  }
+
+for(i in 1:length(my.xy)){
+obj[i] <- my.xy1$counts
 }
+
+obj1[1,1] = obj1[1,1]-1
+obj1[100,1] = obj1[100,1]-1
+obj1[1,100] = obj1[1,100]-1
+obj1[100,100]=obj1[100,100]-1
+
+count1 <- as.vector(obj1)
+
+input <- cbind(count1, count2, count3, count4, count5, count6, count7, count8, count9, count10, count11, count12, count13, count14, count15, count16, count17, count18, count19,count20, count21, count22, count23, count24, count25, count26, count27, count28, count29, count30, count31, count32, count33)
+
+input1.1 <- cbind(count1, count4, count7, count10, count13, count16, count19, count22, count25, count28, count31)
+
+input1.2 <- cbind(count2, count5, count8, count11, count14, count17, count20, count23, count26, count29, count32)
+
+input1.3 <- cbind(count3, count6, count9, count12, count15, count18, count21, count24, count27, count30, count33)
+
+spe.kmeans <- kmeans(spe, centers=4, nstart=10)
+
 
 
 # define vectors to store results (mean sortable silt values)
