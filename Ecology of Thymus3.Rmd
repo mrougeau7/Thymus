@@ -109,46 +109,43 @@ Count1<-read.table("CD11c_1.txt",header=T,sep="\t",fill=TRUE)
 #data <- lapply(dir(),read.table)  #This is similar to line 120
 #head(data[1])
 
+
+setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Mutant2")
 library(gplots)
 msz=100
+cluster=4
 txtfiles = list.files(pattern="*.txt")
 for(i in 1:length(txtfiles)){
   tmp = read.table(txtfiles[i], sep="\t", head=T)
   X=tmp[[1]]
   Y=tmp[[2]]
   my.xy<-hist2d(X,Y,nbins=c(msz,msz))
+  obj <- my.xy$counts
   
+  obj[1,1] = obj[1,1]-1
+  obj[100,1] = obj[100,1]-1
+  obj[1,100] = obj[1,100]-1
+  obj[100,100]=obj[100,100]-1
+
+  count<- as.vector(obj)
   
-  }
+  results = data.frame(txtfiles, count)
 
-for(i in 1:length(my.xy)){
-obj[i] <- my.xy1$counts
-}
-
-obj1[1,1] = obj1[1,1]-1
-obj1[100,1] = obj1[100,1]-1
-obj1[1,100] = obj1[1,100]-1
-obj1[100,100]=obj1[100,100]-1
-
-count1 <- as.vector(obj1)
-
-input <- cbind(count1, count2, count3, count4, count5, count6, count7, count8, count9, count10, count11, count12, count13, count14, count15, count16, count17, count18, count19,count20, count21, count22, count23, count24, count25, count26, count27, count28, count29, count30, count31, count32, count33)
-
+  input <- cbind(count1, count2, count3, count4, count5, count6, count7, count8, count9, count10, count11,      count12, count13, count14, count15, count16, count17, count18, count19,count20, count21, count22, count23,     count24, count25, count26, count27, count28, count29, count30, count31, count32, count33)
+  
 input1.1 <- cbind(count1, count4, count7, count10, count13, count16, count19, count22, count25, count28, count31)
 
 input1.2 <- cbind(count2, count5, count8, count11, count14, count17, count20, count23, count26, count29, count32)
 
 input1.3 <- cbind(count3, count6, count9, count12, count15, count18, count21, count24, count27, count30, count33)
 
-spe.kmeans <- kmeans(spe, centers=4, nstart=10)
-
-
+spe.kmeans <- kmeans(spe, centers=cluster, nstart=10)
+  
+  }
 
 # define vectors to store results (mean sortable silt values)
 #will fix this later results = data.frame(txtfiles, means)
 print(results)
-    
-  
 
 ```
 
