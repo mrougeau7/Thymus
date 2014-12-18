@@ -1,7 +1,7 @@
 ---
 title: "Ecology of the Thymus"
 author: "Mary Browning, John Wares, Nancy Manley"
-date: '`r format(Sys.time(), "%d %B, %Y")`'
+date: '18 December, 2014'
 output: pdf_document
 bibliography: thymus.bib
 ---
@@ -103,55 +103,8 @@ Files containing the X and Y coordinates from CellProfiler were uploaded into R 
 
 
 
-```{r use a shell type command to read in any *.txt, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'}
-
-setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Extra/Reprocessing_Mutant1/txt_2")
-library(gplots)
-msz=100
-cluster=4
-txtfiles=list.files(pattern="*.txt")  #loads in order
-
-mat<-matrix(data=NA,nrow=10000,ncol=33) #this will change with size of matrix and # of sections/cell types
-
-toFill<-as.data.frame(mat)
-
-toUse0<-seq(1,33,1)
-toUse1<-seq(1,33,3)
-toUse2<-seq(2,33,3)
-toUse3<-seq(3,33,3)
-
-# define which vector to query here
-inLoop<-toUse1
-
-for(i in inLoop){
-  tmp = read.table(txtfiles[i], sep="\t", head=T)
-  X=tmp[[1]]  #[,1]
-  Y=tmp[[2]]
-  my.xy<-hist2d(X,Y,nbins=c(msz,msz))
-  obj <- my.xy$counts
-  
-  obj[1,1] = obj[1,1]-1
-  obj[100,1] = obj[100,1]-1
-  obj[1,100] = obj[1,100]-1
-  obj[100,100]=obj[100,100]-1
-  
-  count<- as.vector(obj)
-  toFill[,i]<-count
-    
-    }
-
-result<-toFill[,inLoop]
-#names(result)<-inLoop #Maybe rename columns?
-
-#result->result0   ###All sections
-#result->result1   ###Section 1
-#result->result2   ###Section2
-#result->result3   ###Section3
 
 
-#print(results)
-
-```
 
    
 ### Identification of Scale
@@ -160,180 +113,107 @@ As thymic epithelial cells vary in size from X to X', we considered the problem 
 
 5. Quadrat Selection and Rarefaction: you need to explain how you did this, and the next chunk can include the code you used to achieve this. That way, our results can include one plot and a brief discussion about the selection of that size quadrat and what it means for inclusion of cell types in a given quadrat
 
-``````{r WT1-rarefaction, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'}
-
-# note that you may DO the analysis in one place, and save the output plot to be generated elsewhere (in results)
-####Must use total cell types.  I need to remove the space outside the thymus before I can do this.
-mat <-read.table("Totalcounts100_Thymus1_2.txt", head=T, sep="\t")
-
-# an example 10x10 matrix
-#mat <- matrix(1:100, 10)
-nc <- ncol(mat) # number of columns
-nr <- nrow(mat) # number of rows
-
-size <- 5 # size of the subset matrix
-nmat <- 8 # number of submatrices
-
-# sample indices of submatrices
-#set.seed(1)
-idxc <- sample(seq(2, nc - size), size = nmat, replace = TRUE)
-idxr <- sample(seq(2, nr - size), size = nmat, replace = TRUE)
-
-# create a list of 8 submatrices
-res <- mapply(function(x, y) mat[seq(x, x + size - 1), seq(y, y + size - 1)],
-              idxr, idxc, SIMPLIFY = FALSE)
-
-# calculate the average cell values
-mean(unlist(res))
 
 ```
+## Error: cannot open the connection
+```
+
 
 
 6. Now get into the methods you already have in your R script, first setting K=2 and removing all quadrats that fall outside of the thymus from further analysis. You can do this using the subset command I think. We can then talk about more ways to maintain the identity of a given cluster of spatial quadrats (identity being the type of mouse, the section of thymus, and so on)
 
 
-```{r clustering, cache=TRUE, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
-library (vegan)
-library(labdsv)
-
-# This step normalizes your data and is optional.
-#spe.std <- decostand(spe, "normalize")  #You can also use "standardize". See 'help' for details.
-
-# Do the k-means clustering [read 'help' for the 'kmeans' function to see what the arguments "centers" (clusters or k) and "nstart" (randomizations) mean].
-
-spe.kmeans_Mutant1_All <- kmeans(result0, centers=cluster, nstart=10)
-spe.kmeans_Mutant1_S1 <- kmeans(result1, centers=cluster, nstart=10)
-spe.kmeans_Mutant1_S2 <- kmeans(result2, centers=cluster, nstart=10)
-spe.kmeans_Mutant1_S3 <- kmeans(result3, centers=cluster, nstart=10)
-
-###Viewing section
-write.table(spe.kmeans_Mutant1_All$cluster, file="spe.kmeans_Thymus1WT_K4_100.csv", sep=",")
-write.table(spe.kmeans_Mutant1_S1$cluster, file="spe.kmeans_Thymus1WT_K4_100.csv", sep=",")
-write.table(spe.kmeans_Mutant1_S2$cluster, file="spe.kmeans_Thymus1WT_K4_100.csv", sep=",")
-write.table(spe.kmeans_Mutant1_S3$cluster, file="spe.kmeans_Thymus1WT_K4_100.csv", sep=",")
-
-library(gplots) ###Call 1 set at a time; produces image of section
-spe=read.table("spe.kmeans_Thymus1WT_K4_100.csv", head=T, sep=",")
-#This file contains the clusters.  I reupload and reformat it back into a 2D matrix and add colors to show what the section looks like.
-
-spematrix=data.matrix(spe)
-matrix1tot = matrix(spematrix, nrow = 100, ncol=100)
-heatmap.2( matrix1tot, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1tot,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
-
-
-#change the colors to reflect the number of clusters.  Can also reorder so colors are consistent between sections.
 
 ```
+## Error: object 'result0' not found
+```
+
+```
+## Error: object 'result1' not found
+```
+
+```
+## Error: object 'result2' not found
+```
+
+```
+## Error: object 'result3' not found
+```
+
+```
+## Error: object 'spe.kmeans_Mutant1_All' not found
+```
+
+```
+## Error: object 'spe.kmeans_Mutant1_S1' not found
+```
+
+```
+## Error: object 'spe.kmeans_Mutant1_S2' not found
+```
+
+```
+## Error: object 'spe.kmeans_Mutant1_S3' not found
+```
+
+![plot of chunk clustering](figure/clustering.png) 
+
 
 Next Step: Figuring out how clustering is done
 We can see that we've asked R to take cell count info from 11 cell types and make 4 clusters
 
-```{r notsurewhat, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
-#dimnames(spe.kmeans$centers)[2]
-#unique(spe.kmeans$cluster)
-```
+
+
 
 #need automatic way to identify _empty_ outside of thymus
 
-```{r panels, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
-my.order<-c(1,2,3,4) # define the order we want to plot panels
-par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
-for (i in 1:max(spe.kmeans_Mutant1_All$cluster)){ 
-  barplot(colSums(result0[which(spe.kmeans_Mutant1_All1$cluster==i),]),main=i,ylim=c(0,12000)) 
-  # we pick out desired cluster and plot
-}
-
-#my.order<-c(1,2,3,4) # define the order we want to plot panels
-#par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
-#for (i in 1:max(spe.kmeans_Mutant1_S1$cluster)){ 
-#  barplot(colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==i),]),main=i,ylim=c(0,12000)) 
-  # we pick out desired cluster and plot
-#}
-
-#my.order<-c(1,2,3,4) # define the order we want to plot panels
-#par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
-#for (i in 1:max(spe.kmeans_Mutant1_S2$cluster)){ 
-#  barplot(colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==i),]),main=i,ylim=c(0,12000)) 
-  # we pick out desired cluster and plot
-#}
-
-#my.order<-c(1,2,3,4) # define the order we want to plot panels
-#par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
-#for (i in 1:max(spe.kmeans_Mutant1_S3$cluster)){ 
-#  barplot(colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==i),]),main=i,ylim=c(0,12000)) 
-  # we pick out desired cluster and plot
-#}
 
 ```
+## Error: object 'spe.kmeans_Mutant1_All' not found
+```
+
 
 Looking at cellular relationships between clusters
 We can make a running sum of all the counts of all cell types by cluster
 By this point we need to have excluded the blank space!!!
 
-```{r counts, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
-b2<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==1),])
-b3<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==3),])
-b4<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==4),])
-
-#b2_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==1),])
-#b3_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==2),])
-#b4_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==3),])
-
-#b2_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==4),])
-#b3_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==1),])
-#b4_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==2),])
-
-#b2_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==2),])
-#b3_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==4),])
-#b4_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==1),])
-
-###and normalize these so that each cluster type has the same total amount of cells (in other words, we're ###getting the proportion of cell types in each cluster)
-
-###```{r normalize, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
-b2<-b2/sum(b2)
-b3<-b3/sum(b3)
-b4<-b4/sum(b4)
-
-#b2_S1<-b2/sum(b2_S1)
-#b3_S1<-b3/sum(b3_S1)
-#b4_S1<-b4/sum(b4_S1)
-
-#b2_S2<-b2/sum(b2_S2)
-#b3_S2<-b3/sum(b3_S2)
-#b4_S2<-b4/sum(b4_S2)
-
-#b2_S3<-b2/sum(b2_S3)
-#b3_S3<-b3/sum(b3_S3)
-#b4_S3<-b4/sum(b4_S3)
-
-
-
-#We can look at the difference between pairs of clusters to see which cell types are most different between #clusters
-
-
-par(mfrow=c(2,2))  ##All
-barplot(b2-b3,main="2-3")
-barplot(b2-b4,main="2-4")
-barplot(b3-b4,main="3-4")
-
-#par(mfrow=c(2,2))
-#barplot(b2-b3,main="2-3")
-#barplot(b2-b4,main="2-4")
-#barplot(b3-b4,main="3-4")
-
-#par(mfrow=c(2,2))
-#barplot(b2-b3,main="2-3")
-#barplot(b2-b4,main="2-4")
-#barplot(b3-b4,main="3-4")
-
-#par(mfrow=c(2,2))
-#barplot(b2-b3,main="2-3")
-#barplot(b2-b4,main="2-4")
-#barplot(b3-b4,main="3-4")
 
 ```
+## Error: object 'result0' not found
+```
+
+```
+## Error: object 'result0' not found
+```
+
+```
+## Error: object 'result0' not found
+```
+
+```
+## Error: object 'b2' not found
+```
+
+```
+## Error: object 'b3' not found
+```
+
+```
+## Error: object 'b4' not found
+```
+
+```
+## Error: object 'b2' not found
+```
+
+```
+## Error: object 'b2' not found
+```
+
+```
+## Error: object 'b3' not found
+```
+
 
 
 6b. bray curtis
@@ -354,57 +234,39 @@ df<-NULL
 df2<-NULL
 #these nulls are here to reset the dataframes from the rbind that is below, only important if iteratign across commands outside of KNITR
 
-```{r braycurtis, message=FALSE, comment="", echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
-library(vegan) 
-library(dplyr) # used for chaining and manipulation  
-# http://blog.rstudio.org/2014/01/17/introducing-dplyr/
-#reads as: take only cluster 1 data from 'spe', then take column sums (i.e. total cell type count) 
-#then transpose (swap rows/cols needed for bray curtis calc)
 
-df<-result0[which(spe.kmeans_Mutant1_All$cluster==1),] %>% colSums() %>% t()   # example of chaining. 
-for (j in 2:4){  
-  tmp<-result0[which(spe.kmeans_Mutant1_All$cluster==j),] %>% colSums() %>% t() 
-  df<-rbind(df,tmp)
-}
-
-#df1.1<-spe1.1[which(spe.kmeans1.1$cluster==1),] %>% colSums() %>% t()
-#for (j in 2:4){  
-#  tmp1.1<-spe1.1[which(spe.kmeans1.1$cluster==j),] %>% colSums() %>% t() 
-#  df1.1<-rbind(df1.1,tmp1.1)
-#}
-
-#df1.2<-spe1.2[which(spe.kmeans1.2$cluster==1),] %>% colSums() %>% t()
-#for (j in 2:4){  
-#  tmp1.2<-spe1.2[which(spe.kmeans1.2$cluster==j),] %>% colSums() %>% t() 
-#  df1.2<-rbind(df1.2,tmp1.2)
-#}
-
-#df1.3<-spe1.3[which(spe.kmeans1.3$cluster==1),] %>% colSums() %>% t()
-#for (j in 2:4){  
-#  tmp1.2<-spe1.3[which(spe.kmeans1.3$cluster==j),] %>% colSums() %>% t() 
-#  df1.3<-rbind(df1.3,tmp1.3)
-#}
-
-#rownames(df)<-c("cluster1","cluster2","cluster3","cluster4")
-
-df<-apply(df,2,as.integer) %>% as.data.frame()
-#df1.1<-apply(df1.1,2,as.integer) %>% as.data.frame()
-#df1.2<-apply(df1.2,2,as.integer) %>% as.data.frame()
-#df1.3<-apply(df1.3,2,as.integer) %>% as.data.frame()
-
-#need same number of columns to bind them.
-colnames(df2)<-colnames(df)
-#colnames(df1.1)=colnames(df2.1)
-#colnames(df1.2)<-colnames(df2.1)
-#colnames(df1.2)<-colnames(df2.1)
-
-#dfTOTAL<-rbind(df1.2,df2.2, df1.2, df1.2, df1.1, df1.1)
-
-BrayCurtis<-vegdist(dfTOTAL,method="bray")
-#print(BrayCurtis)
-hc<-hclust(BrayCurtis)
-plot(hc,labels=dfTOTAL$rownames)
 ```
+Error: there is no package called 'dplyr'
+```
+
+```
+Error: could not find function "%>%"
+```
+
+```
+Error: could not find function "%>%"
+```
+
+```
+Error: could not find function "%>%"
+```
+
+```
+Error: object 'df2' not found
+```
+
+```
+Error: object 'dfTOTAL' not found
+```
+
+```
+Error: object 'BrayCurtis' not found
+```
+
+```
+Error: object 'hc' not found
+```
+
 
 # Results
 

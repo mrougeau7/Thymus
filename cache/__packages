@@ -1,0 +1,13 @@
+base
+caTools
+gdata
+gplots
+gtools
+KernSmooth
+knitr
+labdsv
+lattice
+MASS
+mgcv
+permute
+vegan
