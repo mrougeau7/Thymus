@@ -23,7 +23,7 @@ The co-distribution of constituent species in a community is often used to indic
 
  We performed this analysis on our model organ, the thymus.  The thymus was chosen because it is an intriguing example of cellular level organization, with a strong connection between organization and function.  The thymus consists of developing T cells supported by a complex cellular environment containing a variety of resident cell types, including thymic epithelial cells (TECs), dendritic cells, vasculature, and mesenchymal cells.  These cell types comprise multiple microenvironments that direct and support thymocytes to develop from immature progenitors into mature T cells that are both self-tolerant and self-restricted.  T cell development in the thymus requires interactions with the thymic microenvironments that provide signals for their survival, proliferation, and differentiation [1].  Despite their critical role in the generation of cellular immunity and the clinical importance of thymic regeneration, the composition and organization of thymic microenvironments and the mechanisms that promote their proper development and function are not fully understood, in part due to a lack of technical and theoretical approaches for quantifying tissue-level properties.  Thus, the thymus has many characteristics that make it an excellent system for developing and testing quantitative modeling: a diverse cellular composition that can be identified with cell type-specific markers, regional organization that is required for maximal organ function,  genetic models with diverse effects on organ composition and function, assays for experimentally inducing organ degeneration and regeneration, and high biomedical relevance.  
  
-To date, there are no quantitative models of thymus organ structure and function and no established methods for generating one.  We seek to develop a quantitative theoretical model of the organization of cell types that can be used to better understand thymic function as well as evaluate diseased states. Our approach uses immunostaining on sagittal serial sections of a wildtype mouse thymus in order to identify distinct cellular subsets, followed by the use of novel computational approaches in order to quantitatively identify known and cryptic cellular spatial relationships.  First, we used the K means clustering algorithm to identify geographical clusters of cell types based on compositional similarities and abundance [CITE?]. We used a range of K values to compare to previously identified regions of the thymus and to identify cryptic organization. We then used the Bray Curtis Dissimilarity Index to determine the degree of similarity between clusters produced from K means clustering [CITE]. The value produced can also be used for comparisons between different sections, different samples, and can also be compared to ecosystems. We then take this approach one step further by applying these same approaches to a mutant (Aire knockout) mouse thymus to determine if there are differences in organization compared to the wildtype. The Aire knockout mutant was selected in order to test whether dendritic organization is altered with the removal of Aire (as well as doubling of K14?); there are differing reports in the literature [CITE].
+To date, there are no quantitative models of thymus organ structure and function and no established methods for generating one.  We seek to develop a quantitative theoretical model of the organization of cell types that can be used to better understand thymic function as well as evaluate diseased states. Our approach uses immunostaining on sagittal serial sections of a wildtype mouse thymus in order to identify distinct cellular subsets, followed by the use of novel computational approaches in order to quantitatively identify known and cryptic cellular spatial relationships.  First, we used the K means clustering algorithm to identify geographical clusters of cell types based on compositional similarities and abundance [CITE?]. We used a range of K values to compare to previously identified regions of the thymus and to identify cryptic organization. We then used the Bray Curtis Dissimilarity Index to determine the degree of similarity between clusters produced from K means clustering [CITE]. The value produced can also be used for comparisons between different sections, different samples, and can also be compared to ecosystems. We then take this approach one step further by applying these same approaches to a mutant (Aire knockout) mouse thymus to determine if there are differences in organization compared to the wildtype. The Aire knockout mutant was selected in order to test whether dendritic organization is altered with the removal of Aire (as well as doubling of K14?); there are differing reports in the literature [CITE].Keystone species
  
  Cell Types Used in Analysis
  SHOULD I INCLUDE PARAFFIN ANTIBODIES?
@@ -144,7 +144,7 @@ result<-toFill[,inLoop]
 #names(result)<-inLoop #Maybe rename columns?
 
 #result->result0   ###All sections
-#result->result1   ###Section 1
+result->result1   ###Section 1
 #result->result2   ###Section2
 #result->result3   ###Section3
 
@@ -206,24 +206,37 @@ spe.kmeans_Mutant1_S1 <- kmeans(result1, centers=cluster, nstart=10)
 spe.kmeans_Mutant1_S2 <- kmeans(result2, centers=cluster, nstart=10)
 spe.kmeans_Mutant1_S3 <- kmeans(result3, centers=cluster, nstart=10)
 
-###Viewing section
-write.table(spe.kmeans_Mutant1_All$cluster, file="spe.kmeans_Thymus1WT_K4_100.csv", sep=",")
-write.table(spe.kmeans_Mutant1_S1$cluster, file="spe.kmeans_Thymus1WT_K4_100.csv", sep=",")
-write.table(spe.kmeans_Mutant1_S2$cluster, file="spe.kmeans_Thymus1WT_K4_100.csv", sep=",")
-write.table(spe.kmeans_Mutant1_S3$cluster, file="spe.kmeans_Thymus1WT_K4_100.csv", sep=",")
-
 library(gplots) ###Call 1 set at a time; produces image of section
-spe=read.table("spe.kmeans_Thymus1WT_K4_100.csv", head=T, sep=",")
-#This file contains the clusters.  I reupload and reformat it back into a 2D matrix and add colors to show what the section looks like.
 
-spematrix=data.matrix(spe)
-matrix1tot = matrix(spematrix, nrow = 100, ncol=100)
+v <- spe.kmeans_Mutant1_S1$cluster
+u <- unique(v)
+
+u[1]= "layer1"
+u[2]= "layer2"
+u[3]= "layer3"
+u[4]= "layer4"
+
+names=which(v[u[1]]="layer1")
+
+matrix1tot = matrix(u, nrow = 100, ncol=100)
+
+factor(matrix1tot, exclude=1)
+
 heatmap.2( matrix1tot, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1tot,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red"))  
-
+           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
 
 #change the colors to reflect the number of clusters.  Can also reorder so colors are consistent between sections.
+
+```
+
+```{r assigning clusters, cache=TRUE, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+
+if(spe.kmeans_Mutant1_All$cluster="blank", exclude="blank")
+  vector(spe.kmeans_Mutant1_All$cluster,exclude="blank")
+
+factor(spe.kmeans_Mutant1_All$cluster, exclude="blank"
+
 
 ```
 
