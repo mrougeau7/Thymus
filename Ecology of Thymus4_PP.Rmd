@@ -17,7 +17,7 @@ In biological systems, the correct organization and abundance of distinct cell t
 ## Introduction
 >>>>>>> origin/master
 
-Within the field of organ biology, there is a distinct lack of quantitative methods for analyzing the organization, as opposed to the composition, of organs, tissues, and cells.  Without quantitative methods for assessing organization, a significant aspect of organ and tissue biology is inaccessible to analysis and contrast.  Fortunately, a striking comparison can be drawn between the interactions that occur within organs and those that occur within ecosystems.  For instance, cell types in an organ, like species in an ecosystem, are influenced by the availability of space and resources as well as by the presence of other cell types. The presence or absence of one cell type may alter the functional role and dominance of another, or the overall service the community provides to the larger system [e.g., @wootton05].  By comparing cell types within a biological organ to species in an ecosystem, quantitative methods used for ecological analyses can be directly applied. Through analysis of the exact spatial location and co-location of component cell types, in an approach that uses the analytical toolkit of community ecologists and biogeographers, we gain a better understanding of which interactions can be validated by independent approach and analysis, as well as which interactions or even cell types we are likely to be need more information about.  
+Within the field of organ biology, there is a distinct lack of quantitative methods for analyzing the organization, as opposed to the composition, of organs, tissues, and cells.  Without quantitative methods for assessing organization, a significant aspect of organ and tissue biology is inaccessible to analysis.  Fortunately, a striking comparison can be drawn between the interactions that occur within organs and those that occur within ecosystems.  For instance, cell types in an organ, like species in an ecosystem, are influenced by the availability of space and resources as well as by the presence of other cell types. The presence or absence of one cell type may alter the functional role and dominance of another, or the overall service the community provides to the larger system [e.g., @wootton05].  By comparing cell types within a biological organ to species in an ecosystem, quantitative methods used for ecological analyses can be directly applied. Through analysis of the exact spatial location and co-location of component cell types, in an approach that uses the analytical toolkit of community ecologists and biogeographers, we gain a better understanding of which interactions can be validated by independent approach and analysis, as well as which interactions or even cell types we are likely to be need more information about.  
 
 The co-distribution of constituent species in a community is often used to indicate interaction - whether competitive, trophic, or facilitative [@verberk11;@angel11]. By analyzing the exact spatial location and co-location of component cell types across the domain of a particular tissue or organ, we may gain a better understanding of which interactions - indicated by codistribution and sufficient density - can be validated by independent approach and analysis.  To an extent, we recapitulate the spatial scales described above: we explore the differentiation of distinct habitats within the environment (biogeography: identifying regions of endemicity or dramatically shifted abundance), the colocalization of particular sub-groups of cells (community ecology), and we use the tenets of macroecology to the extent that we can generalize that cells need a particular density to be viable interactors, and to the extent that common cells have a larger overall distribution (this is not tautological, this follows from the first: you cannot be rare and widespread in a functional sense).  Our overall goal is development of a cellular ecology, where we can understand interactions at a quantitative level that does not yet exist in developmental biology, particularly in this system.  We seek to create a map of a healthy adult organ using cell location and abundance, and then to spatially characterize the organ by applying ecological theory directly to the produced map (something that has never been done before).  The results from this analysis can be used to make comparisons with organs in states of disequilibrium, such as diseased or mutant organs, in order to identify organizational differences. 
 
@@ -34,9 +34,11 @@ To date, there are no quantitative models of thymus organ structure and function
 
   mTEC       UEA1, Claudin3
              Claudin4, K14
-             K5  
+             K5, Claudin5 
               
-  Blood vessel PDGFRb, Claudin5, CD31 
+  Blood vessel Claudin5, CD31 
+  
+  Mesenchyme  PDGFRb
   
   Dendritic  CD11c
   
@@ -84,7 +86,7 @@ C57BL/6 male mice (N=4) at 5-6 weeks of age were purchased from Jackson Laborato
 
 #### Tissue Preparation
 
-Intact thymuses were removed and the right and left lobes were separated, placed in OCT compound, and immediately frozen before being shipped to the Manley lab.
+Intact thymuses from the Anderson lab were removed and the right and left lobes were separated, placed in OCT compound, and immediately frozen before being shipped to the Manley lab. Mice were shipped from Jackson Laboratories and dissected and frozen in the Manley lab.
 
 #### Antibodies
 
@@ -95,10 +97,10 @@ Secondary antibodies were purchased from Invitrogen.
 The entire left lobe was cut into 10-micron serial sagittal sections using a Leica CM3050 S cryostat. Sections were collected on glass slides and assigned a number corresponding to their location.  The middle third of these slides were selected for IHC.  Of these middle third, 9 sections from each sample that passed quality control standards were used for IHC.  These sections were fixed in -20 degree C acetone for 20 seconds immediately prior to application of blocking solution (10% donkey serum/PBS) for 30 minutes at room temperature.
 
 #### IHC
-Primary antibodies were mixed in PBS and incubated overnight at 4C.  The slides were rinsed with PBS 2x 5 minutes and the secondary antibodies were mixed in PBS (1:800) and applied to the slides for 30 minutes.  Slides were rinsed with PBS 2x5 minutes, mounted in FluorGel (EMS) and coverslipped.   Marker combinations were determined by availability,  biological and technical considerations such as anticipated abundance, distribution of cell types, and reagent compatibility (antibody species of origin). 
+Primary antibodies were mixed in PBS and incubated overnight at 4C.  The slides were rinsed with PBS 2x5 minutes and the secondary antibodies were mixed in PBS (1:800) and applied to the slides for 30 minutes.  Slides were rinsed with PBS 2x5 minutes, mounted in FluorGel (EMS) and coverslipped.   Marker combinations were determined by availability,  biological and technical considerations such as anticipated abundance, distribution of cell types, and reagent compatibility (antibody species of origin). 
 
 #### Microscopy, PTGui, and CellProfiler
-The stained sections were assessed by specific quality control criteria such as lack of section flaws, clarity of image collection, and signal to noise ration.  A total of 9 sections from each sample were used (Mark Anderson's Lab). Sections that passed the QC measures  were photographed at 20x as tiled, overlapping images  on the Zeiss  microscope and reconstructed using PTGui.  The image produced was optimized in Adobe Photoshop in an effort to reduce background and increase signal intensity.  The produced image was too large to work in CellProfiler, so the size of the image was decreased by taking the image width and dividing by 4.  CellProfiler was used to generate cell counts using intensity of signal and the results were input into R for the spatial analysis.  CellProfiler was chosen because it had the capability of quickly, accurately, and efficiently producing cell count number as well as position information  (x and y, centroid) for a large number of cells.  Results from the cell counts were  manually checked for accuracy.  CellProfiler uploaded the image, cropped the image around the section boarder (this was done by drawing a line around the section boarder), identified primary objects, and exported the primary objects in an excel file as x and y coordinates. 
+Multiple sections from each sample were used in the analysis (9 sections from each sample from the Anderson Lab; 8 sections from WT2, 6 from WT1).  The sections were assessed by specific quality control criteria such as lack of section flaws, clarity of image collection, and signal to noise ratio. Sections that passed the QC measures  were imaged at 20x as tiled, overlapping quadrats on the Zeiss  microscope and reconstructed using PTGui.  The image produced was optimized in Adobe Photoshop to reduce background and increase signal intensity so that cell counts could be taken as quickly and accurately as possible in CellProfiler.  The reconstructed image from PTGui was too large to work in CellProfiler, so the size of the image was decreased by taking the image width and dividing by 4. CellProfiler was chosen because it has the capability to quickly and accurately identify cells and output locations (x and y coordinates) in an excel file.  Results from the cell counts were  manually checked for accuracy and input into R for the spatial analysis.  
 
 ####R
 Files containing the X and Y coordinates from CellProfiler were uploaded into R and reformatted into a community matrix.  The K-means function in R's stats package was used to cluster the data. The  Bray-Curtis function in the Vegan package was used to calculate the Bray-Curtis index for the different regions produced from K-means clustering.  
@@ -108,22 +110,26 @@ Files containing the X and Y coordinates from CellProfiler were uploaded into R 
 ```{r use a shell type command to read in any *.txt, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'}
 
 setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Extra/Reprocessing_Mutant1/txt_2")
+setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/WT1")
+setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Mutant2")
+setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/WT2")
+
 library(gplots)
-msz=100
-cluster=4
-txtfiles=list.files(pattern="*.txt")  #loads in order
+msz=100  #matrix size in hist2d
+cluster=4  #number of clusters produced for K means
+txtfiles=list.files(pattern="*.txt")  #loads in order all files within folder
 
 mat<-matrix(data=NA,nrow=10000,ncol=33) #this will change with size of matrix and # of sections/cell types
 
-toFill<-as.data.frame(mat)
+toFill<-as.data.frame(mat)  #changes to data frame
 
-toUse0<-seq(1,33,1)
-toUse1<-seq(1,33,3)
-toUse2<-seq(2,33,3)
-toUse3<-seq(3,33,3)
+toUse0<-seq(1,33,1) #uses all 33 columns
+toUse1<-seq(1,33,3) #uses columns that correspond to Section1
+toUse2<-seq(2,33,3) #Section2
+toUse3<-seq(3,33,3) #Section3
 
 # define which vector to query here
-inLoop<-toUse1
+inLoop<-toUse1  #Determine what section you want to run here
 
 for(i in inLoop){
   tmp = read.table(txtfiles[i], sep="\t", head=T)
@@ -210,7 +216,7 @@ spe.kmeans_Mutant1_S3 <- kmeans(result3, centers=cluster, nstart=10)
 
 library(gplots) ###Call 1 set at a time; produces image of section
 
-v <- spe.kmeans_Mutant1_S1$cluster
+v <- spe.kmeans_Mutant1_S1$cluster  #change this to section you are interested in looking at
 u <- unique(v)
 
 u[1]= "layer1"
@@ -250,9 +256,7 @@ We can see that we've asked R to take cell count info from 11 cell types and mak
 #unique(spe.kmeans$cluster)
 ```
 
-#need automatic way to identify _empty_ outside of thymus
-
-```{r panels, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
+```{r cluster subplots, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans_Mutant1_All$cluster)){ 
@@ -285,24 +289,23 @@ for (i in 1:max(spe.kmeans_Mutant1_All$cluster)){
 
 Looking at cellular relationships between clusters
 We can make a running sum of all the counts of all cell types by cluster
-By this point we need to have excluded the blank space!!!
 
 ```{r counts, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
-b2<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==1),])
+b2<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==2),])
 b3<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==3),])
 b4<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==4),])
 
-#b2_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==1),])
-#b3_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==2),])
-#b4_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==3),])
+#b2_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==2),])
+#b3_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==3),])
+#b4_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==4),])
 
-#b2_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==4),])
-#b3_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==1),])
-#b4_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==2),])
+#b2_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==2),])
+#b3_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==3),])
+#b4_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==4),])
 
 #b2_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==2),])
-#b3_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==4),])
-#b4_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==1),])
+#b3_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==3),])
+#b4_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==4),])
 
 ###and normalize these so that each cluster type has the same total amount of cells (in other words, we're ###getting the proportion of cell types in each cluster)
 
@@ -322,8 +325,6 @@ b4<-b4/sum(b4)
 #b2_S3<-b2/sum(b2_S3)
 #b3_S3<-b3/sum(b3_S3)
 #b4_S3<-b4/sum(b4_S3)
-
-
 
 #We can look at the difference between pairs of clusters to see which cell types are most different between #clusters
 
@@ -365,10 +366,6 @@ The way to read the last plots is for something like "2-3", positive bars mean t
 
 In R, the analogy to re-oarganizing data by either pivot tables, or manual calculation and pasting into a new sheet, is to manipulate one data frame to another. The 'dplyr' package or the 'aggregate' function can both help you here. For most standard ecology metrics there are usually one or more packages that make our life easier. Here the 'vegan' package is useful. In this example, we work out Bray-Curtis for all clusters (pairwise comparison)
 
-df<-NULL
-df2<-NULL
-#these nulls are here to reset the dataframes from the rbind that is below, only important if iteratign across commands outside of KNITR
-
 ```{r braycurtis, message=FALSE, comment="", echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 library(vegan) 
 library(dplyr) # used for chaining and manipulation  
@@ -400,7 +397,6 @@ for (j in 2:4){
 #  df1.3<-rbind(df1.3,tmp1.3)
 #}
 
-#rownames(df)<-c("cluster1","cluster2","cluster3","cluster4")
 
 df<-apply(df,2,as.integer) %>% as.data.frame()
 #df1.1<-apply(df1.1,2,as.integer) %>% as.data.frame()
@@ -432,9 +428,9 @@ plot(hc,labels=dfTOTAL$rownames)
 
 ##K means clustering reproduces previously identified regions and identifies cryptic information
 
-In order to quantitatively evaluate the organization of the thymus, K means clustering was performed using cell type location and abundance. K values of 3 to - were selected based on previously identified information. For K=2, the cortex and medullary regions were reproduced.  Increasing K to 3 resulted in subdividing of the medullary region. What is driving the clustering?  Dendritic cells found in CMJ? Removal of cell types? 
+K means clustering was performed using cell type location and abundance in order to quantitatively evaluate the organization of the thymus.  K values of 3 to - were selected based on previously identified information. For K=2, the cortex and medullary regions were reproduced.  Increasing K to 3 resulted in subdividing of the medullary region. What is driving the clustering?  Dendritic cells found in CMJ? Removal of cell types? 
 
-##Bray Curtis Dissimilarity Index Identifies BLAH
+##Bray Curtis Identifies Degree of Similarity
 
 Bray Curtis values ranged from BLAH to BLAH.  Talk about which samples, regions, subregions were most similar, which sections, did mutants group together? etc
 

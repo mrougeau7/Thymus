@@ -1,0 +1,713 @@
+# ptGui project file
+
+#-encoding utf8
+#-pathseparator /
+#-fileversion 41
+#-previewwidth 566
+#-previewheight 1132
+#-vfov 14.34768055454305
+#-resolution 300
+#-fixaspect 1
+#-outputfile 
+#-ccdcrop 1
+#-hasbeenoptimized 0
+#-hvcpmode 1
+#-morphmode 2
+#-jpegparameters 100 0
+#-tiffparameters 8bit packbits alpha_assoc
+#-psdparameters 8bit packbits layered
+#-qtvrparameters 800 600 1 1000 70 0 0 -180 180 0 -90 90 90 10 120 1
+#-honorexiforientation 1
+#-exrparameters noalpha
+#-hdroutputhdrblended
+#-hdroutputtonemapped
+#-hdrfileformat hdr
+#-hdrmethod fuse
+#-hdrpsdparameters float none layered
+#-tonemapsettings 0 0 0.5 1 0 20 0 0 2 0.27 0.67 0.06
+#-fusesettings 0.5 0 0.2 0 0
+#-cameracurve 3.441228 -0.551975 0.294423 -0.09563199999999999 0.07213899999999999
+#-vignettingparams 
+#-wbexposure 0 0 0
+#-pmoptexposuremode auto
+#-pmoptvignettingmode enabled
+#-pmoptwbmode disabled
+#-pmoptflaremode disabled
+#-pmoptcameracurvemode auto
+#-exposurecorrection 0
+#-blendweight 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100
+#-optviewpoint 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+#-colorcorrectlayers
+#-useexif0
+#-batchbuilder_useexif 0
+#-stitcher ptgui
+#-blender ptgui
+#-blenderfeather 0
+#-optimizer ptgui
+#-interpolator default
+#-templateapplied
+#-simpleoptimizer
+#-imgrotate444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+#-cpinactive
+#-imginactive
+#-linktoprevious
+#-previewinactive
+#-outputcrop 0 1 0 1
+#-morphcp
+#-nooptcp
+#-location default
+#-viewingdirection default
+#-alignsettings_generatecp 1
+#-alignsettings_optimize 1
+#-alignsettings_optimizeprealign 1
+#-alignsettings_straighten 1
+#-alignsettings_fit 1
+#-alignsettings_chooseprojection 1
+#-alignsettings_setoptimumsize 1
+#-alignsettings_limitsize 500
+#-alignsettings_optimizeexposure 0
+#-hdrsettings_defaultlinkmode nolink
+#-hdrsettings_donotask 0
+#-batchsettings_align 0
+#-batchsettings_stitch 1
+#-batchsettings_stitchonlyifcontrolpoints 1
+#-defaultprojectfilenamemode firstsourceimage
+#-defaultprojectfilename_custom " Panorama"
+#-defaultprojectfoldermode sourcefolder
+#-defaultprojectfolder_custom ""
+#-defaultpanoramafilenamemode asproject
+#-defaultpanoramafilename_custom ""
+#-defaultpanoramafoldermode projectfolder
+#-defaultpanoramafolder_custom ""
+#-userelativesourceimagepaths 1
+#-optimizeraskreinitialize 1
+#-applytemplate_lens 1
+#-applytemplate_imageparams 1
+#-applytemplate_crop 1
+#-applytemplate_mask 1
+#-applytemplate_panoramasettings 1
+#-applytemplate_projectsettings 1
+#-applytemplate_optimizer 1
+#-globalcrop 0 0 0 0 0 0 0 0.5
+#-theoreticalhfov -1
+#-rect_compression_x 0
+#-rect_compression_y 0
+#-cylindrical_compression_y 0
+#-transverse_cylindrical_compression_x 0
+#-vedutismo_compression_x 1
+#-transverse_vedutismo_compression_y 1
+#-stereographic_compression 1
+#-rectifisheye_compression 1
+# Panorama settings:
+p w8334 h16662 f0 v7.204695713860247 u20 n"JPEG g0 q100"
+m g1 i0 f0
+
+# input images:
+#-dummyimage
+# The following line contains a 'dummy image' containing some global parameters for the project
+o w1 h1 y0 r0 p0 v1.201326012717928 a0.001632862784643072 b-0.004771734068428883 c0.005773227187027488 f0 d19.54009440384939 e-5.80976430421711 g0 t0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0001_c4.JPG"
+#-metadata -1 246.3416233361453 -1 2014-11-19T12:14:58 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.3439975356932619 r0.0188477889311778 p6.718914246350828 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0002_c4.JPG"
+#-metadata -1 246.3416233361453 -1 2014-11-19T12:15:29 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.6561131106764458 r0.1408612286676711 p6.724585580787611 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0003_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:16:03 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.6560905199597268 r0.1293280911240473 p6.724379825768917 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0004_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:16:27 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.611563315149949 r0.2350359635022684 p6.727294918902072 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0005_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:16:56 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y2.586368334423164 r0.3449630821003625 p6.166111505049468 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0006_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:17:23 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.727011483870213 r0.2710369734816893 p6.164956529997949 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0007_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:17:52 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.8197834368018142 r0.1379891445232747 p6.162465259971961 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0008_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:18:13 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.05303081318224712 r0.04149942275201766 p6.157978568050877 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0009_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:18:38 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.9552405755266186 r-0.03532621747507238 p6.152163389937725 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0010_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:19:02 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.836493756496622 r-0.136601762420682 p6.14534312770432 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0011_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:19:33 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.349129245509615 r-0.1457215289021251 p5.502780527668503 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0012_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:20:01 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.296027461927581 r-0.06294657106294153 p5.511745526404398 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0013_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:20:26 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.4759879322319421 r-0.01639445053298114 p5.516852453430282 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0014_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:20:56 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.4274510091407432 r0.08794702846164092 p5.522601515872927 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0015_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:21:19 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.534568763248665 r0.1364857903709592 p5.527671717160362 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0016_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:21:54 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y2.522118289981861 r0.215395707592255 p5.530184008428421 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0017_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:22:24 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y3.014376534490157 r0.2228536321136005 p5.531208829455648 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0018_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:22:50 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y2.775599113378192 r0.2343488204466511 p4.91329580983174 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0019_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:23:17 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.901049134993503 r0.1654339367429683 p4.911593846982973 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0020_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:23:51 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.13964710500142 r0.0965110200027243 p4.908923599264621 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0021_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:24:28 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.2366001205846569 r0.06910346666139923 p4.904082347500135 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0022_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:25:05 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.6894227494501389 r-0.02332131461167407 p4.89810351913782 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0023_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:25:32 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.621780774961723 r-0.1016492586748189 p4.890515948988738 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0024_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:25:59 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.411655888234657 r-0.1453373640595862 p4.884090763812022 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0025_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:26:30 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.627237479345557 r-0.1476519140129146 p4.20893051294865 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0026_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:27:03 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.675621580279251 r-0.08781930384622429 p4.218175554801068 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0027_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:27:42 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.7367504818334174 r-0.0446421218640112 p4.225718031435316 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0028_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:28:16 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.2376998762134441 r0.05472104236464095 p4.232311955731259 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0029_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:28:47 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.170042248818497 r0.1305551229558276 p4.237334826650943 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0030_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:29:12 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y2.087598451982717 r0.1655960557345044 p4.241772806931245 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0031_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:29:39 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y2.535560846686992 r0.1740797835572185 p4.24323698409411 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0032_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:30:09 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y2.229450354574109 r0.1544254335985932 p3.624111146015258 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0033_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:30:47 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.464850949939954 r0.1251555148433299 p3.621514035617916 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0034_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:31:23 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.5603485124855734 r0.05740815751240416 p3.617513645898748 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0035_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:31:53 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.4574362713349445 r0.0004156606921133711 p3.611392974166356 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0036_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:32:15 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.481516160217309 r-0.06753065353825911 p3.603923064666994 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0037_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:32:40 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.354475960451448 r-0.1272859014048697 p3.596814859569516 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0038_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:33:00 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.844718047785511 r-0.1512596902196342 p3.592289924186054 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0039_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:33:29 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.74839248485612 r-0.151717011935752 p2.927450642286086 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0040_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:33:57 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.731201513065359 r-0.07398048768891187 p2.937185529766223 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0041_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:34:33 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.9801142468408495 r-0.05428413551906457 p2.943148268536423 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0042_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:35:04 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.1306967572134402 r0.01126769855051967 p2.949523757975336 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0043_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:35:41 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.8416598301797529 r0.09253798451695612 p2.955388534661707 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0044_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:36:17 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.770627060048133 r0.1884144538616421 p2.959579479027096 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0045_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:36:44 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y2.293492998011985 r0.1787835578468769 p2.961649361919662 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0046_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:37:22 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y2.158988395128063 r0.04453957422564166 p2.27523425087739 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0047_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:37:53 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.220136408320949 r0.009474155592055835 p2.269915458980932 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0048_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:38:25 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.2710693797685045 r-0.0290296546560226 p2.264153888420543 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0049_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:39:14 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.5735760912494029 r-0.0388781691407354 p2.257960375208224 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0050_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:39:52 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.435052042729485 r-0.04913027414324367 p2.251927128630122 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0051_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:40:25 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.34091671505591 r-0.08338701941494592 p2.245358443681504 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0052_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:40:59 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.984138616099461 r-0.1034844077523551 p2.240045575753564 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0053_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:41:36 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.977573512410556 r-0.1439780378369545 p1.559312697832097 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0054_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:42:09 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.951212380891515 r-0.05165062642292369 p1.568080208859129 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0055_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:43:08 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.9445057043663775 r-0.04053487936404794 p1.576374372743181 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0056_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:43:35 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.03392201046501117 r-0.03784417636457665 p1.583104812238621 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0057_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:44:02 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.9784743080434333 r-0.0003215328348540869 p1.590700952881046 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0058_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:44:48 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.94328294444222 r0.006268548525377961 p1.597252581676681 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0059_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:45:16 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y2.19089437196773 r0.03184565018172917 p1.599053631900019 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0060_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:45:54 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.876992003327036 r-0.0230159714779807 p0.9266366698623534 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0061_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:46:41 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.9622017827042519 r-0.02658313736561315 p0.9205540274976168 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0062_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:47:20 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.07742422780675977 r-0.01563158010275238 p0.9144756235073738 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0063_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:47:46 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.8810199157695938 r-0.04236049827833882 p0.9077482662588902 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0064_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:48:22 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.936201636712198 r-0.05458713568737662 p0.9000264658769691 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0065_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:48:56 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.884922624913632 r-0.1026486432868739 p0.8923121575672537 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0066_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:49:29 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.878939398775925 r-0.008460309268451583 p0.1922637497776994 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0067_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:50:19 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.82538341600971 r-0.01725018682405371 p0.1995709129032261 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0068_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:50:50 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.9409746772842499 r-0.0479736928601276 p0.2059949774260449 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0069_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:51:20 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.04634756691269213 r-0.02356225642102732 p0.2133912803030776 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0070_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:51:58 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.998170448006732 r-0.01896344673537636 p0.2201607166380633 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0071_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:52:30 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.698667422857417 r-0.03715186327961738 p0.2251637353387038 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0072_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:53:01 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.557667909689828 r-0.04613030152074134 p-0.4386989316969832 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0073_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:53:44 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.634920749147274 r-0.006835998104523222 p-0.4448602828503472 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0074_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:54:17 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.2225557760130925 r-0.02962438712945736 p-0.4499815043672598 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0075_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:54:45 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.105970530799699 r-0.01184351514218738 p-0.456265036105906 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0076_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:55:15 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.122808273835744 r-0.01301574659233492 p-0.4331329728885213 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0077_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:56:15 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.954123380185769 r-0.002250724841299682 p-0.4387486698220272 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0078_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:56:43 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.948906539740979 r-0.001118314503797497 p-1.114886192585185 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0079_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:57:16 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.929840270463283 r-0.02637334219147951 p-1.107439578453456 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0080_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:57:40 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.9869869481749801 r-0.03083963012024137 p-1.101004115108688 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0081_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:58:11 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.03149167786489065 r-0.03741195754461131 p-1.093974475489008 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0082_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:58:51 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.95608264444448 r-0.02251158960768981 p-1.086583051781196 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0083_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:59:16 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.656975059995469 r-0.05538666964096841 p-1.081165603281526 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0084_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T12:59:47 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.248505431278785 r-0.06762760756938217 p-1.780264689855418 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0085_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:00:14 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.3835756085493044 r-0.02940433767437227 p-1.78614831841153 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0086_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:00:43 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.507593861484838 r0.04911325563569602 p-1.791883657098193 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0087_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:01:13 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.476218403292978 r0.04114842719848463 p-1.797842940231318 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0088_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:01:37 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.401326590093463 r-0.01406350778602198 p-1.806043414120228 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0089_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:02:09 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.967478284719808 r0.02598212573336671 p-1.809521913904499 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0090_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:02:38 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.741519944392116 r0.06860483731873274 p-2.543063059174496 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0091_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:03:30 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.631885875282768 r0.09474186558566976 p-2.535311318169103 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0092_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:04:03 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.6461490594411285 r9.352161053521279e-05 p-2.528848307133925 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0093_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:04:26 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.3132081066052325 r-0.03907893361381135 p-2.5221913544718 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0094_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:04:53 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.161819743467914 r-0.1161534549453902 p-2.515096436895691 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0095_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:05:52 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.9744019078143833 r-0.136987886645141 p-3.191008219837112 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0096_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:06:28 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.09206436600457917 r-0.06567741253744662 p-3.19775422598113 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0097_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:06:56 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.8989268984611384 r-0.02584033069777995 p-3.205049988653233 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0098_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:07:30 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.91558602958716 r0.002937841870858191 p-3.211384836785937 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0099_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:08:36 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.468099415920441 r0.04737551416440096 p-3.214765204167614 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0100_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:09:28 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-2.026093054704866 r0.03156491560974667 p-3.884556940026024 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0101_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:10:12 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.008971217781451 r-0.005447488406266507 p-3.878061489550849 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0102_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:10:50 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.001027136700424433 r-0.07144498000203614 p-3.870362783870481 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0103_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:11:16 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.8479247869664162 r-0.1450423016364042 p-3.863061841061974 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0104_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:14:20 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.6148837233336553 r-0.311649459921548 p-4.55334008430712 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0105_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:15:06 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.2760607014100566 r-0.09516936984350058 p-4.515966523511631 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0106_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:15:40 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.161977496625755 r-0.001653824063059616 p-4.52245842196769 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0107_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:16:05 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.792657521528713 r0.02187032782954841 p-4.526116922416437 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0108_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:16:44 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.576869785568487 r0.03361475234480926 p-5.195247336285043 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0109_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:17:17 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.5883450340758172 r-0.07342273822652186 p-5.18816735423309 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0110_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:17:42 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.3604383068174358 r-0.2364321591307013 p-5.179259049292422 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0111_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:18:21 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.7720056584349406 r-0.2870970167548714 p-5.17471199188107 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0112_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:18:56 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.48029203761488 r-0.3264467723851154 p-5.849749940904739 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0113_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:19:28 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.619838079008688 r-0.2530330455919565 p-5.85885345112601 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0114_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:19:53 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.3052667985934149 r-0.1371224910776893 p-5.867910869862532 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0115_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:20:20 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.071479409982757 r-0.01360291855830247 p-5.874019975389812 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0116_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:20:42 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-1.379708463932839 r0.006289042957834041 p-5.876080159565317 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0117_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:21:13 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y-0.7715917871596351 r-0.1206548468710248 p-6.503801242880589 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0118_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:21:43 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.2325019218975634 r-0.1852460996733152 p-6.494452903778098 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0119_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:22:10 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y1.219841536558133 r-0.3160459424753878 p-6.482633570681754 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+#-imgfile 1388 1040 "101914_CD11cPDGFRbCD205_1-0120_c4.JPG"
+#-metadata -1 -1 -1 2014-11-19T13:22:39 3*8 0 -1 1 -1 * * * curve -1 * T
+#-viewpoint 0 0 0 0 0
+#-exposureparams 0 0 0 0
+o f0 y0.93597837362695 r-0.2637544556934688 p-6.716966387548962 v=0 a=0 b=0 c=0 d=0 e=0 g=0 t=0
+
+# Control points:
+
+# optimizer:
+v v a b c d e y2 r2 p2 y3 r3 p3 y4 r4 p4 y5 r5 p5 y6 r6 p6 y7 r7 p7 y8 r8 p8 y9 r9 p9 y10 r10 p10 y11 r11 p11 y12 r12 p12 y13 r13 p13 y14 r14 p14 y15 r15 p15 y16 r16 p16 y17 r17 p17 y18 r18 p18 y19 r19 p19 y20 r20 p20 y21 r21 p21 y22 r22 p22 y23 r23 p23 y24 r24 p24 y25 r25 p25 y26 r26 p26 y27 r27 p27 y28 r28 p28 y29 r29 p29 y30 r30 p30 y31 r31 p31 y32 r32 p32 y33 r33 p33 y34 r34 p34 y35 r35 p35 y36 r36 p36 y37 r37 p37 y38 r38 p38 y39 r39 p39 y40 r40 p40 y41 r41 p41 y42 r42 p42 y43 r43 p43 y44 r44 p44 y45 r45 p45 y46 r46 p46 y47 r47 p47 y48 r48 p48 y49 r49 p49 y50 r50 p50 y51 r51 p51 y52 r52 p52 y53 r53 p53 y54 r54 p54 y55 r55 p55 y56 r56 p56 y57 r57 p57 y58 r58 p58 y59 r59 p59 y60 r60 p60 y61 r61 p61 y62 r62 p62 y63 r63 p63 y64 r64 p64 y65 r65 p65 y66 r66 p66 y67 r67 p67 y68 r68 p68 y69 r69 p69 y70 r70 p70 y71 r71 p71 y72 r72 p72 y73 r73 p73 y74 r74 p74 y75 r75 p75 y76 r76 p76 y77 r77 p77 y78 r78 p78 y79 r79 p79 y80 r80 p80 y81 r81 p81 y82 r82 p82 y83 r83 p83 y84 r84 p84 y85 r85 p85 y86 r86 p86 y87 r87 p87 y88 r88 p88 y89 r89 p89 y90 r90 p90 y91 r91 p91 y92 r92 p92 y93 r93 p93 y94 r94 p94 y95 r95 p95 y96 r96 p96 y97 r97 p97 y98 r98 p98 y99 r99 p99 y100 r100 p100 y101 r101 p101 y102 r102 p102 y103 r103 p103 y104 r104 p104 y105 r105 p105 y106 r106 p106 y107 r107 p107 y108 r108 p108 y109 r109 p109 y110 r110 p110 y111 r111 p111 y112 r112 p112 y113 r113 p113 y114 r114 p114 y115 r115 p115 y116 r116 p116 y117 r117 p117 y118 r118 p118 y119 r119 p119 y120 r120 p120
