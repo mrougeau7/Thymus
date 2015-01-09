@@ -1,6 +1,6 @@
 ---
 title: "Ecology of the Thymus"
-author: "Mary Browning, John Wares, Nancy Manley"
+author: "Mary Browning, John Wares, Andrew Park, Nancy Manley"
 date: '`r format(Sys.time(), "%d %B, %Y")`'
 output: pdf_document
 bibliography: thymus.bib
