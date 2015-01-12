@@ -237,12 +237,18 @@ spe.kmeans_Mutant1_S3 <- kmeans(result3, centers=cluster, nstart=10)
 
 library(gplots) ###Call 1 set at a time; produces image of section
 
-v2 <- spe.kmeans_Mutant1_S1$cluster  #change this to section you are interested in looking at
+v1 <- spe.kmeans_Mutant1_S1$cluster  #change this to section you are interested in looking at
 
 #load("thymus.Rdata")
 #image(v2) # make pic
+v2 = matrix(v1, nrow = 100, ncol=100)
 v2<-v2[1:40,1:100] # trim
 image(v2) # make new pic
+
+heatmap.2( v2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+
 clust.ext<-v2[1,1] # get cluster number of corner pixel (should always represent 'exterior')
 idx<-which(v2==clust.ext,arr.ind=T) # get addresses of all pixels of that number
 idx2<-which(idx[,1]<40) # find such pixels for which there is another pixel immediately to right
@@ -273,7 +279,7 @@ mean(col22.01[idx.med2],na.rm=T)
 mean(col25.01[idx.med1],na.rm=T)
 mean(col25.01[idx.med2],na.rm=T)
 
-matrix1tot = matrix(v, nrow = 100, ncol=100)
+
 
 heatmap.2( matrix1tot, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1tot,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
