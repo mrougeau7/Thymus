@@ -233,7 +233,7 @@ spe.kmeans_Mutant1_S3 <- kmeans(result3, centers=cluster, nstart=10)
 
 ```
 
-```{r}
+```{r assigning clusters}
 
 library(gplots) ###Call 1 set at a time; produces image of section
 
