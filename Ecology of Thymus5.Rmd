@@ -232,7 +232,7 @@ for(i in toUse3){
 result<-toFill[,toUse0]
 result1<-toFill[,toUse1]
 result2<-toFill[,toUse2]
-result3,-toFill[,toUse3]
+result3<-toFill[,toUse3]
 
 #print(results)
 
