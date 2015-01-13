@@ -11,35 +11,33 @@ bibliography: thymus.bib
 
 Abstract
 
-The correct organization and abundance of distinct cell types is important for optimal organ performance.  The ability to identify recurrent or cryptic cellular patterns could help us to better understand healthy tissue function and will enable us to make comparisons with diseased tissues.  However, quantitative analyses for tissue organization do not currently exist. Here, in an attempt to overcome this barrier, we have developed  novel molecular and computational approaches that allow us to study the organ of our choice, the thymus, in a statistical framework. We identify cell type abundance and location and use this information to recreate a virtual thymus section.  We then treat cell types as species in an ecosystem, thus enabling us to directly apply quantitative theory used in ecology to our virtual section. We use K means clustering to BLAH, followed by BLAH. The output generated can then be used to better understand spatial patterns within a healthy functional thymus and make informative comparisons of thymic tissues under different developmental, mutant, or disease conditions.
+The correct organization and abundance of cell types is important for optimal organ performance.  The ability to identify recurrent or cryptic cellular organizational patterns could help us to better understand tissue function and will enable us to make comparisons with diseased tissues.  However, quantitative approaches for tissue organization do not currently exist. Here, in an attempt to overcome this barrier, we have developed  novel molecular and computational analyses that allow us to study the organ of our choice, the thymus, in a statistical framework. First, we identify cell type abundance and location and use this information to recreate a virtual thymus section.  We then treat cell types like species in an ecosystem, thus enabling us to directly apply quantitative theory used in ecology to our virtual section. We use K means clustering to computationally produce regions of the thymus a priori, followed by Bray Curtis Dissimilarity Index to determine the degree of similarity between thymus samples and regions of the thymus. The output generated from these analyses can then be used to better understand spatial patterns/biogeography within a healthy functional thymus and will enable us to make informative comparisons of thymic tissues under different developmental, mutant, or disease conditions.
 
-to better understand the "biogeography" of the thymus by using location and abundance information for different cell types.     
- 
 =======
 ## Introduction
 >>>>>>> origin/master
 
-Within the field of organ biology, there is a distinct lack of quantitative methods for analyzing the organization, as opposed to the composition, of organs and tissues.  Healthy organ function requires more than the appropriate proportions of component parts; these parts must also be arranged in specific ways. Without quantitative methods for assessing organization, a significant aspect of organ and tissue biology is inaccessible to analysis. However, beyond essentially descriptive assays, we have few theoretical tools available for interpreting organizational characteristics/patterns. In contrast, the fields of ecology and population genetics have a robust theoretical tradition, with multiple quantitative tools available for describing the natural world.  Fortunately, a striking comparison can be drawn between the interactions that occur within organs and those that occur within ecosystems.  For instance, cell types in an organ, like species in an ecosystem, are influenced by the availability of space and resources as well as by the presence or absence of other cell types. The presence or absence of one cell type may alter the functional role and dominance of another, or the overall service the community provides to the larger system [e.g., @wootton05].  By comparing cell types within a biological organ to species in an ecosystem, quantitative methods used by ecologists can be directly applied to biological systems. Our overall goal is development of a cellular ecology, where we can understand interactions at a quantitative level that do not yet exist in developmental biology. The goal of this project is to develop quantitative tools, modeled after the ecological toolkit, to spatially and statistically characterize healthy biological tissues.  The results from this analysis will enable informative comparisons with tissues in states of disequilibrium, including disease or developmental states, in order to identify any recurring organizational differences.  
+Within the field of organ biology, there is a distinct lack of quantitative methods for analyzing the organization, as opposed to the composition, of organs and tissues.  Healthy organ function requires more than the appropriate proportions of component parts; these parts must also be arranged in specific ways. Without quantitative methods for assessing organization, a significant aspect of organ and tissue biology is inaccessible to analysis. However, beyond essentially descriptive assays, we have few theoretical tools available for interpreting organizational characteristics/patterns. In contrast, the fields of ecology and population genetics have a robust theoretical tradition, with multiple quantitative tools available for describing the natural world.  Fortunately, a striking comparison can be drawn between the interactions that occur within organs and those that occur within ecosystems.  For instance, cell types in an organ, like species in an ecosystem, are influenced by the availability of space and resources as well as by the presence or absence of other cell types. The presence or absence of one cell type may alter the functional role and dominance of another, or the overall service the community provides to the larger system [e.g., @wootton05].  By comparing cell types within a biological organ to species in an ecosystem, quantitative methods used by ecologists can be directly applied to biological systems. Our overall goal is development of a cellular ecology, where we can model tissue level organization in an effort to better understand the "biogeography" of the organ we wish to study. We seek to understand interactions at a quantitative level that do not yet exist in developmental biology. The goal of this project is to develop quantitative tools, modeled after the ecological toolkit, to spatially and statistically characterize healthy biological tissues.  The results from this analysis will enable informative comparisons with tissues in states of disequilibrium, including disease or developmental states, in order to identify any recurring organizational differences.  The data obtained in this analysis will provide both a valuable resource for understanding the structure of a normal thymus, and a scientific framework and accessible tools for the analysis of mutant phenotypes in this project and in the field.  
 
-We seek to develop a method that will allow for the development of a model of a healthy adult organ.  We aim to accomplish this by using cellular location and abundance.  We will then spatially characterize the organ by applying ecological theory directly to the produced model (something that has never been done before). By analyzing the exact spatial location and co-location of component cell types across the domain of a particular tissue or organ, we may gain a better understanding of which interactions - indicated by codistribution and sufficient density - can be validated by independent approach and analysis.  To an extent, we recapitulate the spatial scales described above: we explore the differentiation of distinct habitats within the environment (biogeography: identifying regions of endemicity or dramatically shifted abundance), the colocalization of particular sub-groups of cells (community ecology), and we use the tenets of macroecology to the extent that we can generalize that cells need a particular density to be viable interactors, and to the extent that common cells have a larger overall distribution (this is not tautological, this follows from the first: you cannot be rare and widespread in a functional sense).  The co-distribution of constituent species in a community is often used to indicate interaction - whether competitive, trophic, or facilitative [@verberk11;@angel11].
+First, we aim to model a healthy adult organ. We will accomplish this by identifying cellular location and abundance.  We will then spatially characterize the organ by applying ecological theory directly to the produced model (something that has never been done before). By analyzing the exact spatial location and co-location of component cell types across the domain of a particular tissue or organ, we may gain a better understanding of which interactions - indicated by codistribution and sufficient density - can be validated by independent approach and analysis.  To an extent, we recapitulate the spatial scales described above: we explore the differentiation of distinct habitats within the environment (biogeography: identifying regions of endemicity or dramatically shifted abundance), the colocalization of particular sub-groups of cells (community ecology), and we use the tenets of macroecology to the extent that we can generalize that cells need a particular density to be viable interactors, and to the extent that common cells have a larger overall distribution (this is not tautological, this follows from the first: you cannot be rare and widespread in a functional sense).  The co-distribution of constituent species in a community is often used to indicate interaction - whether competitive, trophic, or facilitative [@verberk11;@angel11].
 
-Specific structural aspects of organs with strong 3-D structures, such as the lung, kidney, and other organs that undergo branching morphogenesis, have been modeled with some success (CITE). However, the cellular organization of other types of organs can be particularly difficult to assess quantitatively.  For example, endodermal glandular organs are often organized at the cellular level, with organizational structures that are visible only with the use of molecular or cellular markers; thus detecting differences in organ structure depends in part on having distinct markers for known functional cell subsets.  Examples of this type of organ include the liver, pancreas, and thymus, all of which are of high clinical importance.  Developing a quantitative approach to assessing the structure and function of these organs is thus of direct biomedical relevance.  We performed our analysis on our model organ, the thymus.  The thymus was chosen because it is an intriguing example of cellular level organization, with a strong connection between organization and function.  The thymus consists of developing T cells supported by a complex cellular environment containing a variety of resident cell types, including thymic epithelial cells (TECs), dendritic cells, vasculature, and mesenchymal cells.  These cell types comprise multiple microenvironments that direct and support thymocytes to develop from immature progenitors into mature T cells that are both self-tolerant and self-restricted [CITE?].  T cell development in the thymus requires interactions with the thymic microenvironments that provide signals for their survival, proliferation, and differentiation [1].  Despite their critical role in the generation of cellular immunity and the clinical importance of thymic regeneration, the composition and organization of thymic microenvironments and the mechanisms that promote their proper development and function are not fully understood [CITE?], in part due to a lack of technical and theoretical approaches for quantifying tissue-level properties.  Thus, the thymus has many characteristics that make it an excellent system for developing and testing quantitative modeling: a diverse cellular composition that can be identified with cell type-specific markers, regional organization that is required for maximal organ function,  genetic models with diverse effects on organ composition and function, assays for experimentally inducing organ degeneration and regeneration, and high biomedical relevance.  
- To date, there are no quantitative theoretical models of thymus organ structure and function and no established methods for generating one.  We seek to develop a quantitative model of the organization of cell types that can be used to better understand thymic function as well as evaluate states of disequilibrium. The new theoretical approaches that we will defive from these studies will also provide novel methods for assessing tissue organization in other organs, tissues, and disease states. Our approach uses immunostaining on sagittal serial sections of a wildtype mouse thymus in order to identify distinct cellular subsets, followed by the use of novel computational approaches in order to quantitatively identify known and cryptic cellular spatial relationships. 
- 
-First, we used the K means clustering algorithm to identify geographical clusters of cell types based on compositional similarities and abundance [CITE?]. We used a range of K values to compare to previously identified regions of the thymus and to identify cryptic organization. By increasing K, we garner a more focused and in depth view of the organization of the thymus that is overlooked through qualitative analysis. based on cellular densities and associations. Greatest statistical differentiation of regions.  employs dimensional weighting of data from each column of quadrats in array.  clustered by cellular content and position. Allow us to test structure of thymus in a statistical framework that can provide unambiguous support for the number of compositionally distinct thymic regions. K means clustering was performed using cell type location and abundance in order to quantitatively evaluate the organization of the thymus.  This clustering algorithm generates a posterior probability that any subsample (quadrat) belongs to each of the k different groups, while maximizing the ratio of compositional differences between groups to compositional variation within groups.  These k groups are presumable functionally distinct, and a key hypothesis we will test is whether Kmutant is significantly less than kwildtype for each comparison. This approach has been successful in delineating distinct cell sub-population in tissue samples (13. Veronika M, Evans J, Matsudaira P, Welsch R, Rajapakse J (2009) Sub-population analysis based on
+Specific structural aspects of organs with strong 3-D structures, such as the lung, kidney, and other organs that undergo branching morphogenesis, have been modeled with some success (CITE). However, the cellular organization of other types of organs can be particularly difficult to assess quantitatively.  For example, endodermal glandular organs are often organized at the cellular level, with organizational structures that are visible only with the use of molecular or cellular markers; thus detecting differences in organ structure depends in part on having distinct markers for known functional cell subsets.  Examples of this type of organ include the liver, pancreas, and thymus, all of which are of high clinical importance.  Developing a quantitative approach to assessing the structure and function of these organs is thus of direct biomedical relevance.  We performed our analysis on our model organ, the thymus.  The thymus was chosen because it is an excellent example of cellular level organization, with a strong connection between organization and function.  The thymus consists of developing T cells supported by a complex cellular environment containing a variety of resident cell types, including thymic epithelial cells (TECs), dendritic cells, vasculature, and mesenchymal cells.  These cell types comprise multiple microenvironments that direct and support thymocytes to develop from immature progenitors into mature T cells that are both self-tolerant and self-restricted [CITE?].  T cell development in the thymus requires interactions with the thymic microenvironments that provide signals for their survival, proliferation, and differentiation [1].  Despite their critical role in the generation of cellular immunity and the clinical importance of thymic regeneration, the composition and organization of thymic microenvironments and the mechanisms that promote their proper development and function are not fully understood [CITE?], in part due to a lack of technical and theoretical approaches for quantifying tissue-level properties.  Thus, the thymus has many characteristics that make it an excellent system for developing and testing quantitative modeling: a diverse cellular composition that can be identified with cell type-specific markers, regional organization that is required for maximal organ function,  genetic models with diverse effects on organ composition and function, assays for experimentally inducing organ degeneration and regeneration, and high biomedical relevance. To date, there are no quantitative theoretical models of thymus organ structure and function and no established methods for generating one.  We seek to develop a quantitative model of the organization of cell types that can be used to better understand thymic function as well as evaluate states of disequilibrium. The new theoretical approaches that we will defive from these studies will also provide novel methods for assessing tissue organization in other organs, tissues, and disease states. 
+
+Our approach is designed to take advantage of the cellular complexity of the thymus to provide a sensitive and quantitative method to measure changes over time. We use immunostaining on sagittal serial sections of a wildtype mouse thymus in order to identify distinct cellular subsets, followed by the use of novel computational approaches in order to quantitatively identify known and cryptic cellular spatial relationships. These methods are designed to replace the largely descriptive histological and IHC-based analysis currently available in the field.  First, we used the K means clustering algorithm to identify geographical clusters of cell types based on compositional similarities, position, and abundance. This approach has previously been successful in delineating distinct cell sub-population in tissue samples (cite) {INCLUDE MORE INFO}.K means clustering allows us to test the structure of thymus in a statistical framework that can provide unambiguous support for the number of compositionally distinct thymic regions. We then used a range of K values to compare to previously identified regions of the thymus and to identify potentially cryptic organization. This clustering algorithm generates a posterior probability that any subsample (quadrat) belongs to each of the k different groups, while maximizing the ratio of compositional differences between groups to compositional variation within groups.  These k groups are presumable functionally distinct, and a key hypothesis we will test is whether Kmutant is significantly less than kwildtype for each comparison. 
+
+13. Veronika M, Evans J, Matsudaira P, Welsch R, Rajapakse J (2009) Sub-population analysis based on
 temporal features of high content images. BMC Bioinformatics 10 Suppl 15: S4.
 14. Cataldo S, Ficarra E, Macii E (2009) Automated Discrimination of Pathological Regions in Tissue Images:
 Unsupervised Clustering vs. Supervised SVM Classification. In: Fred A, Filipe J, Gamboa H, editors.
 Biomedical Engineering Systems and Technologies: Springer Berlin Heidelberg. pp. 344-356.)
 
 
-We then used the Bray Curtis Dissimilarity Index to determine the degree of similarity between clusters produced from K means clustering [CITE]. The value produced can also be used for comparisons between different sections, different samples, and can also be compared to ecosystems. The identity and relative abundance of species can be compared across communities using various dissimilarity indicies (10. Magurran AE (2004) Measuring Biological Diversity. Malden, MA: Blackwell Publishing.)
+In ecology, the identity and relative abundance of species can be compared across communities using various dissimilarity indicies (10. Magurran AE (2004) Measuring Biological Diversity. Malden, MA: Blackwell Publishing.) The Bray Curtis Dissimilarity Index in particular is a well characterized statistical method. We applied Bray Curtis to our samples to determine the degree of similarity between clusters produced from K means clustering [CITE]. Bray Curtis was also used to make comparisons between different thymic samples and subsamples, and can also be compared to ecosystems.
 
 connected component labeling
 
-We then take this approach one step further by applying these same approaches to a mutant (Aire knockout) mouse thymus to determine if there are differences in organization compared to the wildtype. The Aire knockout mutant was selected in order to test whether dendritic organization is altered with the removal of Aire (as well as doubling of K14?); there are differing reports in the literature [CITE].Although we know Aire is important, does it act as a Keystone species?  The data obtained in this analysis will provide both a valuable resource for understanding the structure of a normal thymus, and a scientific framework and accessible tools for the analysis of mutant phenotypes in this project and in the field.  
+We then take this approach one step further by applying these same approaches described above to a mutant mouse thymus in order to determine if there are any detectable organizational differences compared to the wildtype. We selected the Aire knockout Mouse (CITE) for several reasons.  First, the Aire knockout is well characterized: DESCRIBE PHENOTYPE HERE?? there is debate as to whether mutant mice double in mTEC number (particularly with respect to K14).  There is also debate as to whether dendritic cell organization and number is altered; there are differing reports in the literature [CITE]. From an ecological standpoint, we are interested in determining the degree to which Aire plays. Although we know Aire is functionally important, does it act as a Keystone species? Will the removal of Aire cause a shift BLAH. Or will there be no discernable organizational differences? 
 
-These methods are designed to replace the largely descriptive histological and IHC-based analysis currently available in the field.  Our approach is designed to take advantage of the cellular complexity of the thymus to provide a sensitive and quantitative method to measure changes over time. 
  
  Cell Types Used in Analysis
  SHOULD I INCLUDE PARAFFIN ANTIBODIES?
@@ -146,9 +144,9 @@ toUse2<-seq(2,33,3) #Section2
 toUse3<-seq(3,33,3) #Section3
 
 # define which vector to query here
-inLoop<-toUse1  #Determine what section you want to run here
+#inLoop<-toUse1  #Determine what section you want to run here
 
-for(i in inLoop){
+for(i in toUse0){
   tmp = read.table(txtfiles[i], sep="\t", head=T)
   X=tmp[[1]]  #[,1]
   Y=tmp[[2]]
@@ -165,14 +163,61 @@ for(i in inLoop){
     
     }
 
-result<-toFill[,inLoop]
-#names(result)<-inLoop #Maybe rename columns?
+for(i in toUse1){
+  tmp = read.table(txtfiles[i], sep="\t", head=T)
+  X=tmp[[1]]  #[,1]
+  Y=tmp[[2]]
+  my.xy<-hist2d(X,Y,nbins=c(msz,msz))
+  obj <- my.xy$counts
+  
+  obj[1,1] = obj[1,1]-1
+  obj[100,1] = obj[100,1]-1
+  obj[1,100] = obj[1,100]-1
+  obj[100,100]=obj[100,100]-1
+  
+  count<- as.vector(obj)
+  toFill[,i]<-count
+    
+    }
 
-#result->result0   ###All sections
-result->result1   ###Section 1
-#result->result2   ###Section2
-#result->result3   ###Section3
+for(i in toUse2){
+  tmp = read.table(txtfiles[i], sep="\t", head=T)
+  X=tmp[[1]]  #[,1]
+  Y=tmp[[2]]
+  my.xy<-hist2d(X,Y,nbins=c(msz,msz))
+  obj <- my.xy$counts
+  
+  obj[1,1] = obj[1,1]-1
+  obj[100,1] = obj[100,1]-1
+  obj[1,100] = obj[1,100]-1
+  obj[100,100]=obj[100,100]-1
+  
+  count<- as.vector(obj)
+  toFill[,i]<-count
+    
+    }
 
+for(i in toUse3){
+  tmp = read.table(txtfiles[i], sep="\t", head=T)
+  X=tmp[[1]]  #[,1]
+  Y=tmp[[2]]
+  my.xy<-hist2d(X,Y,nbins=c(msz,msz))
+  obj <- my.xy$counts
+  
+  obj[1,1] = obj[1,1]-1
+  obj[100,1] = obj[100,1]-1
+  obj[1,100] = obj[1,100]-1
+  obj[100,100]=obj[100,100]-1
+  
+  count<- as.vector(obj)
+  toFill[,i]<-count
+    
+    }
+
+result<-toFill[,toUse0]
+result1<-toFill[,toUse1]
+result2<-toFill[,toUse2]
+result3,-toFill[,toUse3]
 
 #print(results)
 
@@ -251,17 +296,20 @@ heatmap.2( v2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2,
 
 clust.ext<-v2[1,1] # get cluster number of corner pixel (should always represent 'exterior')
 idx<-which(v2==clust.ext,arr.ind=T) # get addresses of all pixels of that number
+#mat[mat < 0.1] <- NA
 idx2<-which(idx[,1]<40) # find such pixels for which there is another pixel immediately to right
 idx<-idx[idx2,] # use only those pixels
 idx[,1]<-idx[,1]+1 # find pixels immediately to right
 z<-table(v2[idx]) # make sorted table of cluster numbers of these pixels
 clust.int<-as.integer(which(z==max(z[z!=max(z)]))) # get the cluster number that is 2nd most common (this is the thing most often 'touching' exterior, i.e. interior but not medular)
+#mat[mat < 0.1] <- NA
+
 clust.med1<-as.integer(which(z==min(z[z!=min(z)])))
 clust.med2<-as.integer(which(z==min(z)))
 idx.med1<-which(v2==clust.med1)
 idx.med2<-which(v2==clust.med2)
 
-mean(toFill[idx.med1,1],na.rm=T)
+mean(toFill[idx.med1,1],na.rm=T) #looking at certain column numbers
 mean(toFill[idx.med2,1],na.rm=T)
 mean(toFill[idx.med1,22],na.rm=T)
 mean(toFill[idx.med2,22],na.rm=T)
@@ -281,7 +329,7 @@ mean(col25.01[idx.med2],na.rm=T)
 
 
 
-heatmap.2( matrix1tot, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=matrix1tot,
+heatmap.2( v2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
 
