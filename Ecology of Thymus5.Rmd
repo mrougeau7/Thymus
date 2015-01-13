@@ -342,8 +342,6 @@ mean(col22.01[idx.med2],na.rm=T)
 mean(col25.01[idx.med1],na.rm=T)
 mean(col25.01[idx.med2],na.rm=T)
 
-
-
 heatmap.2( v2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
@@ -507,6 +505,10 @@ df<-apply(df,2,as.integer) %>% as.data.frame()
 #df1.1<-apply(df1.1,2,as.integer) %>% as.data.frame()
 #df1.2<-apply(df1.2,2,as.integer) %>% as.data.frame()
 #df1.3<-apply(df1.3,2,as.integer) %>% as.data.frame()
+```
+
+```{r dendrogram}
+###This is where I import the other files? I don't think I will be able to compare the sections with ALL
 
 #need same number of columns to bind them.
 colnames(df2)<-colnames(df)
