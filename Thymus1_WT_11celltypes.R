@@ -2,93 +2,93 @@ setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Extra/Reprocessing_WT1/t
 
 library(gplots)
 
-mszs=100  #matrix size in hist2d
-clusters=4  #number of clusters produced for K means
-txtfiless=list.files(pattern="*.txt")  #loads in order all files within folder
+msz=100  #matrix size in hist2d
+cluster=4  #number of clusters produced for K means
+txtfiles_WT1=list.files(pattern="*.txt")  #loads in order all files within folder
 
-mats<-matrix(data=NA,nrow=10000,ncol=33) #this will change with size of matrix and # of sections/cell types
+mat_WT1<-matrix(data=NA,nrow=10000,ncol=33) #this will change with size of matrix and # of sections/cell types
 
-toFills<-as.data.frame(mats)  #changes to data frame
+toFill_WT1<-as.data.frame(mat_Wt1)  #changes to data frame
 
-toUse0s<-seq(1,33,1) #uses all 33 columns
-toUse1s<-seq(1,33,3) #uses columns that correspond to Section1
-toUse2s<-seq(2,33,3) #Section2
-toUse3s<-seq(3,33,3) #Section3
+toUse0_WT1<-seq(1,33,1) #uses all 33 columns
+toUse1_WT1<-seq(1,33,3) #uses columns that correspond to Section1
+toUse2_WT1<-seq(2,33,3) #Section2
+toUse3_WT1<-seq(3,33,3) #Section3
 
-for(i in toUse0s){
-  tmps = read.table(txtfiless[i], sep="\t", head=T)
-  Xs=tmps[[1]]  #[,1]
-  Ys=tmps[[2]]
-  my.xys<-hist2d(Xs,Ys,nbins=c(mszs,mszs))
-  objs <- my.xys$counts
+for(i in toUse0_WT1){
+  tmp_WT1 = read.table(txtfiles_WT1[i], sep="\t", head=T)
+  X_WT1=tmp_WT1[[1]]  #[,1]
+  Y_WT1=tmp_WT1[[2]]
+  my.xy_WT1<-hist2d(X_WT1,Y_WT1,nbins=c(msz_WT1,msz_WT1))
+  obj_WT1 <- my.xy_WT1$counts
   
-  objs[1,1] = objs[1,1]-1
-  objs[100,1] = objs[100,1]-1
-  objs[1,100] = objs[1,100]-1
-  objs[100,100]=objs[100,100]-1
+  obj_WT1[1,1] = obj_WT1[1,1]-1
+  obj_WT1[100,1] = obj_WT1[100,1]-1
+  obj_WT1[1,100] = obj_WT1[1,100]-1
+  obj_WT1[100,100]=obj_WT1[100,100]-1
   
-  counts<- as.vector(objs)
-  toFills[,i]<-counts
+  count_WT1<- as.vector(obj_WT1)
+  toFill_WT1[,i]<-count_WT1
   
-  results<-toFills[,toUse0s]
-  results->result0s
+  result_WT1<-toFill_WT1[,toUse0_WT1]
+  result_WT1->result0_WT1
 }
 
-for(i in toUse1s){
-  tmps = read.table(txtfiless[i], sep="\t", head=T)
-  Xs=tmps[[1]]  #[,1]
-  Ys=tmps[[2]]
-  my.xys<-hist2d(Xs,Ys,nbins=c(mszs,mszs))
-  objs <- my.xys$counts
+for(i in toUse1_WT1){
+  tmp_WT1 = read.table(txtfiles_WT1[i], sep="\t", head=T)
+  X_WT1=tmp_WT1[[1]]  #[,1]
+  Y_WT1=tmp_WT1[[2]]
+  my.xy_WT1<-hist2d(X_WT1,Y_WT1,nbins=c(msz_WT1,msz_WT1))
+  obj_WT1 <- my.xy_WT1$counts
   
-  objs[1,1] = objs[1,1]-1
-  objs[100,1] = objs[100,1]-1
-  objs[1,100] = objs[1,100]-1
-  objs[100,100]=objs[100,100]-1
+  obj_WT1[1,1] = obj_WT1[1,1]-1
+  obj_WT1[100,1] = obj_WT1[100,1]-1
+  obj_WT1[1,100] = obj_WT1[1,100]-1
+  obj_WT1[100,100]=obj_WT1[100,100]-1
   
-  counts<- as.vector(objs)
-  toFills[,i]<-counts
+  count_WT1<- as.vector(obj_WT1)
+  toFill_WT1[,i]<-count_WT1
   
-  results<-toFills[,toUse1s]
-  results->result1s
+  result_WT1<-toFill_WT1[,toUse1_WT1]
+  result_WT1->result1_WT1
 }
 
-for(i in toUse2s){
-  tmps = read.table(txtfiless[i], sep="\t", head=T)
-  Xs=tmps[[1]]  #[,1]
-  Ys=tmps[[2]]
-  my.xys<-hist2d(Xs,Ys,nbins=c(mszs,mszs))
-  objs <- my.xys$counts
+for(i in toUse2_WT1){
+  tmp_WT1 = read.table(txtfiles_WT1[i], sep="\t", head=T)
+  X_WT1=tmp_WT1[[1]]  #[,1]
+  Y_WT1=tmp_WT1[[2]]
+  my.xy_WT1<-hist2d(X_WT1,Y_WT1,nbins=c(msz_WT1,msz_WT1))
+  obj_WT1 <- my.xy_WT1$counts
   
-  objs[1,1] = objs[1,1]-1
-  objs[100,1] = objs[100,1]-1
-  objs[1,100] = objs[1,100]-1
-  objs[100,100]=objs[100,100]-1
+  obj_WT1[1,1] = obj_WT1[1,1]-1
+  obj_WT1[100,1] = obj_WT1[100,1]-1
+  obj_WT1[1,100] = obj_WT1[1,100]-1
+  obj_WT1[100,100]=obj_WT1[100,100]-1
   
-  counts<- as.vector(objs)
-  toFills[,i]<-counts
+  count_WT1<- as.vector(obj_WT1)
+  toFill_WT1[,i]<-count_WT1
   
-  results<-toFills[,toUse2s]
-  results->result2s
+  result_WT1<-toFill_WT1[,toUse2_WT1]
+  result_WT1->result2_WT1
 }
 
-for(i in toUse3s){
-  tmps = read.table(txtfiless[i], sep="\t", head=T)
-  Xs=tmps[[1]]  #[,1]
-  Ys=tmps[[2]]
-  my.xys<-hist2d(Xs,Ys,nbins=c(mszs,mszs))
-  objs <- my.xys$counts
+for(i in toUse3_WT1){
+  tmp_WT1 = read.table(txtfiles_WT1[i], sep="\t", head=T)
+  X_WT1=tmp_WT1[[1]]  #[,1]
+  Y_WT1=tmp_WT1[[2]]
+  my.xy_WT1<-hist2d(X_WT1,Y_WT1,nbins=c(msz_WT1,msz_Wt1))
+  obj_WT1 <- my.xy_WT1$counts
   
-  objs[1,1] = objs[1,1]-1
-  objs[100,1] = objs[100,1]-1
-  objs[1,100] = objs[1,100]-1
-  objs[100,100]=objs[100,100]-1
+  obj_WT1[1,1] = obj_WT1[1,1]-1
+  obj_WT1[100,1] = obj_WT1[100,1]-1
+  obj_WT1[1,100] = obj_WT1[1,100]-1
+  obj_WT1[100,100]=obj_WT1[100,100]-1
   
-  counts<- as.vector(objs)
-  toFills[,i]<-counts
+  count_WT1<- as.vector(obj_WT1)
+  toFill_WT1[,i]<-count_WT1
   
-  results<-toFill[,toUse3s]
-  results->result3s   ###Section3
+  result_WT1<-toFill[,toUse3_Wt1]
+  result_Wt1->result3_WT1   ###Section3
 }
 
 
@@ -100,39 +100,39 @@ library(labdsv)
 
 # Do the k-means clustering [read 'help' for the 'kmeans' function to see what the arguments "centers" (clusters or k) and "nstart" (randomizations) mean].
 
-spe.kmeans_Mutant1_Alls <- kmeans(result0s, centers=clusters, nstart=10)
-spe.kmeans_Mutant1_S1s <- kmeans(result1s, centers=clusters, nstart=10)
-spe.kmeans_Mutant1_S2s <- kmeans(result2s, centers=cluster, nstart=10)
-spe.kmeans_Mutant1_S3s <- kmeans(result3s, centers=cluster, nstart=10)
+spe.kmeans_Mutant1_All_WT1 <- kmeans(result0_WT1, centers=cluster, nstart=10)
+spe.kmeans_Mutant1_S1_Wt1 <- kmeans(result1_Wt1, centers=cluster, nstart=10)
+spe.kmeans_Mutant1_S2_WT1 <- kmeans(result2_WT1, centers=cluster, nstart=10)
+spe.kmeans_Mutant1_S3_WT1 <- kmeans(result3_WT1, centers=cluster, nstart=10)
 
 library(gplots) ###Call 1 set at a time; produces image of section
 
-v1s <- spe.kmeans_Mutant1_S1s$cluster  #change this to section you are interested in looking at
+v1_WT1 <- spe.kmeans_Mutant1_S1_WT1$cluster  #change this to section you are interested in looking at
 
 #load("thymus.Rdata")
 #image(v2) # make pic
-v2s = matrix(v1s, nrow = 100, ncol=100)
-v2s<-v2s[1:40,1:100] # trim
-image(v2s) # make new pic
+v2_WT1 = matrix(v1_Wt1, nrow = 100, ncol=100)
+v2_WT1<-v2_WT1[1:40,1:100] # trim
+image(v2_WT1) # make new pic
 
-heatmap.2( v2s, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2s,
+heatmap.2( v2_WT1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2_WT1,
 notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
 margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
 
-clust.exts<-v2s[1,1] # get cluster number of corner pixel (should always represent 'exterior')
-idxs<-which(v2s==clust.exts,arr.ind=T) # get addresses of all pixels of that number
+clust.ext<-v2_WT1[1,1] # get cluster number of corner pixel (should always represent 'exterior')
+idx_Wt1<-which(v2_WT1==clust.ext_WT1,arr.ind=T) # get addresses of all pixels of that number
 #mat[mat < 0.1] <- NA
-idx2s<-which(idxs[,1]<40) # find such pixels for which there is another pixel immediately to right
-idxs<-idxs[idx2s,] # use only those pixels
-idxs[,1]<-idxs[,1]+1 # find pixels immediately to right
-zs<-table(v2s[idxs]) # make sorted table of cluster numbers of these pixels
-clust.ints<-as.integer(which(zs==max(zs[zs!=max(zs)]))) # get the cluster number that is 2nd most common (this is the thing most often 'touching' exterior, i.e. interior but not medular)
+idx2_WT1<-which(idx_Wt1[,1]<40) # find such pixels for which there is another pixel immediately to right
+idx_WT1<-idx_Wt1[idx2_Wt1,] # use only those pixels
+idx_Wt1[,1]<-idx_Wt1[,1]+1 # find pixels immediately to right
+z_Wt1<-table(v2_WT1[idx_Wt1]) # make sorted table of cluster numbers of these pixels
+clust.int_WT1<-as.integer(which(z_Wt1==max(z_WT1[z_Wt1!=max(z_WT1)]))) # get the cluster number that is 2nd most common (this is the thing most often 'touching' exterior, i.e. interior but not medular)
 #mat[mat < 0.1] <- NA
 
-clust.med1s<-as.integer(which(zs==min(zs[zs!=min(zs)])))
-clust.med2s<-as.integer(which(zs==min(zs)))
-idx.med1s<-which(v2s==clust.med1s)
-idx.med2s<-which(v2s==clust.med2s)
+clust.med1_Wt1<-as.integer(which(z_Wt1==min(z_WT1[z_WT1!=min(z_WT1)])))
+clust.med2_Wt1<-as.integer(which(z_Wt1==min(z_WT1)))
+idx.med1_Wt1<-which(v2_WT1==clust.med1_WT1)
+idx.med2_WT1<-which(v2_WT1==clust.med2_Wt1)
 
 ####ADD s
 
@@ -296,3 +296,5 @@ BrayCurtis<-vegdist(dfTOTAL,method="bray")
 #print(BrayCurtis)
 hc<-hclust(BrayCurtis)
 plot(hc,labels=dfTOTAL$rownames)
+
+save.image("file.rdata")
