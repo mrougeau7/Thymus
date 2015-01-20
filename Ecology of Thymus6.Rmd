@@ -121,6 +121,9 @@ Is there a way to keep multiple scripts for each sample and then call them in th
 ```{r use a shell type command to read in any *.txt, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'}
 
 setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Extra/Reprocessing_Mutant1/txt_2")
+load("WT1.Rdata")
+load("WT2.Rdata")
+load("Mutant2.Rdata")
 
 library(gplots)
 
