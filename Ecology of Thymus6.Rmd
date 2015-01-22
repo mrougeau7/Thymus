@@ -388,18 +388,22 @@ Looking at cellular relationships between clusters
 We can make a running sum of all the counts of all cell types by cluster
 
 ```{r counts, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
+b1<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==1),])
 b2<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==2),])
 b3<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==3),])
 b4<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==4),])
 
+b1_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==1),])
 b2_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==2),])
 b3_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==3),])
 b4_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==4),])
 
+b1_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==1),])
 b2_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==2),])
 b3_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==3),])
 b4_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==4),])
 
+b1_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==1),])
 b2_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==2),])
 b3_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==3),])
 b4_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==4),])
@@ -407,44 +411,59 @@ b4_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==4),])
 ###and normalize these so that each cluster type has the same total amount of cells (in other words, we're ###getting the proportion of cell types in each cluster)
 
 ###```{r normalize, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
+b1<-b1/sum(b1)
 b2<-b2/sum(b2)
 b3<-b3/sum(b3)
 b4<-b4/sum(b4)
 
+b1_S1<-b1/sum(b1_S1)
 b2_S1<-b2/sum(b2_S1)
 b3_S1<-b3/sum(b3_S1)
 b4_S1<-b4/sum(b4_S1)
 
+b1_S2<-b1/sum(b1_S2)
 b2_S2<-b2/sum(b2_S2)
 b3_S2<-b3/sum(b3_S2)
 b4_S2<-b4/sum(b4_S2)
 
+b1_S3<-b1/sum(b1_S3)
 b2_S3<-b2/sum(b2_S3)
 b3_S3<-b3/sum(b3_S3)
 b4_S3<-b4/sum(b4_S3)
 
 #We can look at the difference between pairs of clusters to see which cell types are most different between #clusters
 
-par(mfrow=c(2,2))  ##All
+par(mfrow=c(3,2))  ##All
+barplot(b1-b2,main="1-2")
+barplot(b1-b3,main="1-3")
+barplot(b1-b4,main="1-4")
 barplot(b2-b3,main="2-3")
 barplot(b2-b4,main="2-4")
 barplot(b3-b4,main="3-4")
 
-par(mfrow=c(2,2))
-barplot(b2-b3,main="2-3")
-barplot(b2-b4,main="2-4")
-barplot(b3-b4,main="3-4")
+par(mfrow=c(3,2))  ##All
+barplot(b1_S1-b2_S1,main="1-2")
+barplot(b1_S1-b3_S1,main="1-3")
+barplot(b1_S1-b4_S1,main="1-4")
+barplot(b2_S1-b3_S1,main="2-3")
+barplot(b2_S1-b4_S1,main="2-4")
+barplot(b3_S1-b4_S1,main="3-4")
 
-par(mfrow=c(2,2))
-barplot(b2-b3,main="2-3")
-barplot(b2-b4,main="2-4")
-barplot(b3-b4,main="3-4")
+par(mfrow=c(3,2))  ##All
+barplot(b1_S2-b2_S2,main="1-2")
+barplot(b1_S2-b3_S2,main="1-3")
+barplot(b1_S2-b4_S2,main="1-4")
+barplot(b2_S2-b3_S2,main="2-3")
+barplot(b2_S2-b4_S2,main="2-4")
+barplot(b3_S2-b4_S2,main="3-4")
 
-par(mfrow=c(2,2))
-barplot(b2-b3,main="2-3")
-barplot(b2-b4,main="2-4")
-barplot(b3-b4,main="3-4")
-
+par(mfrow=c(3,2))  ##All
+barplot(b1_S3-b2_S3,main="1-2")
+barplot(b1_S3-b3_S3,main="1-3")
+barplot(b1_S3-b4_S3,main="1-4")
+barplot(b2_S3-b3_S3,main="2-3")
+barplot(b2_S3-b4_S3,main="2-4")
+barplot(b3_S3-b4_S3,main="3-4")
 ```
 The way to read the last plots is for something like "2-3", positive bars mean that cell type is more common in cluster 2 (than 3); negative bars mean the opposite. The higher the absolute number on the y-axis, the greater the difference is in that cell count between the two clusters. I think (as John suggested), that we can move ahead and be more formal with this analysis (e.g. Bray Curtis dissimilarity), but this is a useful first step.
 
