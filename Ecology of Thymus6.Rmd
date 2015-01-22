@@ -263,9 +263,6 @@ mean(unlist(res))
 library (vegan)
 library(labdsv)
 
-#load("thymus.Rdata")
-
-
 # This step normalizes your data and is optional.
 #spe.std <- decostand(spe, "normalize")  #You can also use "standardize". See 'help' for details.
 
@@ -344,8 +341,7 @@ if(spe.kmeans_Mutant1_All$cluster="blank", exclude="blank")
   vector(spe.kmeans_Mutant1_All$cluster,exclude="blank")
 
 factor(spe.kmeans_Mutant1_All$cluster, exclude="blank"
-
-
+       
 ```
 
 Next Step: Figuring out how clustering is done
@@ -487,7 +483,6 @@ for (j in 2:4){
 #  df_S3<-rbind(df_S3,tmp_S3)
 #}
 
-
 df<-apply(df,2,as.integer) %>% as.data.frame()
 df_S1<-apply(df_S1,2,as.integer) %>% as.data.frame()
 df_S2<-apply(df_S2,2,as.integer) %>% as.data.frame()
@@ -512,7 +507,7 @@ hc<-hclust(BrayCurtis)
 plot(hc,labels=dfTOTAL$rownames)
 ```
 
-```{r, CCl}
+```{r, Connected Component labeling}
 my.mat = name of matrix
 library(SDMTools)
 ccl.mat<-ConnCompLabel(my.mat)
@@ -532,9 +527,6 @@ dist.cents<-pointDistance(my.cents,my.cents,lonlat=F,allpairs=T)
 dist.cents
 
 mean(dist.cents[which(dist.cents>0)]) #avg distance to other clusters
-
-
-
 
 ```
 
