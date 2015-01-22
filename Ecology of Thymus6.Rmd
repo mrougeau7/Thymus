@@ -273,6 +273,8 @@ spe.kmeans_Mutant1_S1 <- kmeans(result1, centers=cluster, nstart=10)
 spe.kmeans_Mutant1_S2 <- kmeans(result2, centers=cluster, nstart=10)
 spe.kmeans_Mutant1_S3 <- kmeans(result3, centers=cluster, nstart=10)
 
+save.image("thymus.rdata")
+load("thymus.rdata")
 ```
 
 ```{r assigning clusters}
