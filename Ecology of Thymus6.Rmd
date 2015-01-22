@@ -282,11 +282,14 @@ spe.kmeans_Mutant1_S3 <- kmeans(result3, centers=cluster, nstart=10)
 
 library(gplots) ###Call 1 set at a time; produces image of section
 
-v1 <- spe.kmeans_Mutant1_S1$cluster  #change this to section you are interested in looking at
+v0_Mutant1 = spe.kmeans_Mutant1_All$cluster
+v1_Mutant1 <- spe.kmeans_Mutant1_S1$cluster 
+v2_Mutant1 = spe.kmeans_Mutant1_S2$cluster
+v3_Mutant1 = spe.kmeans_Mutant1_S3$cluster
 
 #load("thymus.Rdata")
 #image(v2) # make pic
-v2 = matrix(v1, nrow = 100, ncol=100)
+v2 = matrix(v1_Mutant1, nrow = 100, ncol=100)
 v2<-v2[1:40,1:100] # trim
 image(v2) # make new pic
 
@@ -360,26 +363,26 @@ for (i in 1:max(spe.kmeans_Mutant1_All$cluster)){
   # we pick out desired cluster and plot
 }
 
-#my.order<-c(1,2,3,4) # define the order we want to plot panels
-#par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
-#for (i in 1:max(spe.kmeans_Mutant1_S1$cluster)){ 
-#  barplot(colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==i),]),main=i,ylim=c(0,12000)) 
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans_Mutant1_S1$cluster)){ 
+  barplot(colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==i),]),main=i,ylim=c(0,12000)) 
   # we pick out desired cluster and plot
-#}
+}
 
-#my.order<-c(1,2,3,4) # define the order we want to plot panels
-#par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
-#for (i in 1:max(spe.kmeans_Mutant1_S2$cluster)){ 
-#  barplot(colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==i),]),main=i,ylim=c(0,12000)) 
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans_Mutant1_S2$cluster)){ 
+  barplot(colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==i),]),main=i,ylim=c(0,12000)) 
   # we pick out desired cluster and plot
-#}
+}
 
-#my.order<-c(1,2,3,4) # define the order we want to plot panels
-#par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
-#for (i in 1:max(spe.kmeans_Mutant1_S3$cluster)){ 
-#  barplot(colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==i),]),main=i,ylim=c(0,12000)) 
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans_Mutant1_S3$cluster)){ 
+  barplot(colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==i),]),main=i,ylim=c(0,12000)) 
   # we pick out desired cluster and plot
-#}
+}
 
 ```
 
@@ -391,17 +394,17 @@ b2<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==2),])
 b3<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==3),])
 b4<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==4),])
 
-#b2_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==2),])
-#b3_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==3),])
-#b4_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==4),])
+b2_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==2),])
+b3_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==3),])
+b4_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==4),])
 
-#b2_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==2),])
-#b3_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==3),])
-#b4_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==4),])
+b2_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==2),])
+b3_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==3),])
+b4_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==4),])
 
-#b2_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==2),])
-#b3_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==3),])
-#b4_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==4),])
+b2_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==2),])
+b3_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==3),])
+b4_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==4),])
 
 ###and normalize these so that each cluster type has the same total amount of cells (in other words, we're ###getting the proportion of cell types in each cluster)
 
@@ -410,40 +413,39 @@ b2<-b2/sum(b2)
 b3<-b3/sum(b3)
 b4<-b4/sum(b4)
 
-#b2_S1<-b2/sum(b2_S1)
-#b3_S1<-b3/sum(b3_S1)
-#b4_S1<-b4/sum(b4_S1)
+b2_S1<-b2/sum(b2_S1)
+b3_S1<-b3/sum(b3_S1)
+b4_S1<-b4/sum(b4_S1)
 
-#b2_S2<-b2/sum(b2_S2)
-#b3_S2<-b3/sum(b3_S2)
-#b4_S2<-b4/sum(b4_S2)
+b2_S2<-b2/sum(b2_S2)
+b3_S2<-b3/sum(b3_S2)
+b4_S2<-b4/sum(b4_S2)
 
-#b2_S3<-b2/sum(b2_S3)
-#b3_S3<-b3/sum(b3_S3)
-#b4_S3<-b4/sum(b4_S3)
+b2_S3<-b2/sum(b2_S3)
+b3_S3<-b3/sum(b3_S3)
+b4_S3<-b4/sum(b4_S3)
 
 #We can look at the difference between pairs of clusters to see which cell types are most different between #clusters
-
 
 par(mfrow=c(2,2))  ##All
 barplot(b2-b3,main="2-3")
 barplot(b2-b4,main="2-4")
 barplot(b3-b4,main="3-4")
 
-#par(mfrow=c(2,2))
-#barplot(b2-b3,main="2-3")
-#barplot(b2-b4,main="2-4")
-#barplot(b3-b4,main="3-4")
+par(mfrow=c(2,2))
+barplot(b2-b3,main="2-3")
+barplot(b2-b4,main="2-4")
+barplot(b3-b4,main="3-4")
 
-#par(mfrow=c(2,2))
-#barplot(b2-b3,main="2-3")
-#barplot(b2-b4,main="2-4")
-#barplot(b3-b4,main="3-4")
+par(mfrow=c(2,2))
+barplot(b2-b3,main="2-3")
+barplot(b2-b4,main="2-4")
+barplot(b3-b4,main="3-4")
 
-#par(mfrow=c(2,2))
-#barplot(b2-b3,main="2-3")
-#barplot(b2-b4,main="2-4")
-#barplot(b3-b4,main="3-4")
+par(mfrow=c(2,2))
+barplot(b2-b3,main="2-3")
+barplot(b2-b4,main="2-4")
+barplot(b3-b4,main="3-4")
 
 ```
 The way to read the last plots is for something like "2-3", positive bars mean that cell type is more common in cluster 2 (than 3); negative bars mean the opposite. The higher the absolute number on the y-axis, the greater the difference is in that cell count between the two clusters. I think (as John suggested), that we can move ahead and be more formal with this analysis (e.g. Bray Curtis dissimilarity), but this is a useful first step.
@@ -467,46 +469,73 @@ for (j in 2:4){
   df<-rbind(df,tmp)
 }
 
-#df1.1<-spe1.1[which(spe.kmeans1.1$cluster==1),] %>% colSums() %>% t()
+#df_S1<-result1[which(spe.kmeans_Mutant1_S1$cluster==1),] %>% colSums() %>% t()
 #for (j in 2:4){  
-#  tmp1.1<-spe1.1[which(spe.kmeans1.1$cluster==j),] %>% colSums() %>% t() 
-#  df1.1<-rbind(df1.1,tmp1.1)
+#  tmp_S1<-result1[which(spe.kmeans_Mutant1_S1$cluster==j),] %>% colSums() %>% t() 
+#  df_S1<-rbind(df_S1,tmp_S1)
 #}
 
-#df1.2<-spe1.2[which(spe.kmeans1.2$cluster==1),] %>% colSums() %>% t()
+#df_S2<-result2[which(spe.kmeans_Mutant1_S2$cluster==1),] %>% colSums() %>% t()
 #for (j in 2:4){  
-#  tmp1.2<-spe1.2[which(spe.kmeans1.2$cluster==j),] %>% colSums() %>% t() 
-#  df1.2<-rbind(df1.2,tmp1.2)
+#  tmp_S2<-result2[which(spe.kmeans_Mutant1_S2$cluster==j),] %>% colSums() %>% t() 
+#  df_S2<-rbind(df_S2,tmp_S2)
 #}
 
-#df1.3<-spe1.3[which(spe.kmeans1.3$cluster==1),] %>% colSums() %>% t()
+#df_S3<-result3[which(spe.kmeans_Mutant1_S3$cluster==1),] %>% colSums() %>% t()
 #for (j in 2:4){  
-#  tmp1.2<-spe1.3[which(spe.kmeans1.3$cluster==j),] %>% colSums() %>% t() 
-#  df1.3<-rbind(df1.3,tmp1.3)
+#  tmp_S3<-result3[which(spe.kmeans_Mutant1_S3$cluster==j),] %>% colSums() %>% t() 
+#  df_S3<-rbind(df_S3,tmp_S3)
 #}
 
 
 df<-apply(df,2,as.integer) %>% as.data.frame()
-#df1.1<-apply(df1.1,2,as.integer) %>% as.data.frame()
-#df1.2<-apply(df1.2,2,as.integer) %>% as.data.frame()
-#df1.3<-apply(df1.3,2,as.integer) %>% as.data.frame()
+df_S1<-apply(df_S1,2,as.integer) %>% as.data.frame()
+df_S2<-apply(df_S2,2,as.integer) %>% as.data.frame()
+df_S3<-apply(df_S3,2,as.integer) %>% as.data.frame()
 ```
 
 ```{r dendrogram}
 ###This is where I import the other files? I don't think I will be able to compare the sections with ALL
 
 #need same number of columns to bind them.
-colnames(df2)<-colnames(df)
-#colnames(df1.1)=colnames(df2.1)
-#colnames(df1.2)<-colnames(df2.1)
-#colnames(df1.2)<-colnames(df2.1)
+#colnames(df2)<-colnames(df)
+colnames(df_S2)=colnames(df_S1)
+colnames(df_S3)<-colnames(df_S1)
 
-#dfTOTAL<-rbind(df1.2,df2.2, df1.2, df1.2, df1.1, df1.1)
+#dfTOTAL<-rbind(df_S1_WT1,df_S2_WT1, df_S3_WT1, df_S1_WT2, df_S2_WT2, df_S3_WT3, df_S1_Mutant1,
+#df_S2_Mutant1, df_S3_Mutant1, df_S1_Mutant2, df_S2_Mutant2, df_S3_Mutant3)
 
+dfTOTAL=rbind(df_S1,df_S2,df_S3)
 BrayCurtis<-vegdist(dfTOTAL,method="bray")
 #print(BrayCurtis)
 hc<-hclust(BrayCurtis)
 plot(hc,labels=dfTOTAL$rownames)
+```
+
+```{r, CCl}
+my.mat = name of matrix
+library(SDMTools)
+ccl.mat<-ConnCompLabel(my.mat)
+image(t(ccl.mat[10:1,]),col=c('grey',rainbow(length(unique(ccl.mat))-1)))
+max(ccl.mat) #how many clusters
+table(ccl.mat) #size distribution
+
+my.cents<-NULL    #calculate cluster centriods
+for (j in 1:max(ccl.mat)){
+  tmp<-(which(ccl.mat==j,arr.ind=T))
+  my.cents<-rbind(my.cents,colMeans(tmp))
+}
+my.cents
+
+library(raster)  #how far apart centroids are from each other
+dist.cents<-pointDistance(my.cents,my.cents,lonlat=F,allpairs=T)
+dist.cents
+
+mean(dist.cents[which(dist.cents>0)]) #avg distance to other clusters
+
+
+
+
 ```
 
 7. also Andrew Sornborger's approach for separating out the geometry/geography of clusters., and/or using connected component labeling to identify size, centroid, distance of centroids among clusters

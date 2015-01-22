@@ -270,48 +270,50 @@ library(dplyr) # used for chaining and manipulation
 #reads as: take only cluster 1 data from 'spe', then take column sums (i.e. total cell type count) 
 #then transpose (swap rows/cols needed for bray curtis calc)
 
-df_WT1<-result0[which(spe.kmeans_All_WT1$cluster==1),] %>% colSums() %>% t()   # example of chaining. 
+df_WT1<-result0_WT1[which(spe.kmeans_All_WT1$cluster==1),] %>% colSums() %>% t()   # example of chaining. 
 for (j in 2:4){  
   tmp_WT1<-result0_WT1[which(spe.kmeans_All_WT1$cluster==j),] %>% colSums() %>% t() 
   df_WT1<-rbind(df_WT1,tmp_WT1)
 }
 
-df_S1_WT1<-result1[which(spe.kmeans_S1_WT1$cluster==1),] %>% colSums() %>% t()
+df_S1_WT1<-result1_WT1[which(spe.kmeans_S1_WT1$cluster==1),] %>% colSums() %>% t()
 for (j in 2:4){  
   tmp_S1_WT1<-result1_WT1[which(spe.kmeans_S1_WT1$cluster==j),] %>% colSums() %>% t() 
   df_S1_WT1<-rbind(df_S1_WT1,tmp_S1_WT1)
 }
 
-#df_S2_WT1<-result2_WT1[which(spe.kmeans_S1_WT1$cluster==1),] %>% colSums() %>% t()
-#for (j in 2:4){  
-#  tmp_S2_WT1<-result2_WT1[which(spe.kmeans_S1_WT1$cluster==j),] %>% colSums() %>% t() 
-#  df_S1_WT1<-rbind(df_S1_WT1,tmp_S1_WT1)
-#}
+df_S2_WT1<-result2_WT1[which(spe.kmeans_S1_WT1$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp_S2_WT1<-result2_WT1[which(spe.kmeans_S1_WT1$cluster==j),] %>% colSums() %>% t() 
+  df_S1_WT1<-rbind(df_S1_WT1,tmp_S1_WT1)
+}
 
-#df_S3_WT1<-result3_WT1[which(spe.kmeans_S3_WT1$cluster==1),] %>% colSums() %>% t()
-#for (j in 2:4){  
-#  tmp_S3_WT1<-result3_WT1[which(spe.kmeans_S3_WT1$cluster==j),] %>% colSums() %>% t() 
-#  df_S3_WT1<-rbind(df_S3_WT1,tmp_S3_WT1)
-#}
-
-
-df_WT1<-apply(df_WT1,2,as.integer) %>% as.data.frame()
-df_S1_WT1<-apply(df_S1_WT1,2,as.integer) %>% as.data.frame()
-df_S2_WT1<-apply(df_S2_WT1,2,as.integer) %>% as.data.frame()
-df_S3_WT1<-apply(df_S3_WT1,2,as.integer) %>% as.data.frame()
+df_S3_WT1<-result3_WT1[which(spe.kmeans_S3_WT1$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp_S3_WT1<-result3_WT1[which(spe.kmeans_S3_WT1$cluster==j),] %>% colSums() %>% t() 
+  df_S3_WT1<-rbind(df_S3_WT1,tmp_S3_WT1)
+}
 
 #need same number of columns to bind them.
 
-colnames(df2_WT1)<-colnames(df_WT1)
-#colnames(df_S1_WT1)=colnames(df_S2_WT1)
-#colnames(df_S3_WT1)<-colnames(df_S2_WT1)
+#colnames(df2_WT1)<-colnames(df_WT1)
+colnames(df_S1_WT1)=colnames(df_S2_WT1)
+colnames(df_S3_WT1)<-colnames(df_S2_WT1)
+
+#df_WT1<-apply(df_WT1,2,as.integer) %>% as.data.frame()
+#df_S1_WT1<-apply(df_S1_WT1,2,as.integer) %>% as.data.frame()
+#df_S2_WT1<-apply(df_S2_WT1,2,as.integer) %>% as.data.frame()
+#df_S3_WT1<-apply(df_S3_WT1,2,as.integer) %>% as.data.frame()
+
 
 #dfTOTAL<-rbind(df_S1_WT1,df_S2_WT1, df_S3_WT1, df_S1_WT2, df_S2_WT2, df_S3_WT3, df_S1_Mutant1,
 #df_S2_Mutant1, df_S3_Mutant1, df_S1_Mutant2, df_S2_Mutant2, df_S3_Mutant3)
+dfT=rbind(df_S1_WT1,df_S2_WT1,df_S3_WT1)
 
-BrayCurtis<-vegdist(dfTOTAL,method="bray")
+BrayCurtis<-vegdist(dfT,method="bray")
 #print(BrayCurtis)
 hc<-hclust(BrayCurtis)
-plot(hc,labels=dfTOTAL$rownames)
+#plot(hc,labels=dfT$rownames)
+plot(hc)
 
 save.image("WT1.rdata")
