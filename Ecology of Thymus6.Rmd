@@ -11,7 +11,7 @@ bibliography: thymus.bib
 
 Abstract
 
-The correct organization and abundance of cell types is important for optimal organ performance, but no method exists for distinguishing organizational patterns. The ability to identify recurrent or cryptic cellular organizational patterns could help us to better understand tissue function and to make comparisons with diseased tissues. Here, in an attempt to overcome this barrier, we have developed  novel molecular and computational analyses that allow us to study the organ of our choice, the thymus, in a statistical framework. First, we identify cell type abundance and location and use this information to recreate a virtual thymus section.  We then treat cell types like species in an ecosystem, thus enabling us to directly apply quantitative approaches used in ecology to our virtual section. We use K means clustering to computationally produce regions of the thymus a priori, followed by Bray Curtis Dissimilarity Index to determine the degree of dissimilarity between thymus samples and regions of the thymus. The output generated from these analyses can then be used to better understand spatial patterns/biogeography within a healthy functional thymus and will enable us to make informative comparisons of thymic tissues under different developmental, mutant, or disease conditions.
+The correct organization and abundance of cell types is important for optimal organ performance, but no method currently exists for distinguishing organizational patterns. The ability to identify recurrent or cryptic cellular patterns could help us to better understand tissue function and to make comparisons with diseased tissues. Here, in an attempt to overcome this barrier, we have developed  novel molecular and computational analyses that allow us to study the organ of our choice, the thymus, in a statistical framework. First, we identify cell type abundance and location and use this information to recreate a virtual thymus section.  We then treat cell types like species in an ecosystem, thus enabling us to directly apply quantitative approaches used in ecology to our virtual section. We use K means clustering to computationally produce regions of the thymus a priori, followed by Bray Curtis Dissimilarity Index to determine the degree of dissimilarity between thymus samples and regions of the thymus. The output generated from these analyses can then be used to better understand spatial patterns/biogeography within a healthy functional thymus and will enable us to make informative comparisons of thymic tissues under different developmental, mutant, or disease conditions.
 
 =======
 ## Introduction
@@ -94,7 +94,7 @@ C57BL/6 male mice (N=4) at 5-6 weeks of age were purchased from Jackson Laborato
 
 #### Tissue Preparation
 
-Intact thymuses from the Anderson lab were removed and the right and left lobes were separated, placed in OCT compound, and immediately frozen before being shipped to the Manley lab. Mice were shipped from Jackson Laboratories and dissected and frozen in the Manley lab.
+Intact thymuses from the Anderson lab were removed and the right and left lobes were separated, placed in OCT compound, and immediately frozen before being shipped to the Manley lab. Mice from Jackson Laboratories were dissected and their frozen in the Manley lab.
 
 #### Antibodies
 
@@ -105,7 +105,7 @@ Secondary antibodies were purchased from Invitrogen.
 The entire left lobe was cut into 10-micron serial sagittal sections using a Leica CM3050 S cryostat. Sections were collected on glass slides and assigned a number corresponding to their location.  The middle third of these slides were selected for IHC.  Of these middle third, 9 sections from each sample that passed quality control standards were used for IHC.  These sections were fixed in -20 degree C acetone for 20 seconds immediately prior to application of blocking solution (10% donkey serum/PBS) for 30 minutes at room temperature.
 
 #### IHC
-Primary antibodies were mixed in PBS and incubated overnight at 4C.  The slides were rinsed with PBS 2x5 minutes and the secondary antibodies were mixed in PBS (1:800) and applied to the slides for 30 minutes.  Slides were rinsed with PBS 2x5 minutes, mounted in FluorGel (EMS) and coverslipped.   Marker combinations were determined by availability,  biological and technical considerations such as anticipated abundance, distribution of cell types, and reagent compatibility (antibody species of origin). 
+Primary antibodies were mixed in PBS and slides were covered with the antibody solution and incubated/stored overnight at 4C.  The slides were rinsed with PBS 2x5 minutes and the secondary antibodies were mixed in PBS (1:800) and applied to the slides for 30 minutes.  Slides were rinsed with PBS 2x5 minutes, mounted in FluorGel (EMS) and coverslipped.   Marker combinations were determined by availability,  biological and technical considerations such as anticipated abundance, distribution of cell types, and reagent compatibility (antibody species of origin). 
 
 #### Microscopy, PTGui, and CellProfiler
 Multiple sections from each sample were used in the analysis (9 sections from each sample from the Anderson Lab; 8 sections from WT2, 6 from WT1).  The sections were assessed by specific quality control criteria such as lack of section flaws, clarity of image collection, and signal to noise ratio. Sections that passed the QC measures  were imaged at 20x as tiled, overlapping quadrats on the Zeiss  microscope and reconstructed using PTGui.  The image produced was optimized in Adobe Photoshop to reduce background and increase signal intensity so that cell counts could be taken as quickly and accurately as possible in CellProfiler.  The reconstructed image from PTGui was too large to work in CellProfiler, so the size of the image was decreased by taking the image width and dividing by 4. CellProfiler was chosen because it has the capability to quickly and accurately identify cells and output locations (x and y coordinates) in an excel file.  Results from the cell counts were  manually checked for accuracy and input into R for the spatial analysis.  Cell counts from serial sagittal sections stained with different marker combinations were collapsed into a single virtual section.  Our experimental appraoch is essentially 2-D.  Although the 3-D nature of the stromal network is an important aspect of its functionality [cite], a 2-D picture will provide an informative, if not complete view of the thymus.  After all, the qualitative assays currently used are all viewed in 2D sections and are the basis of our current views of thymus organization and function.   
@@ -117,7 +117,6 @@ Files containing the X and Y coordinates from CellProfiler were uploaded into R 
 We will use an established mutant with specific effects on individual cell populations to test the effect on thymus organization. Null mutations in the Aire gene, which marks a specific subpopulation of mTECs, cause defective negative selection and multi-organ autoimmunity.  Analyses of TEC phenotypes have been performed, and there are reports that Aire mutants have defects in mTEC composition and organization (cite).  A recent report has also shown displaced dendritic cells in Aire mutant thymus (cite). These results have functional consequences for different models of Aire function as either a regulator of tissue-restricted antigens in the thymus or as a key modulator of mTEC differentiation and mechanistic implications for autoimmunity in these mice.  All of these reports point to the need for more robust quantitative methods to evaluate cellular organization.  The parallel in ecology is removal of a species from a community, which can lead to two distinct outcomes: the relative species abundance may not be affected if species are independently utilizing available resources, or the rand abundance of species may change dramatically, suggesting strong interactions depending on missind components [CITE]
 
 
-Is there a way to keep multiple scripts for each sample and then call them in this script?
 ```{r use a shell type command to read in any *.txt, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'}
 
 setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Extra/Reprocessing_Mutant1/txt_2")
@@ -139,9 +138,6 @@ toUse0<-seq(1,33,1) #uses all 33 columns
 toUse1<-seq(1,33,3) #uses columns that correspond to Section1
 toUse2<-seq(2,33,3) #Section2
 toUse3<-seq(3,33,3) #Section3
-
-# define which vector to query here
-#inLoop<-toUse1  #Determine what section you want to run here
 
 for(i in toUse0){
   tmp = read.table(txtfiles[i], sep="\t", head=T)
