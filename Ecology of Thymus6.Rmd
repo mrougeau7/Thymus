@@ -486,23 +486,23 @@ for (j in 2:4){
   df<-rbind(df,tmp)
 }
 
-#df_S1<-result1[which(spe.kmeans_Mutant1_S1$cluster==1),] %>% colSums() %>% t()
-#for (j in 2:4){  
-#  tmp_S1<-result1[which(spe.kmeans_Mutant1_S1$cluster==j),] %>% colSums() %>% t() 
-#  df_S1<-rbind(df_S1,tmp_S1)
-#}
+df_S1<-result1[which(spe.kmeans_Mutant1_S1$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp_S1<-result1[which(spe.kmeans_Mutant1_S1$cluster==j),] %>% colSums() %>% t() 
+  df_S1<-rbind(df_S1,tmp_S1)
+}
 
-#df_S2<-result2[which(spe.kmeans_Mutant1_S2$cluster==1),] %>% colSums() %>% t()
-#for (j in 2:4){  
-#  tmp_S2<-result2[which(spe.kmeans_Mutant1_S2$cluster==j),] %>% colSums() %>% t() 
-#  df_S2<-rbind(df_S2,tmp_S2)
-#}
+df_S2<-result2[which(spe.kmeans_Mutant1_S2$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp_S2<-result2[which(spe.kmeans_Mutant1_S2$cluster==j),] %>% colSums() %>% t() 
+  df_S2<-rbind(df_S2,tmp_S2)
+}
 
-#df_S3<-result3[which(spe.kmeans_Mutant1_S3$cluster==1),] %>% colSums() %>% t()
-#for (j in 2:4){  
-#  tmp_S3<-result3[which(spe.kmeans_Mutant1_S3$cluster==j),] %>% colSums() %>% t() 
-#  df_S3<-rbind(df_S3,tmp_S3)
-#}
+df_S3<-result3[which(spe.kmeans_Mutant1_S3$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp_S3<-result3[which(spe.kmeans_Mutant1_S3$cluster==j),] %>% colSums() %>% t() 
+  df_S3<-rbind(df_S3,tmp_S3)
+}
 
 df<-apply(df,2,as.integer) %>% as.data.frame()
 df_S1<-apply(df_S1,2,as.integer) %>% as.data.frame()
@@ -598,8 +598,6 @@ We take this approach one step further by applying the same approaches described
 28. Lei Y, Ripen AM, Ishimaru N, Ohigashi I, Nagasawa T, et al. (2011) Aire-dependent production of XCL1 mediates medullary accumulation of thymic dendritic cells and contributes to regulatory T cell development. J Exp Med 208: 383-394.
 
 connected component labeling-distributional interactions
-
-
 
  Michael B. Dillencourt and Hannan Samet and Markku Tamminen (1992). "A general approach to connected-component labeling for arbitrary image representations". J. ACM.
 

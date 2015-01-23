@@ -205,59 +205,78 @@ for (i in 1:max(spe.kmeans_S3_WT1$cluster)){
 # we pick out desired cluster and plot
 }
 
+b1_WT1<-colSums(result0_WT1[which(spe.kmeans_All_WT1$cluster==1),])
 b2_WT1<-colSums(result0_WT1[which(spe.kmeans_All_WT1$cluster==2),])
 b3_WT1<-colSums(result0_WT1[which(spe.kmeans_All_WT1$cluster==3),])
 b4_WT1<-colSums(result0_WT1[which(spe.kmeans_All_WT1$cluster==4),])
 
+b1_S1_WT1<-colSums(result1_WT1[which(spe.kmeans_S1_WT1$cluster==1),])
 b2_S1_WT1<-colSums(result1_WT1[which(spe.kmeans_S1_WT1$cluster==2),])
 b3_S1_WT1<-colSums(result1_WT1[which(spe.kmeans_S1_WT1$cluster==3),])
 b4_S1_WT1<-colSums(result1_WT1[which(spe.kmeans_S1_WT1$cluster==4),])
 
+b1_S2_WT1<-colSums(result2_WT1[which(spe.kmeans_S2_WT1$cluster==1),])
 b2_S2_WT1<-colSums(result2_WT1[which(spe.kmeans_S2_WT1$cluster==2),])
 b3_S2_WT1<-colSums(result2_WT1[which(spe.kmeans_S2_WT1$cluster==3),])
 b4_S2_WT1<-colSums(result2_WT1[which(spe.kmeans_S2_WT1$cluster==4),])
 
+b1_S3_WT1<-colSums(result3_WT1[which(spe.kmeans_S3_WT1$cluster==1),])
 b2_S3_WT1<-colSums(result3_WT1[which(spe.kmeans_S3_WT1$cluster==2),])
 b3_S3_WT1<-colSums(result3_WT1[which(spe.kmeans_S3_WT1$cluster==3),])
 b4_S3_WT1<-colSums(result3_WT1[which(spe.kmeans_S3_WT1$cluster==4),])
 
 ###and normalize these so that each cluster type has the same total amount of cells (in other words, we're ###getting the proportion of cell types in each cluster)
 
-
+b1_WT1<-b1_WT1/sum(b1_WT1)
 b2_WT1<-b2_WT1/sum(b2_WT1)
 b3_WT1<-b3_WT1/sum(b3_WT1)
 b4_WT1<-b4_WT1/sum(b4_WT1)
 
+b1_S1_WT1<-b1_S1_WT1/sum(b1_S1_WT1)
 b2_S1_WT1<-b2_S1_WT1/sum(b2_S1_WT1)
 b3_S1_WT1<-b3_S1_WT1/sum(b3_S1_WT1)
 b4_S1_WT1<-b4_S1_WT1/sum(b4_S1_WT1)
 
+b1_S2_WT1<-b1_S2_WT1/sum(b1_S2_WT1)
 b2_S2_WT1<-b2_S2_WT1/sum(b2_S2_WT1)
 b3_S2_WT1<-b3_S2_WT1/sum(b3_S2_WT1)
 b4_S2_WT1<-b4_S2_WT1/sum(b4_S2_WT1)
 
+b1_S3_WT1<-b1_S3_WT1/sum(b1_S3_WT1)
 b2_S3_WT1<-b2_S3_WT1/sum(b2_S3_WT1)
 b3_S3_WT1<-b3_S3_WT1/sum(b3_S3_WT1)
 b4_S3_WT1<-b4_S3_WT1/sum(b4_S3_WT1)
 
 #We can look at the difference between pairs of clusters to see which cell types are most different between #clusters
 
-par(mfrow=c(2,2))  ##All
+par(mfrow=c(3,2))  ##All
+barplot(b1_WT1-b2_WT1,main="1-2")
+barplot(b1_WT1-b3_WT1,main="1-3")
+barplot(b1_WT1-b4_WT1,main="1-4")
 barplot(b2_WT1-b3_WT1,main="2-3")
 barplot(b2_WT1-b4_WT1,main="2-4")
 barplot(b3_WT1-b4_WT1,main="3-4")
 
-par(mfrow=c(2,2))
+par(mfrow=c(3,2))
+barplot(b1_S1_WT1-b2_S1_WT1,main="1-2")
+barplot(b1_S1_WT1-b3_S1_WT1,main="1-3")
+barplot(b1_S1_WT1-b4_S1_WT1,main="1-4")
 barplot(b2_S1_WT1-b3_S1_WT1,main="2-3")
 barplot(b2_S1_WT1-b4_S1_WT1,main="2-4")
 barplot(b3_S1_WT1-b4_S1_WT1,main="3-4")
 
-par(mfrow=c(2,2))
+par(mfrow=c(3,2))
+barplot(b1_S2_WT1-b2_S2_WT1,main="1-2")
+barplot(b1_S2_WT1-b3_S2_WT1,main="1-3")
+barplot(b1_S2_WT1-b4_S2_WT1,main="1-4")
 barplot(b2_S2_WT1-b3_S2_WT1,main="2-3")
 barplot(b2_S2_WT1-b4_S2_WT1,main="2-4")
 barplot(b3_S2_WT1-b4_S2_WT1,main="3-4")
 
-par(mfrow=c(2,2))
+par(mfrow=c(3,2))
+barplot(b1_S3_WT1-b2_S3_WT1,main="1-2")
+barplot(b1_S3_WT1-b3_S3_WT1,main="1-3")
+barplot(b1_S3_WT1-b4_S3_WT1,main="1-4")
 barplot(b2_S3_WT1-b3_S3_WT1,main="2-3")
 barplot(b2_S3_WT1-b4_S3_WT1,main="2-4")
 barplot(b3_S3_WT1-b4_S3_WT1,main="3-4")
