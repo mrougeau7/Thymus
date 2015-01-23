@@ -11,7 +11,7 @@ bibliography: thymus.bib
 
 Abstract
 
-dumb word. The correct organization and abundance of cell types is important for optimal organ performance, but no method currently exists for distinguishing organizational patterns. The ability to identify recurrent or cryptic cellular patterns could help us to better understand tissue function and to make comparisons with diseased tissues. Here, in an attempt to overcome this barrier, we have developed  novel molecular and computational analyses that allow us to study the organ of our choice, the thymus, in a statistical framework. First, we identify cell type abundance and location and use this information to recreate a virtual thymus section.  We then treat cell types like species in an ecosystem, thus enabling us to directly apply quantitative approaches used in ecology to our virtual section. We use K means clustering to computationally produce regions of the thymus a priori, followed by Bray Curtis Dissimilarity Index to determine the degree of dissimilarity between thymus samples and regions of the thymus. The output generated from these analyses can then be used to better understand spatial patterns/biogeography within a healthy functional thymus and will enable us to make informative comparisons of thymic tissues under different developmental, mutant, or disease conditions.
+The correct organization and abundance of cell types is important for optimal organ performance, but no method currently exists for distinguishing organizational patterns. The ability to identify recurrent or cryptic cellular patterns could help us to better understand tissue function and to make comparisons with diseased tissues. Here, in an attempt to overcome this barrier, we have developed  novel molecular and computational analyses that allow us to study the organ of our choice, the thymus, in a statistical framework. First, we identify cell type abundance and location and use this information to recreate a virtual thymus section.  We then treat cell types like species in an ecosystem, thus enabling us to directly apply quantitative approaches used in ecology to our virtual section. We use K means clustering to computationally produce regions of the thymus a priori, followed by Bray Curtis Dissimilarity Index to determine the degree of dissimilarity between thymus samples and regions of the thymus. The output generated from these analyses can then be used to better understand spatial patterns/biogeography within a healthy functional thymus and will enable us to make informative comparisons of thymic tissues under different developmental, mutant, or disease conditions.
 
 =======
 ## Introduction
@@ -98,7 +98,7 @@ Intact thymuses from the Anderson lab were removed and the right and left lobes 
 
 #### Antibodies
 
-Primary antibodies used in this work include the biotinylated hamster CD11c (Cat#, 1:100), rabbit Claudin 3 (Cat#:  , 1:200), rabbit Claudin 4 (Cat#: , 1:200), supernatant hamster CD31 (Cat#, 1:50), rat CD25 (Cat#: , 1:50), biotinylated UEA1 (Cat#: , 1:200), conjugated mouse Claudin5 (Cat#: , 1:100), rabbit Keratin5 (Cat#, 1:200), biotin rat Foxp3 (Cat#, 1:50), goat Keratin14 (Cat#, 1:200), goat PDGFRb (Cat#, 1:100), and rat CD205 (Cat#, 1:200). 
+Primary antibodies used in this work include the biotinylated hamster CD11c (Cat#, 1:200), rabbit Claudin 3 (Cat#:  , 1:200), rabbit Claudin 4 (Cat#: , 1:200), supernatant hamster CD31 (Cat#, 1:50), rat CD25 (Cat#: , 1:50), biotinylated UEA1 (Cat#: , 1:200), conjugated mouse Claudin5 (Cat#: , 1:200), rabbit Keratin5 (Cat#, 1:200), biotin rat Foxp3 (Cat#, 1:50), goat Keratin14 (Cat#, 1:200), goat PDGFRb (Cat#, 1:200), and rat CD205 (Cat#, 1:200). 
 Secondary antibodies were purchased from Invitrogen.
  
 #### Frozen Sample Preparation
@@ -120,17 +120,18 @@ We will use an established mutant with specific effects on individual cell popul
 ```{r use a shell type command to read in any *.txt, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'}
 
 setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Extra/Reprocessing_Mutant1/txt_2")
+setwd("~/Thymus/Datasets/Data with 11 cell types/Mutant1") #Use this one for GitTower
 load("WT1.Rdata")
 load("WT2.Rdata")
 load("Mutant2.Rdata")
 
 library(gplots)
 
-msz=100  #matrix size in hist2d
+msz=200  #matrix size in hist2d
 cluster=4  #number of clusters produced for K means
 txtfiles=list.files(pattern="*.txt")  #loads in order all files within folder
 
-mat<-matrix(data=NA,nrow=10000,ncol=33) #this will change with size of matrix and # of sections/cell types
+mat<-matrix(data=NA,nrow=40000,ncol=33) #this will change with size of matrix and # of sections/cell types
 
 toFill<-as.data.frame(mat)  #changes to data frame
 
@@ -147,9 +148,9 @@ for(i in toUse0){
   obj <- my.xy$counts
   
   obj[1,1] = obj[1,1]-1
-  obj[100,1] = obj[100,1]-1
-  obj[1,100] = obj[1,100]-1
-  obj[100,100]=obj[100,100]-1
+  obj[200,1] = obj[200,1]-1
+  obj[1,200] = obj[1,200]-1
+  obj[200,200]=obj[200,200]-1
   
   count<- as.vector(obj)
   toFill[,i]<-count
@@ -164,9 +165,9 @@ for(i in toUse1){
   obj <- my.xy$counts
   
   obj[1,1] = obj[1,1]-1
-  obj[100,1] = obj[100,1]-1
-  obj[1,100] = obj[1,100]-1
-  obj[100,100]=obj[100,100]-1
+  obj[200,1] = obj[200,1]-1
+  obj[1,200] = obj[1,200]-1
+  obj[200,200]=obj[200,200]-1
   
   count<- as.vector(obj)
   toFill[,i]<-count
@@ -181,9 +182,9 @@ for(i in toUse2){
   obj <- my.xy$counts
   
   obj[1,1] = obj[1,1]-1
-  obj[100,1] = obj[100,1]-1
-  obj[1,100] = obj[1,100]-1
-  obj[100,100]=obj[100,100]-1
+  obj[200,1] = obj[200,1]-1
+  obj[1,200] = obj[1,200]-1
+  obj[200,200]=obj[200,200]-1
   
   count<- as.vector(obj)
   toFill[,i]<-count
@@ -198,9 +199,9 @@ for(i in toUse3){
   obj <- my.xy$counts
   
   obj[1,1] = obj[1,1]-1
-  obj[100,1] = obj[100,1]-1
-  obj[1,100] = obj[1,100]-1
-  obj[100,100]=obj[100,100]-1
+  obj[200,1] = obj[200,1]-1
+  obj[1,200] = obj[1,200]-1
+  obj[200,200]=obj[200,200]-1
   
   count<- as.vector(obj)
   toFill[,i]<-count
@@ -227,10 +228,10 @@ As thymic epithelial cells vary in size from X to X', we considered the problem 
 
 # note that you may DO the analysis in one place, and save the output plot to be generated elsewhere (in results)
 ####Must use total cell types.  I need to remove the space outside the thymus before I can do this.
-mat <-read.table("Totalcounts100_Thymus1_2.txt", head=T, sep="\t")
+mat <-read.table("Totalcounts200_Thymus1_2.txt", head=T, sep="\t")
 
 # an example 10x10 matrix
-#mat <- matrix(1:100, 10)
+#mat <- matrix(1:200, 10)
 nc <- ncol(mat) # number of columns
 nr <- nrow(mat) # number of rows
 
@@ -264,10 +265,10 @@ library(labdsv)
 
 # Do the k-means clustering [read 'help' for the 'kmeans' function to see what the arguments "centers" (clusters or k) and "nstart" (randomizations) mean].
 
-spe.kmeans_Mutant1_All <- kmeans(result0, centers=cluster, nstart=10)
-spe.kmeans_Mutant1_S1 <- kmeans(result1, centers=cluster, nstart=10)
-spe.kmeans_Mutant1_S2 <- kmeans(result2, centers=cluster, nstart=10)
-spe.kmeans_Mutant1_S3 <- kmeans(result3, centers=cluster, nstart=10)
+spe.kmeans_Mutant1_All <- kmeans(result0, centers=cluster, nstart=1000)
+spe.kmeans_Mutant1_S1 <- kmeans(result1, centers=cluster, nstart=1000)
+spe.kmeans_Mutant1_S2 <- kmeans(result2, centers=cluster, nstart=1000)
+spe.kmeans_Mutant1_S3 <- kmeans(result3, centers=cluster, nstart=1000)
 
 save.image("thymus.rdata")
 load("thymus.rdata")
@@ -284,8 +285,8 @@ v3_Mutant1 = spe.kmeans_Mutant1_S3$cluster
 
 #load("thymus.Rdata")
 #image(v2) # make pic
-v2 = matrix(v1_Mutant1, nrow = 100, ncol=100)
-v2<-v2[1:40,1:100] # trim
+v2 = matrix(v1_Mutant1, nrow = 200, ncol=200)
+v2<-v2[1:40,1:200] # trim
 image(v2) # make new pic
 
 heatmap.2( v2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2,
@@ -587,7 +588,7 @@ Biomedical Engineering Systems and Technologies: Springer Berlin Heidelberg. pp.
 
 In ecology, the identity and relative abundance of species can be compared across communities using various dissimilarity indicies (10. Magurran AE (2004) Measuring Biological Diversity. Malden, MA: Blackwell Publishing.) The Bray Curtis Dissimilarity Index in particular is a well characterized statistical method used to quantify the compositional dissimilarity between two sites, based on counts at each site [ Bray, J. R. and J. T. Curtis. 1957. An ordination of upland forest communities of southern Wisconsin. Ecological Monographs 27:325-349.]. We applied Bray Curtis to our samples to determine the degree of dissimilarity between clusters produced from K means clustering based on cell count. Bray Curtis was also used to make comparisons between different thymic samples and subsamples, and the amount of distinctiveness can also be compared to ecosystems/natural systems/ecological communities and subregions.
 
-We take this approach one step further by applying the same approaches described above to a mutant mouse thymus in order to determine if there are any detectable organizational differences compared to the wildtype. We selected the Aire knockout Mouse (Anderson MS; Venanzi ES; Chen Z; Berzins SP; Benoist C; Mathis D. 2005. The cellular mechanism of Aire control of T cell tolerance. Immunity 23(2):227-39. [PubMed: 16111640]  [MGI Ref ID J:100515]) for several reasons.  First, the Aire knockout is well characterized: DESCRIBE PHENOTYPE HERE?? there is debate as to whether mutant mice double in mTEC number (particularly with respect to K14) [26].  There is also debate as to whether dendritic cell organization and number is altered [27,28]. From an ecological standpoint, we are interested in determining the degree to which Aire plays a role in maintaining proper organization of the thymus. Although we know Aire is functionally important, does it act as a Keystone species? Will the removal of Aire affect stromal of lymphocyte organization, Or will there be no discernable organizational differences? 
+We take this approach one step further by applying the same approaches described above to a mutant mouse thymus in order to determine if there are any detectable organizational differences compared to the wildtype. We selected the Aire knockout Mouse (Anderson MS; Venanzi ES; Chen Z; Berzins SP; Benoist C; Mathis D. 2005. The cellular mechanism of Aire control of T cell tolerance. Immunity 23(2):227-39. [PubMed: 16111640]  [MGI Ref ID J:200515]) for several reasons.  First, the Aire knockout is well characterized: DESCRIBE PHENOTYPE HERE?? there is debate as to whether mutant mice double in mTEC number (particularly with respect to K14) [26].  There is also debate as to whether dendritic cell organization and number is altered [27,28]. From an ecological standpoint, we are interested in determining the degree to which Aire plays a role in maintaining proper organization of the thymus. Although we know Aire is functionally important, does it act as a Keystone species? Will the removal of Aire affect stromal of lymphocyte organization, Or will there be no discernable organizational differences? 
 
 26. Gillard GO, Dooley J, Erickson M, Peltonen L, Farr AG (2007) Aire-dependent alterations in medullary thymic epithelium indicate a role for Aire in thymic epithelial differentiation. J Immunol 178: 3007-3015.
 27. Yano M, Kuroda N, Han H, Meguro-Horike M, Nishikawa Y, et al. (2008) Aire controls the differentiation program of thymic epithelial cells in the medulla for the establishment of self-tolerance. J Exp Med 205: 2827-2838.
@@ -628,4 +629,4 @@ there are many more. we can learn from the methods..
 
 # Literature Cited
 
-assume we have vector (e.g. 10000 pixels, numbered)
+assume we have vector (e.g. 20000 pixels, numbered)
