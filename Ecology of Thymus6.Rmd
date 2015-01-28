@@ -94,7 +94,7 @@ C57BL/6 male mice (N=4) at 5-6 weeks of age were purchased from Jackson Laborato
 
 #### Tissue Preparation
 
-Intact thymuses from the Anderson lab were removed and the right and left lobes were separated, placed in OCT compound, and immediately frozen before being shipped to the Manley lab. Mice from Jackson Laboratories were dissected and their frozen in the Manley lab.
+Intact thymuses from the Anderson lab were removed and the right and left lobes were separated, placed in OCT compound, and immediately frozen before being shipped to the Manley lab. Mice thymii from Jackson Laboratories were dissected and frozen in the Manley lab.
 
 #### Antibodies
 
@@ -272,8 +272,8 @@ spe.kmeans_Mutant1_S1 <- kmeans(result1, centers=cluster, nstart=1000)
 spe.kmeans_Mutant1_S2 <- kmeans(result2, centers=cluster, nstart=1000)
 spe.kmeans_Mutant1_S3 <- kmeans(result3, centers=cluster, nstart=1000)
 
-save.image("thymus.rdata")
-load("thymus.rdata")
+save.image("Mutant1.rdata")
+
 ```
 
 ```{r assigning clusters}
@@ -284,6 +284,11 @@ v0_Mutant1 = spe.kmeans_Mutant1_All$cluster
 v1_Mutant1 <- spe.kmeans_Mutant1_S1$cluster 
 v2_Mutant1 = spe.kmeans_Mutant1_S2$cluster
 v3_Mutant1 = spe.kmeans_Mutant1_S3$cluster
+
+v0.1_Mutant1=matrix(v0_Mutant1,nrow=200,ncol=200)
+v1.1_Mutant1=matrix(v1_Mutant1,nrow=200,ncol=200)
+v2.1_Mutant1=matrix(v2_Mutant1,nrow=200,ncol=200)
+v3.1_Mutant1=matrix(v3_Mutant1,nrow=200,ncol=200)
 
 #load("thymus.Rdata")
 #image(v2) # make pic
@@ -331,6 +336,24 @@ mean(col25.01[idx.med2],na.rm=T)
 heatmap.2( v2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+
+
+
+heatmap.2( v0.1_Mutant1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v0.1_Mutant1,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
+
+heatmap.2( v1.1_Mutant1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v1.1_Mutant1,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
+
+heatmap.2( v2.1_Mutant1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2.1_Mutant1,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
+
+heatmap.2( v3.1_Mutant1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v3.1_Mutant1,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
 
 #change the colors to reflect the number of clusters.  Can also reorder so colors are consistent between sections.
 
@@ -518,7 +541,7 @@ colnames(df_S2)=colnames(df_S1)
 colnames(df_S3)<-colnames(df_S1)
 
 #dfTOTAL<-rbind(df_S1_WT1,df_S2_WT1, df_S3_WT1, df_S1_WT2, df_S2_WT2, df_S3_WT3, df_S1_Mutant1,
-#df_S2_Mutant1, df_S3_Mutant1, df_S1_Mutant2, df_S2_Mutant2, df_S3_Mutant3)
+#df_S2_Mutant1, df_S3_Mutant1, df_S1_Mutant1, df_S2_Mutant1, df_S3_Mutant3)
 
 dfTOTAL=rbind(df_S1,df_S2,df_S3)
 BrayCurtis<-vegdist(dfTOTAL,method="bray")
