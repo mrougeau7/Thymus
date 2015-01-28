@@ -1,6 +1,7 @@
 setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/WT1")
 setwd("~/Thymus/Datasets/Data with 11 cell types/WT1")  
 library(gplots)
+load("WT1.rdata")
 
 msz=200  #matrix size in hist2d
 cluster=4  #number of clusters produced for K means
@@ -316,8 +317,8 @@ for (j in 2:4){
 #need same number of columns to bind them.
 
 #colnames(df2_WT1)<-colnames(df_WT1)
-colnames(df_S1_WT1)=colnames(df_S2_WT1)
-colnames(df_S3_WT1)<-colnames(df_S2_WT1)
+colnames(df_S2_WT1)=colnames(df_S1_WT1)
+colnames(df_S3_WT1)<-colnames(df_S1_WT1)
 
 #df_WT1<-apply(df_WT1,2,as.integer) %>% as.data.frame()
 #df_S1_WT1<-apply(df_S1_WT1,2,as.integer) %>% as.data.frame()

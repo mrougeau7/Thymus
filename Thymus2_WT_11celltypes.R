@@ -1,5 +1,6 @@
 setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/WT2")
 setwd("~/Thymus/Datasets/Data with 11 cell types/WT2")  
+load("WT2.rdata")
 library(gplots)
 
 msz=200  #matrix size in hist2d
@@ -316,8 +317,8 @@ for (j in 2:4){
 #need same number of columns to bind them.
 
 #colnames(df2_WT2)<-colnames(df_WT2)
-colnames(df_S1_WT2)=colnames(df_S2_WT2)
-colnames(df_S3_WT2)<-colnames(df_S2_WT2)
+colnames(df_S2_WT2)=colnames(df_S1_WT2)
+colnames(df_S3_WT2)<-colnames(df_S1_WT2)
 
 #df_WT2<-apply(df_WT2,2,as.integer) %>% as.data.frame()
 #df_S1_WT2<-apply(df_S1_WT2,2,as.integer) %>% as.data.frame()
