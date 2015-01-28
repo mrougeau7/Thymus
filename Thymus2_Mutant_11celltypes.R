@@ -1,5 +1,5 @@
 setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Mutant2")
-
+load("Mutant2.rdata")
 library(gplots)
 
 msz=100  #matrix size in hist2d
