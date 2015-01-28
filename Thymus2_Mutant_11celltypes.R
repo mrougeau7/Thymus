@@ -316,8 +316,8 @@ for (j in 2:4){
 #need same number of columns to bind them.
 
 #colnames(df2_Mutant2)<-colnames(df_Mutant2)
-colnames(df_S1_Mutant2)=colnames(df_S2_Mutant2)
-colnames(df_S3_Mutant2)<-colnames(df_S2_Mutant2)
+colnames(df_S2_Mutant2)=colnames(df_S1_Mutant2)
+colnames(df_S3_Mutant2)<-colnames(df_S1_Mutant2)
 
 #df_Mutant2<-apply(df_Mutant2,2,as.integer) %>% as.data.frame()
 #df_S1_Mutant2<-apply(df_S1_Mutant2,2,as.integer) %>% as.data.frame()

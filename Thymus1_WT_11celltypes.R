@@ -1,12 +1,12 @@
 setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/WT1")
-
+setwd("~/Thymus/Datasets/Data with 11 cell types/WT1")  
 library(gplots)
 
-msz=100  #matrix size in hist2d
+msz=200  #matrix size in hist2d
 cluster=4  #number of clusters produced for K means
 txtfiles_WT1=list.files(pattern="*.txt")  #loads in order all files within folder
 
-mat_WT1<-matrix(data=NA,nrow=10000,ncol=33) #this will change with size of matrix and # of sections/cell types
+mat_WT1<-matrix(data=NA,nrow=40000,ncol=33) #this will change with size of matrix and # of sections/cell types
 
 toFill_WT1<-as.data.frame(mat_WT1)  #changes to data frame
 
@@ -23,9 +23,9 @@ for(i in toUse0_WT1){
   obj_WT1 <- my.xy_WT1$counts
   
   obj_WT1[1,1] = obj_WT1[1,1]-1
-  obj_WT1[100,1] = obj_WT1[100,1]-1
-  obj_WT1[1,100] = obj_WT1[1,100]-1
-  obj_WT1[100,100]=obj_WT1[100,100]-1
+  obj_WT1[200,1] = obj_WT1[200,1]-1
+  obj_WT1[1,200] = obj_WT1[1,200]-1
+  obj_WT1[200,200]=obj_WT1[200,200]-1
   
   count_WT1<- as.vector(obj_WT1)
   toFill_WT1[,i]<-count_WT1
@@ -42,9 +42,9 @@ for(i in toUse1_WT1){
   obj_WT1 <- my.xy_WT1$counts
   
   obj_WT1[1,1] = obj_WT1[1,1]-1
-  obj_WT1[100,1] = obj_WT1[100,1]-1
-  obj_WT1[1,100] = obj_WT1[1,100]-1
-  obj_WT1[100,100]=obj_WT1[100,100]-1
+  obj_WT1[200,1] = obj_WT1[200,1]-1
+  obj_WT1[1,200] = obj_WT1[1,200]-1
+  obj_WT1[200,200]=obj_WT1[200,200]-1
   
   count_WT1<- as.vector(obj_WT1)
   toFill_WT1[,i]<-count_WT1
@@ -61,9 +61,9 @@ for(i in toUse2_WT1){
   obj_WT1 <- my.xy_WT1$counts
   
   obj_WT1[1,1] = obj_WT1[1,1]-1
-  obj_WT1[100,1] = obj_WT1[100,1]-1
-  obj_WT1[1,100] = obj_WT1[1,100]-1
-  obj_WT1[100,100]=obj_WT1[100,100]-1
+  obj_WT1[200,1] = obj_WT1[200,1]-1
+  obj_WT1[1,200] = obj_WT1[1,200]-1
+  obj_WT1[200,200]=obj_WT1[200,200]-1
   
   count_WT1<- as.vector(obj_WT1)
   toFill_WT1[,i]<-count_WT1
@@ -80,9 +80,9 @@ for(i in toUse3_WT1){
   obj_WT1 <- my.xy_WT1$counts
   
   obj_WT1[1,1] = obj_WT1[1,1]-1
-  obj_WT1[100,1] = obj_WT1[100,1]-1
-  obj_WT1[1,100] = obj_WT1[1,100]-1
-  obj_WT1[100,100]=obj_WT1[100,100]-1
+  obj_WT1[200,1] = obj_WT1[200,1]-1
+  obj_WT1[1,200] = obj_WT1[1,200]-1
+  obj_WT1[200,200]=obj_WT1[200,200]-1
   
   count_WT1<- as.vector(obj_WT1)
   toFill_WT1[,i]<-count_WT1
@@ -100,10 +100,10 @@ library(labdsv)
 
 # Do the k-means clustering [read 'help' for the 'kmeans' function to see what the arguments "centers" (clusters or k) and "nstart" (randomizations) mean].
 
-spe.kmeans_All_WT1 <- kmeans(result0_WT1, centers=cluster, nstart=10)
-spe.kmeans_S1_WT1 <- kmeans(result1_WT1, centers=cluster, nstart=10)
-spe.kmeans_S2_WT1 <- kmeans(result2_WT1, centers=cluster, nstart=10)
-spe.kmeans_S3_WT1 <- kmeans(result3_WT1, centers=cluster, nstart=10)
+spe.kmeans_All_WT1 <- kmeans(result0_WT1, centers=cluster, nstart=1000)
+spe.kmeans_S1_WT1 <- kmeans(result1_WT1, centers=cluster, nstart=1000)
+spe.kmeans_S2_WT1 <- kmeans(result2_WT1, centers=cluster, nstart=1000)
+spe.kmeans_S3_WT1 <- kmeans(result3_WT1, centers=cluster, nstart=1000)
 
 library(gplots) ###Call 1 set at a time; produces image of section
 v0_WT1=spe.kmeans_All_WT1$cluster
@@ -113,12 +113,12 @@ v3_WT1=spe.kmeans_S3_WT1$cluster
 
 #load("thymus.Rdata")
 #image(v2) # make pic
-v0.1_WT1=matrix(v0_WT1,nrow=100,ncol=100)
-v1.1_WT1=matrix(v1_WT1,nrow=100,ncol=100)
-v2.1_WT1=matrix(v2_WT1,nrow=100,ncol=100)
-v3.1_WT1=matrix(v3_WT1,nrow=100,ncol=100)
+v0.1_WT1=matrix(v0_WT1,nrow=200,ncol=200)
+v1.1_WT1=matrix(v1_WT1,nrow=200,ncol=200)
+v2.1_WT1=matrix(v2_WT1,nrow=200,ncol=200)
+v3.1_WT1=matrix(v3_WT1,nrow=200,ncol=200)
 
-#v2_WT1<-v2_WT1[1:40,1:100] # trim
+#v2_WT1<-v2_WT1[1:40,1:200] # trim
 #image(v2_WT1) # make new pic
 
 heatmap.2( v0.1_WT1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v0.1_WT1,
@@ -138,19 +138,19 @@ heatmap.2( v3.1_WT1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v3.1_WT
            margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
 
 clust.ext<-v2_WT1[1,1] # get cluster number of corner pixel (should always represent 'exterior')
-idx_Wt1<-which(v2_WT1==clust.ext_WT1,arr.ind=T) # get addresses of all pixels of that number
+idx_WT1<-which(v2_WT1==clust.ext_WT1,arr.ind=T) # get addresses of all pixels of that number
 #mat[mat < 0.1] <- NA
-idx2_WT1<-which(idx_Wt1[,1]<40) # find such pixels for which there is another pixel immediately to right
-idx_WT1<-idx_Wt1[idx2_Wt1,] # use only those pixels
-idx_Wt1[,1]<-idx_Wt1[,1]+1 # find pixels immediately to right
-z_Wt1<-table(v2_WT1[idx_Wt1]) # make sorted table of cluster numbers of these pixels
-clust.int_WT1<-as.integer(which(z_Wt1==max(z_WT1[z_Wt1!=max(z_WT1)]))) # get the cluster number that is 2nd most common (this is the thing most often 'touching' exterior, i.e. interior but not medular)
+idx2_WT1<-which(idx_WT1[,1]<40) # find such pixels for which there is another pixel immediately to right
+idx_WT1<-idx_WT1[idx2_WT1,] # use only those pixels
+idx_WT1[,1]<-idx_WT1[,1]+1 # find pixels immediately to right
+z_WT1<-table(v2_WT1[idx_WT1]) # make sorted table of cluster numbers of these pixels
+clust.int_WT1<-as.integer(which(z_WT1==max(z_WT1[z_WT1!=max(z_WT1)]))) # get the cluster number that is 2nd most common (this is the thing most often 'touching' exterior, i.e. interior but not medular)
 #mat[mat < 0.1] <- NA
 
-clust.med1_Wt1<-as.integer(which(z_Wt1==min(z_WT1[z_WT1!=min(z_WT1)])))
-clust.med2_Wt1<-as.integer(which(z_Wt1==min(z_WT1)))
-idx.med1_Wt1<-which(v2_WT1==clust.med1_WT1)
-idx.med2_WT1<-which(v2_WT1==clust.med2_Wt1)
+clust.med1_WT1<-as.integer(which(z_WT1==min(z_WT1[z_WT1!=min(z_WT1)])))
+clust.med2_WT1<-as.integer(which(z_WT1==min(z_WT1)))
+idx.med1_WT1<-which(v2_WT1==clust.med1_WT1)
+idx.med2_WT1<-which(v2_WT1==clust.med2_WT1)
 
 ####ADD s
 
@@ -173,36 +173,36 @@ mean(col25.01[idx.med1],na.rm=T)
 mean(col25.01[idx.med2],na.rm=T)
 
 heatmap.2( v2_WT1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2_WT1,
-notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
 
 
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans_All_WT1$cluster)){ 
-barplot(colSums(result0_WT1[which(spe.kmeans_All_WT1$cluster==i),]),main=i,ylim=c(0,12000)) 
-# we pick out desired cluster and plot
+  barplot(colSums(result0_WT1[which(spe.kmeans_All_WT1$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
 }
 
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans_S1_WT1$cluster)){ 
   barplot(colSums(result1_WT1[which(spe.kmeans_S1_WT1$cluster==i),]),main=i,ylim=c(0,12000)) 
- #we pick out desired cluster and plot
+  #we pick out desired cluster and plot
 }
 
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans_S2_WT1$cluster)){ 
   barplot(colSums(result2_WT1[which(spe.kmeans_S2_WT1$cluster==i),]),main=i,ylim=c(0,12000)) 
-# we pick out desired cluster and plot
+  # we pick out desired cluster and plot
 }
 
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans_S3_WT1$cluster)){ 
   barplot(colSums(result3_WT1[which(spe.kmeans_S3_WT1$cluster==i),]),main=i,ylim=c(0,12000)) 
-# we pick out desired cluster and plot
+  # we pick out desired cluster and plot
 }
 
 b1_WT1<-colSums(result0_WT1[which(spe.kmeans_All_WT1$cluster==1),])
@@ -326,7 +326,7 @@ colnames(df_S3_WT1)<-colnames(df_S2_WT1)
 
 
 #dfTOTAL<-rbind(df_S1_WT1,df_S2_WT1, df_S3_WT1, df_S1_WT2, df_S2_WT2, df_S3_WT3, df_S1_Mutant1,
-#df_S2_Mutant1, df_S3_Mutant1, df_S1_Mutant2, df_S2_Mutant2, df_S3_Mutant3)
+#df_S2_Mutant1, df_S3_Mutant1, df_S1_WT1, df_S2_WT1, df_S3_Mutant3)
 dfT=rbind(df_S1_WT1,df_S2_WT1,df_S3_WT1)
 
 BrayCurtis<-vegdist(dfT,method="bray")
