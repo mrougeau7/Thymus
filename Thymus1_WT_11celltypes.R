@@ -96,9 +96,6 @@ for(i in toUse3_WT1){
 library (vegan)
 library(labdsv)
 
-# This step normalizes your data and is optional.
-#spe.std <- decostand(spe, "normalize")  #You can also use "standardize". See 'help' for details.
-
 # Do the k-means clustering [read 'help' for the 'kmeans' function to see what the arguments "centers" (clusters or k) and "nstart" (randomizations) mean].
 
 spe.kmeans_All_WT1 <- kmeans(result0_WT1, centers=cluster, nstart=1000)
@@ -137,46 +134,6 @@ heatmap.2( v2.1_WT1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2.1_WT
 heatmap.2( v3.1_WT1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v3.1_WT1,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
-
-clust.ext<-v2_WT1[1,1] # get cluster number of corner pixel (should always represent 'exterior')
-idx_WT1<-which(v2_WT1==clust.ext_WT1,arr.ind=T) # get addresses of all pixels of that number
-#mat[mat < 0.1] <- NA
-idx2_WT1<-which(idx_WT1[,1]<40) # find such pixels for which there is another pixel immediately to right
-idx_WT1<-idx_WT1[idx2_WT1,] # use only those pixels
-idx_WT1[,1]<-idx_WT1[,1]+1 # find pixels immediately to right
-z_WT1<-table(v2_WT1[idx_WT1]) # make sorted table of cluster numbers of these pixels
-clust.int_WT1<-as.integer(which(z_WT1==max(z_WT1[z_WT1!=max(z_WT1)]))) # get the cluster number that is 2nd most common (this is the thing most often 'touching' exterior, i.e. interior but not medular)
-#mat[mat < 0.1] <- NA
-
-clust.med1_WT1<-as.integer(which(z_WT1==min(z_WT1[z_WT1!=min(z_WT1)])))
-clust.med2_WT1<-as.integer(which(z_WT1==min(z_WT1)))
-idx.med1_WT1<-which(v2_WT1==clust.med1_WT1)
-idx.med2_WT1<-which(v2_WT1==clust.med2_WT1)
-
-####ADD s
-
-mean(toFill[idx.med1,1],na.rm=T) #looking at certain column numbers
-mean(toFill[idx.med2,1],na.rm=T)
-mean(toFill[idx.med1,22],na.rm=T)
-mean(toFill[idx.med2,22],na.rm=T)
-mean(toFill[idx.med1,25],na.rm=T)
-mean(toFill[idx.med2,25],na.rm=T)
-
-col1.01<-1*(toFill[,1]>0)
-col22.01<-1*(toFill[,22]>0)
-col25.01<-1*(toFill[,25]>0)
-
-mean(col1.01[idx.med1],na.rm=T)
-mean(col1.01[idx.med2],na.rm=T)
-mean(col22.01[idx.med1],na.rm=T)
-mean(col22.01[idx.med2],na.rm=T)
-mean(col25.01[idx.med1],na.rm=T)
-mean(col25.01[idx.med2],na.rm=T)
-
-heatmap.2( v2_WT1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2_WT1,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
-
 
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style

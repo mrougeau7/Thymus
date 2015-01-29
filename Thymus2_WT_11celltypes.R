@@ -1,6 +1,7 @@
 setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/WT2")
 setwd("~/Thymus/Datasets/Data with 11 cell types/WT2")  
 load("WT2.rdata")
+load("WT2_150.rdata")
 library(gplots)
 
 msz=200  #matrix size in hist2d
