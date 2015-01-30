@@ -85,6 +85,12 @@ I suggest an explanatory box for readers so that quadrat, section, composite, et
                           used to assay 
                           single-cell thickness
                           composition
+                          
+  section 
+  
+  virtual section
+  
+  virtual slice
 ----------- ---------- -------------------------
 
 ### System and Data Collection
