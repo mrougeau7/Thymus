@@ -2,13 +2,14 @@ setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Mutant1")
 setwd("~/Thymus/Datasets/Data with 11 cell types/Mutant1")  
 
 load("Mutant1.rdata")
+load("Mutant1_150.rdata")
 library(gplots)
 
-msz=200  #matrix size in hist2d
+msz=150  #matrix size in hist2d
 cluster=4  #number of clusters produced for K means
 txtfiles_Mutant1=list.files(pattern="*.txt")  #loads in order all files within folder
 
-mat_Mutant1<-matrix(data=NA,nrow=40000,ncol=33) #this will change with size of matrix and # of sections/cell types
+mat_Mutant1<-matrix(data=NA,nrow=22500,ncol=33) #this will change with size of matrix and # of sections/cell types
 
 toFill_Mutant1<-as.data.frame(mat_Mutant1)  #changes to data frame
 
@@ -25,9 +26,9 @@ for(i in toUse0_Mutant1){
   obj_Mutant1 <- my.xy_Mutant1$counts
   
   obj_Mutant1[1,1] = obj_Mutant1[1,1]-1
-  obj_Mutant1[200,1] = obj_Mutant1[200,1]-1
-  obj_Mutant1[1,200] = obj_Mutant1[1,200]-1
-  obj_Mutant1[200,200]=obj_Mutant1[200,200]-1
+  obj_Mutant1[150,1] = obj_Mutant1[150,1]-1
+  obj_Mutant1[1,150] = obj_Mutant1[1,150]-1
+  obj_Mutant1[150,150]=obj_Mutant1[150,150]-1
   
   count_Mutant1<- as.vector(obj_Mutant1)
   toFill_Mutant1[,i]<-count_Mutant1
@@ -44,9 +45,9 @@ for(i in toUse1_Mutant1){
   obj_Mutant1 <- my.xy_Mutant1$counts
   
   obj_Mutant1[1,1] = obj_Mutant1[1,1]-1
-  obj_Mutant1[200,1] = obj_Mutant1[200,1]-1
-  obj_Mutant1[1,200] = obj_Mutant1[1,200]-1
-  obj_Mutant1[200,200]=obj_Mutant1[200,200]-1
+  obj_Mutant1[150,1] = obj_Mutant1[150,1]-1
+  obj_Mutant1[1,150] = obj_Mutant1[1,150]-1
+  obj_Mutant1[150,150]=obj_Mutant1[150,150]-1
   
   count_Mutant1<- as.vector(obj_Mutant1)
   toFill_Mutant1[,i]<-count_Mutant1
@@ -63,9 +64,9 @@ for(i in toUse2_Mutant1){
   obj_Mutant1 <- my.xy_Mutant1$counts
   
   obj_Mutant1[1,1] = obj_Mutant1[1,1]-1
-  obj_Mutant1[200,1] = obj_Mutant1[200,1]-1
-  obj_Mutant1[1,200] = obj_Mutant1[1,200]-1
-  obj_Mutant1[200,200]=obj_Mutant1[200,200]-1
+  obj_Mutant1[150,1] = obj_Mutant1[150,1]-1
+  obj_Mutant1[1,150] = obj_Mutant1[1,150]-1
+  obj_Mutant1[150,150]=obj_Mutant1[150,150]-1
   
   count_Mutant1<- as.vector(obj_Mutant1)
   toFill_Mutant1[,i]<-count_Mutant1
@@ -82,9 +83,9 @@ for(i in toUse3_Mutant1){
   obj_Mutant1 <- my.xy_Mutant1$counts
   
   obj_Mutant1[1,1] = obj_Mutant1[1,1]-1
-  obj_Mutant1[200,1] = obj_Mutant1[200,1]-1
-  obj_Mutant1[1,200] = obj_Mutant1[1,200]-1
-  obj_Mutant1[200,200]=obj_Mutant1[200,200]-1
+  obj_Mutant1[150,1] = obj_Mutant1[150,1]-1
+  obj_Mutant1[1,150] = obj_Mutant1[1,150]-1
+  obj_Mutant1[150,150]=obj_Mutant1[150,150]-1
   
   count_Mutant1<- as.vector(obj_Mutant1)
   toFill_Mutant1[,i]<-count_Mutant1
@@ -115,12 +116,12 @@ v3_Mutant1=spe.kmeans_S3_Mutant1$cluster
 
 #load("thymus.Rdata")
 #image(v2) # make pic
-v0.1_Mutant1=matrix(v0_Mutant1,nrow=200,ncol=200)
-v1.1_Mutant1=matrix(v1_Mutant1,nrow=200,ncol=200)
-v2.1_Mutant1=matrix(v2_Mutant1,nrow=200,ncol=200)
-v3.1_Mutant1=matrix(v3_Mutant1,nrow=200,ncol=200)
+v0.1_Mutant1=matrix(v0_Mutant1,nrow=150,ncol=150)
+v1.1_Mutant1=matrix(v1_Mutant1,nrow=150,ncol=150)
+v2.1_Mutant1=matrix(v2_Mutant1,nrow=150,ncol=150)
+v3.1_Mutant1=matrix(v3_Mutant1,nrow=150,ncol=150)
 
-#v2_Mutant1<-v2_Mutant1[1:40,1:200] # trim
+#v2_Mutant1<-v2_Mutant1[1:40,1:150] # trim
 #image(v2_Mutant1) # make new pic
 
 heatmap.2( v0.1_Mutant1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v0.1_Mutant1,
@@ -142,28 +143,28 @@ heatmap.2( v3.1_Mutant1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v3.
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans_All_Mutant1$cluster)){ 
-  barplot(colSums(result0_Mutant1[which(spe.kmeans_All_Mutant1$cluster==i),]),main=i,ylim=c(0,12000)) 
+  barplot(colSums(result0_Mutant1[which(spe.kmeans_All_Mutant1$cluster==i),]),main=i,ylim=c(0,11500)) 
   # we pick out desired cluster and plot
 }
 
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans_S1_Mutant1$cluster)){ 
-  barplot(colSums(result1_Mutant1[which(spe.kmeans_S1_Mutant1$cluster==i),]),main=i,ylim=c(0,12000)) 
+  barplot(colSums(result1_Mutant1[which(spe.kmeans_S1_Mutant1$cluster==i),]),main=i,ylim=c(0,11500)) 
   #we pick out desired cluster and plot
 }
 
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans_S2_Mutant1$cluster)){ 
-  barplot(colSums(result2_Mutant1[which(spe.kmeans_S2_Mutant1$cluster==i),]),main=i,ylim=c(0,12000)) 
+  barplot(colSums(result2_Mutant1[which(spe.kmeans_S2_Mutant1$cluster==i),]),main=i,ylim=c(0,11500)) 
   # we pick out desired cluster and plot
 }
 
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans_S3_Mutant1$cluster)){ 
-  barplot(colSums(result3_Mutant1[which(spe.kmeans_S3_Mutant1$cluster==i),]),main=i,ylim=c(0,12000)) 
+  barplot(colSums(result3_Mutant1[which(spe.kmeans_S3_Mutant1$cluster==i),]),main=i,ylim=c(0,11500)) 
   # we pick out desired cluster and plot
 }
 
@@ -291,10 +292,10 @@ colnames(df_S3_Mutant1)<-colnames(df_S1_Mutant1)
 #df_S2_Mutant1, df_S3_Mutant1, df_S1_Mutant1, df_S2_Mutant1, df_S3_Mutant3)
 dfT_Mutant1=rbind(df_S1_Mutant1,df_S2_Mutant1,df_S3_Mutant1)
 
-BrayCurtis<-vegdist(dfT,method="bray")
+BrayCurtis_Mutant1<-vegdist(dfT_Mutant1,method="bray")
 #print(BrayCurtis)
-hc_Mutant1<-hclust(BrayCurtis)
+hc_Mutant1<-hclust(BrayCurtis_Mutant1)
 #plot(hc,labels=dfT$rownames)
 plot(hc_Mutant1)
 
-save.image("Mutant1.rdata")
+save.image("Mutant1_150.rdata")

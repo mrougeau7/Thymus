@@ -287,12 +287,12 @@ colnames(df_S3_WT2_R)<-colnames(df_S1_WT2_R)
 
 #dfTOTAL<-rbind(df_S1_WT2_R,df_S2_WT2_R, df_S3_WT2_R, df_S1_WT2, df_S2_WT2, df_S3_WT3, df_S1_Mutant1,
 #df_S2_Mutant1, df_S3_Mutant1, df_S1_WT2_R, df_S2_WT2_R, df_S3_Mutant3)
-dfT=rbind(df_S1_WT2_R,df_S2_WT2_R,df_S3_WT2_R)
+dfT_WT2_R=rbind(df_S1_WT2_R,df_S2_WT2_R,df_S3_WT2_R)
 
-BrayCurtis<-vegdist(dfT,method="bray")
+BrayCurtis_WT2_R<-vegdist(dfT_WT2_R,method="bray")
 #print(BrayCurtis)
-hc<-hclust(BrayCurtis)
+hc_WT2_R<-hclust(BrayCurtis_WT2_R)
 #plot(hc,labels=dfT$rownames)
-plot(hc)
+plot(hc_WT2_R)
 
-save.image("WT2_Rarefaction.rdata")
+save.image("WT2_Rarefaction_150.rdata")
