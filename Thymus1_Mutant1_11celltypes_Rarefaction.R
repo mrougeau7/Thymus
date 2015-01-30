@@ -1,5 +1,6 @@
 setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Mutant1")
 setwd("~/Thymus/Datasets/Data with 11 cell types/Mutant1")  
+
 load("Mutant1_Rarefaction_150.rdata")
 
 library(gplots)

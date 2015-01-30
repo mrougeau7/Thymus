@@ -1,7 +1,7 @@
 setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Mutant1")
 setwd("~/Thymus/Datasets/Data with 11 cell types/Mutant1")  
+
 load("Mutant1.rdata")
-load("Mutant1_Rarefaction_150.rdata")
 library(gplots)
 
 msz=200  #matrix size in hist2d
@@ -138,46 +138,6 @@ heatmap.2( v2.1_Mutant1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2.
 heatmap.2( v3.1_Mutant1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v3.1_Mutant1,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
-
-clust.ext<-v2_Mutant1[1,1] # get cluster number of corner pixel (should always represent 'exterior')
-idx_Mutant1<-which(v2_Mutant1==clust.ext_Mutant1,arr.ind=T) # get addresses of all pixels of that number
-#mat[mat < 0.1] <- NA
-idx2_Mutant1<-which(idx_Mutant1[,1]<40) # find such pixels for which there is another pixel immediately to right
-idx_Mutant1<-idx_Mutant1[idx2_Mutant1,] # use only those pixels
-idx_Mutant1[,1]<-idx_Mutant1[,1]+1 # find pixels immediately to right
-z_Mutant1<-table(v2_Mutant1[idx_Mutant1]) # make sorted table of cluster numbers of these pixels
-clust.int_Mutant1<-as.integer(which(z_Mutant1==max(z_Mutant1[z_Mutant1!=max(z_Mutant1)]))) # get the cluster number that is 2nd most common (this is the thing most often 'touching' exterior, i.e. interior but not medular)
-#mat[mat < 0.1] <- NA
-
-clust.med1_Mutant1<-as.integer(which(z_Mutant1==min(z_Mutant1[z_Mutant1!=min(z_Mutant1)])))
-clust.med2_Mutant1<-as.integer(which(z_Mutant1==min(z_Mutant1)))
-idx.med1_Mutant1<-which(v2_Mutant1==clust.med1_Mutant1)
-idx.med2_Mutant1<-which(v2_Mutant1==clust.med2_Mutant1)
-
-####ADD s
-
-mean(toFill[idx.med1,1],na.rm=T) #looking at certain column numbers
-mean(toFill[idx.med2,1],na.rm=T)
-mean(toFill[idx.med1,22],na.rm=T)
-mean(toFill[idx.med2,22],na.rm=T)
-mean(toFill[idx.med1,25],na.rm=T)
-mean(toFill[idx.med2,25],na.rm=T)
-
-col1.01<-1*(toFill[,1]>0)
-col22.01<-1*(toFill[,22]>0)
-col25.01<-1*(toFill[,25]>0)
-
-mean(col1.01[idx.med1],na.rm=T)
-mean(col1.01[idx.med2],na.rm=T)
-mean(col22.01[idx.med1],na.rm=T)
-mean(col22.01[idx.med2],na.rm=T)
-mean(col25.01[idx.med1],na.rm=T)
-mean(col25.01[idx.med2],na.rm=T)
-
-heatmap.2( v2_Mutant1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2_Mutant1,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
-
 
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
@@ -329,12 +289,12 @@ colnames(df_S3_Mutant1)<-colnames(df_S1_Mutant1)
 
 #dfTOTAL<-rbind(df_S1_Mutant1,df_S2_Mutant1, df_S3_Mutant1, df_S1_Mutant1, df_S2_Mutant1, df_S3_WT3, df_S1_Mutant1,
 #df_S2_Mutant1, df_S3_Mutant1, df_S1_Mutant1, df_S2_Mutant1, df_S3_Mutant3)
-dfT=rbind(df_S1_Mutant1,df_S2_Mutant1,df_S3_Mutant1)
+dfT_Mutant1=rbind(df_S1_Mutant1,df_S2_Mutant1,df_S3_Mutant1)
 
 BrayCurtis<-vegdist(dfT,method="bray")
 #print(BrayCurtis)
-hc<-hclust(BrayCurtis)
+hc_Mutant1<-hclust(BrayCurtis)
 #plot(hc,labels=dfT$rownames)
-plot(hc)
+plot(hc_Mutant1)
 
 save.image("Mutant1.rdata")

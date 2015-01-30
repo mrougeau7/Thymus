@@ -285,12 +285,12 @@ colnames(df_S3_WT1)<-colnames(df_S1_WT1)
 
 #dfTOTAL<-rbind(df_S1_WT1,df_S2_WT1, df_S3_WT1, df_S1_WT2, df_S2_WT2, df_S3_WT3, df_S1_Mutant1,
 #df_S2_Mutant1, df_S3_Mutant1, df_S1_WT1, df_S2_WT1, df_S3_Mutant3)
-dfT=rbind(df_S1_WT1,df_S2_WT1,df_S3_WT1)
+dfT_WT1=rbind(df_S1_WT1,df_S2_WT1,df_S3_WT1)
 
-BrayCurtis<-vegdist(dfT,method="bray")
+BrayCurtis_WT1<-vegdist(dfT,method="bray")
 #print(BrayCurtis)
-hc<-hclust(BrayCurtis)
+hc_WT1<-hclust(BrayCurtis)
 #plot(hc,labels=dfT$rownames)
-plot(hc)
+plot(hc_WT1)
 
 save.image("WT1.rdata")
