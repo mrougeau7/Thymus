@@ -663,3 +663,6 @@ there are many more. we can learn from the methods..
 # Literature Cited
 
 assume we have vector (e.g. 20000 pixels, numbered)
+
+
+# Future Directions
