@@ -1,7 +1,7 @@
 setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Mutant2")
 setwd("~/Thymus/Datasets/Data with 11 cell types/Mutant2")  
+
 load("Mutant2.rdata")
-load("Mutant2_200.rdata")
 load("Mutant2_150.rdata")
 
 library(gplots)
@@ -291,12 +291,12 @@ colnames(df_S3_Mutant2)<-colnames(df_S1_Mutant2)
 
 #dfTOTAL<-rbind(df_S1_Mutant2,df_S2_Mutant2, df_S3_Mutant2, df_S1_WT2, df_S2_WT2, df_S3_WT3, df_S1_Mutant1,
 #df_S2_Mutant1, df_S3_Mutant1, df_S1_Mutant2, df_S2_Mutant2, df_S3_Mutant3)
-dfT=rbind(df_S1_Mutant2,df_S2_Mutant2,df_S3_Mutant2)
+dfT_Mutant2=rbind(df_S1_Mutant2,df_S2_Mutant2,df_S3_Mutant2)
 
-BrayCurtis<-vegdist(dfT,method="bray")
+BrayCurtis_Mutant2<-vegdist(dfT_Mutant2,method="bray")
 #print(BrayCurtis)
-hc<-hclust(BrayCurtis)
+hc_Mutant2<-hclust(BrayCurtis_Mutant2)
 #plot(hc,labels=dfT$rownames)
-plot(hc)
+plot(hc_Mutant2)
 
-save.image("Mutant2_200.rdata")
+save.image("Mutant2.rdata")
