@@ -212,37 +212,37 @@ b4_S3_Mutant1<-b4_S3_Mutant1/sum(b4_S3_Mutant1)
 
 #We can look at the difference between pairs of clusters to see which cell types are most different between #clusters
 
-par(mfrow=c(3,2))  ##All
+par(mfrow=c(2,2))  ##All
 barplot(b1_Mutant1-b2_Mutant1,main="1-2")
-barplot(b1_Mutant1-b3_Mutant1,main="1-3")
+#barplot(b1_Mutant1-b3_Mutant1,main="1-3")
 barplot(b1_Mutant1-b4_Mutant1,main="1-4")
-barplot(b2_Mutant1-b3_Mutant1,main="2-3")
+#barplot(b2_Mutant1-b3_Mutant1,main="2-3")
 barplot(b2_Mutant1-b4_Mutant1,main="2-4")
-barplot(b3_Mutant1-b4_Mutant1,main="3-4")
+#barplot(b3_Mutant1-b4_Mutant1,main="3-4")
 
-par(mfrow=c(3,2))
-barplot(b1_S1_Mutant1-b2_S1_Mutant1,main="1-2")
-barplot(b1_S1_Mutant1-b3_S1_Mutant1,main="1-3")
-barplot(b1_S1_Mutant1-b4_S1_Mutant1,main="1-4")
+par(mfrow=c(2,2))
+#barplot(b1_S1_Mutant1-b2_S1_Mutant1,main="1-2")
+#barplot(b1_S1_Mutant1-b3_S1_Mutant1,main="1-3")
+#barplot(b1_S1_Mutant1-b4_S1_Mutant1,main="1-4")
 barplot(b2_S1_Mutant1-b3_S1_Mutant1,main="2-3")
 barplot(b2_S1_Mutant1-b4_S1_Mutant1,main="2-4")
 barplot(b3_S1_Mutant1-b4_S1_Mutant1,main="3-4")
 
-par(mfrow=c(3,2))
-barplot(b1_S2_Mutant1-b2_S2_Mutant1,main="1-2")
-barplot(b1_S2_Mutant1-b3_S2_Mutant1,main="1-3")
-barplot(b1_S2_Mutant1-b4_S2_Mutant1,main="1-4")
+par(mfrow=c(2,2))
+#barplot(b1_S2_Mutant1-b2_S2_Mutant1,main="1-2")
+#barplot(b1_S2_Mutant1-b3_S2_Mutant1,main="1-3")
+#barplot(b1_S2_Mutant1-b4_S2_Mutant1,main="1-4")
 barplot(b2_S2_Mutant1-b3_S2_Mutant1,main="2-3")
 barplot(b2_S2_Mutant1-b4_S2_Mutant1,main="2-4")
 barplot(b3_S2_Mutant1-b4_S2_Mutant1,main="3-4")
 
-par(mfrow=c(3,2))
+par(mfrow=c(2,2))
 barplot(b1_S3_Mutant1-b2_S3_Mutant1,main="1-2")
-barplot(b1_S3_Mutant1-b3_S3_Mutant1,main="1-3")
+#barplot(b1_S3_Mutant1-b3_S3_Mutant1,main="1-3")
 barplot(b1_S3_Mutant1-b4_S3_Mutant1,main="1-4")
-barplot(b2_S3_Mutant1-b3_S3_Mutant1,main="2-3")
+#barplot(b2_S3_Mutant1-b3_S3_Mutant1,main="2-3")
 barplot(b2_S3_Mutant1-b4_S3_Mutant1,main="2-4")
-barplot(b3_S3_Mutant1-b4_S3_Mutant1,main="3-4")
+#barplot(b3_S3_Mutant1-b4_S3_Mutant1,main="3-4")
 
 ###Bray Curtis
 

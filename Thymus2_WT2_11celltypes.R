@@ -141,45 +141,6 @@ heatmap.2( v3.1_WT2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v3.1_WT
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
            margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
 
-clust.ext<-v2_WT2[1,1] # get cluster number of corner pixel (should always represent 'exterior')
-idx_WT2<-which(v2_WT2==clust.ext_WT2,arr.ind=T) # get addresses of all pixels of that number
-#mat[mat < 0.1] <- NA
-idx2_WT2<-which(idx_WT2[,1]<40) # find such pixels for which there is another pixel immediately to right
-idx_WT2<-idx_WT2[idx2_WT2,] # use only those pixels
-idx_WT2[,1]<-idx_WT2[,1]+1 # find pixels immediately to right
-z_WT2<-table(v2_WT2[idx_WT2]) # make sorted table of cluster numbers of these pixels
-clust.int_WT2<-as.integer(which(z_WT2==max(z_WT2[z_WT2!=max(z_WT2)]))) # get the cluster number that is 2nd most common (this is the thing most often 'touching' exterior, i.e. interior but not medular)
-#mat[mat < 0.1] <- NA
-
-clust.med1_WT2<-as.integer(which(z_WT2==min(z_WT2[z_WT2!=min(z_WT2)])))
-clust.med2_WT2<-as.integer(which(z_WT2==min(z_WT2)))
-idx.med1_WT2<-which(v2_WT2==clust.med1_WT2)
-idx.med2_WT2<-which(v2_WT2==clust.med2_WT2)
-
-####ADD s
-
-mean(toFill[idx.med1,1],na.rm=T) #looking at certain column numbers
-mean(toFill[idx.med2,1],na.rm=T)
-mean(toFill[idx.med1,22],na.rm=T)
-mean(toFill[idx.med2,22],na.rm=T)
-mean(toFill[idx.med1,25],na.rm=T)
-mean(toFill[idx.med2,25],na.rm=T)
-
-col1.01<-1*(toFill[,1]>0)
-col22.01<-1*(toFill[,22]>0)
-col25.01<-1*(toFill[,25]>0)
-
-mean(col1.01[idx.med1],na.rm=T)
-mean(col1.01[idx.med2],na.rm=T)
-mean(col22.01[idx.med1],na.rm=T)
-mean(col22.01[idx.med2],na.rm=T)
-mean(col25.01[idx.med1],na.rm=T)
-mean(col25.01[idx.med2],na.rm=T)
-
-heatmap.2( v2_WT2, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2_WT2,
-           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("green", "yellow", "blue", "red")) 
-
 
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
@@ -253,37 +214,37 @@ b4_S3_WT2<-b4_S3_WT2/sum(b4_S3_WT2)
 
 #We can look at the difference between pairs of clusters to see which cell types are most different between #clusters
 
-par(mfrow=c(3,2))  ##All
+par(mfrow=c(2,2))  ##All
 barplot(b1_WT2-b2_WT2,main="1-2")
 barplot(b1_WT2-b3_WT2,main="1-3")
-barplot(b1_WT2-b4_WT2,main="1-4")
+#barplot(b1_WT2-b4_WT2,main="1-4")
 barplot(b2_WT2-b3_WT2,main="2-3")
-barplot(b2_WT2-b4_WT2,main="2-4")
-barplot(b3_WT2-b4_WT2,main="3-4")
+#barplot(b2_WT2-b4_WT2,main="2-4")
+#barplot(b3_WT2-b4_WT2,main="3-4")
 
-par(mfrow=c(3,2))
+par(mfrow=c(2,2))
 barplot(b1_S1_WT2-b2_S1_WT2,main="1-2")
 barplot(b1_S1_WT2-b3_S1_WT2,main="1-3")
-barplot(b1_S1_WT2-b4_S1_WT2,main="1-4")
+#barplot(b1_S1_WT2-b4_S1_WT2,main="1-4")
 barplot(b2_S1_WT2-b3_S1_WT2,main="2-3")
-barplot(b2_S1_WT2-b4_S1_WT2,main="2-4")
-barplot(b3_S1_WT2-b4_S1_WT2,main="3-4")
+#barplot(b2_S1_WT2-b4_S1_WT2,main="2-4")
+#barplot(b3_S1_WT2-b4_S1_WT2,main="3-4")
 
-par(mfrow=c(3,2))
-barplot(b1_S2_WT2-b2_S2_WT2,main="1-2")
+par(mfrow=c(2,2))
+#barplot(b1_S2_WT2-b2_S2_WT2,main="1-2")
 barplot(b1_S2_WT2-b3_S2_WT2,main="1-3")
 barplot(b1_S2_WT2-b4_S2_WT2,main="1-4")
-barplot(b2_S2_WT2-b3_S2_WT2,main="2-3")
-barplot(b2_S2_WT2-b4_S2_WT2,main="2-4")
+#barplot(b2_S2_WT2-b3_S2_WT2,main="2-3")
+#barplot(b2_S2_WT2-b4_S2_WT2,main="2-4")
 barplot(b3_S2_WT2-b4_S2_WT2,main="3-4")
 
-par(mfrow=c(3,2))
+par(mfrow=c(2,2))
 barplot(b1_S3_WT2-b2_S3_WT2,main="1-2")
-barplot(b1_S3_WT2-b3_S3_WT2,main="1-3")
+#barplot(b1_S3_WT2-b3_S3_WT2,main="1-3")
 barplot(b1_S3_WT2-b4_S3_WT2,main="1-4")
-barplot(b2_S3_WT2-b3_S3_WT2,main="2-3")
+#barplot(b2_S3_WT2-b3_S3_WT2,main="2-3")
 barplot(b2_S3_WT2-b4_S3_WT2,main="2-4")
-barplot(b3_S3_WT2-b4_S3_WT2,main="3-4")
+#barplot(b3_S3_WT2-b4_S3_WT2,main="3-4")
 
 ###Bray Curtis
 
@@ -339,4 +300,4 @@ hc_WT2<-hclust(BrayCurtis_WT2)
 #plot(hc,labels=dfT$rownames)
 plot(hc_WT2)
 
-save.image("WT2.rdata")
+save.image("WT2_150.rdata")

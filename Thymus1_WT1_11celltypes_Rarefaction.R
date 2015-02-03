@@ -2,6 +2,7 @@ setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/WT1")
 setwd("~/Thymus/Datasets/Data with 11 cell types/WT1")  
 library(gplots)
 load("WT1_Rarefaction.rdata")
+load("WT1_Rarefaction_150.rdata")
 
 msz=150  #matrix size in hist2d
 cluster=4  #number of clusters produced for K means
@@ -184,61 +185,39 @@ b2_S3_WT1_R<-colSums(result3_WT1_R[which(spe.kmeans_S3_WT1_R$cluster==2),])
 b3_S3_WT1_R<-colSums(result3_WT1_R[which(spe.kmeans_S3_WT1_R$cluster==3),])
 b4_S3_WT1_R<-colSums(result3_WT1_R[which(spe.kmeans_S3_WT1_R$cluster==4),])
 
-###and normalize these so that each cluster type has the same total amount of cells (in other words, we're ###getting the proportion of cell types in each cluster)
-
-b1_WT1_R<-b1_WT1_R/sum(b1_WT1_R)
-b2_WT1_R<-b2_WT1_R/sum(b2_WT1_R)
-b3_WT1_R<-b3_WT1_R/sum(b3_WT1_R)
-b4_WT1_R<-b4_WT1_R/sum(b4_WT1_R)
-
-b1_S1_WT1_R<-b1_S1_WT1_R/sum(b1_S1_WT1_R)
-b2_S1_WT1_R<-b2_S1_WT1_R/sum(b2_S1_WT1_R)
-b3_S1_WT1_R<-b3_S1_WT1_R/sum(b3_S1_WT1_R)
-b4_S1_WT1_R<-b4_S1_WT1_R/sum(b4_S1_WT1_R)
-
-b1_S2_WT1_R<-b1_S2_WT1_R/sum(b1_S2_WT1_R)
-b2_S2_WT1_R<-b2_S2_WT1_R/sum(b2_S2_WT1_R)
-b3_S2_WT1_R<-b3_S2_WT1_R/sum(b3_S2_WT1_R)
-b4_S2_WT1_R<-b4_S2_WT1_R/sum(b4_S2_WT1_R)
-
-b1_S3_WT1_R<-b1_S3_WT1_R/sum(b1_S3_WT1_R)
-b2_S3_WT1_R<-b2_S3_WT1_R/sum(b2_S3_WT1_R)
-b3_S3_WT1_R<-b3_S3_WT1_R/sum(b3_S3_WT1_R)
-b4_S3_WT1_R<-b4_S3_WT1_R/sum(b4_S3_WT1_R)
-
 #We can look at the difference between pairs of clusters to see which cell types are most different between #clusters
 
-par(mfrow=c(3,2))  ##All
+par(mfrow=c(2,2))  ##All
 barplot(b1_WT1_R-b2_WT1_R,main="1-2")
-barplot(b1_WT1_R-b3_WT1_R,main="1-3")
+#barplot(b1_WT1_R-b3_WT1_R,main="1-3")
 barplot(b1_WT1_R-b4_WT1_R,main="1-4")
-barplot(b2_WT1_R-b3_WT1_R,main="2-3")
+#barplot(b2_WT1_R-b3_WT1_R,main="2-3")
 barplot(b2_WT1_R-b4_WT1_R,main="2-4")
-barplot(b3_WT1_R-b4_WT1_R,main="3-4")
+#barplot(b3_WT1_R-b4_WT1_R,main="3-4")
 
-par(mfrow=c(3,2))
+par(mfrow=c(2,2))
 barplot(b1_S1_WT1_R-b2_S1_WT1_R,main="1-2")
-barplot(b1_S1_WT1_R-b3_S1_WT1_R,main="1-3")
+#barplot(b1_S1_WT1_R-b3_S1_WT1_R,main="1-3")
 barplot(b1_S1_WT1_R-b4_S1_WT1_R,main="1-4")
-barplot(b2_S1_WT1_R-b3_S1_WT1_R,main="2-3")
+#barplot(b2_S1_WT1_R-b3_S1_WT1_R,main="2-3")
 barplot(b2_S1_WT1_R-b4_S1_WT1_R,main="2-4")
-barplot(b3_S1_WT1_R-b4_S1_WT1_R,main="3-4")
+#barplot(b3_S1_WT1_R-b4_S1_WT1_R,main="3-4")
 
-par(mfrow=c(3,2))
-barplot(b1_S2_WT1_R-b2_S2_WT1_R,main="1-2")
+par(mfrow=c(2,2))
+#barplot(b1_S2_WT1_R-b2_S2_WT1_R,main="1-2")
 barplot(b1_S2_WT1_R-b3_S2_WT1_R,main="1-3")
 barplot(b1_S2_WT1_R-b4_S2_WT1_R,main="1-4")
-barplot(b2_S2_WT1_R-b3_S2_WT1_R,main="2-3")
-barplot(b2_S2_WT1_R-b4_S2_WT1_R,main="2-4")
+#barplot(b2_S2_WT1_R-b3_S2_WT1_R,main="2-3")
+#barplot(b2_S2_WT1_R-b4_S2_WT1_R,main="2-4")
 barplot(b3_S2_WT1_R-b4_S2_WT1_R,main="3-4")
 
-par(mfrow=c(3,2))
+par(mfrow=c(2,2))
 barplot(b1_S3_WT1_R-b2_S3_WT1_R,main="1-2")
-barplot(b1_S3_WT1_R-b3_S3_WT1_R,main="1-3")
+#barplot(b1_S3_WT1_R-b3_S3_WT1_R,main="1-3")
 barplot(b1_S3_WT1_R-b4_S3_WT1_R,main="1-4")
-barplot(b2_S3_WT1_R-b3_S3_WT1_R,main="2-3")
+#barplot(b2_S3_WT1_R-b3_S3_WT1_R,main="2-3")
 barplot(b2_S3_WT1_R-b4_S3_WT1_R,main="2-4")
-barplot(b3_S3_WT1_R-b4_S3_WT1_R,main="3-4")
+#barplot(b3_S3_WT1_R-b4_S3_WT1_R,main="3-4")
 
 ###Bray Curtis
 
@@ -286,12 +265,12 @@ colnames(df_S3_WT1_R)<-colnames(df_S1_WT1_R)
 
 #dfTOTAL<-rbind(df_S1_WT1_R,df_S2_WT1_R, df_S3_WT1_R, df_S1_WT2, df_S2_WT2, df_S3_WT3, df_S1_Mutant1,
 #df_S2_Mutant1, df_S3_Mutant1, df_S1_WT1_R, df_S2_WT1_R, df_S3_Mutant3)
-dfT=rbind(df_S1_WT1_R,df_S2_WT1_R,df_S3_WT1_R)
+dfT_WT1_R=rbind(df_S1_WT1_R,df_S2_WT1_R,df_S3_WT1_R)
 
-BrayCurtis<-vegdist(dfT,method="bray")
+BrayCurtis_WT1_R<-vegdist(dfT_WT1_R,method="bray")
 #print(BrayCurtis)
-hc<-hclust(BrayCurtis)
-#plot(hc,labels=dfT$rownames)
-plot(hc)
+hc_WT1_R<-hclust(BrayCurtis_WT1_R)
+#plot(hc_WT1_R,labels=dfT$rownames)
+plot(hc_WT1_R)
 
 save.image("WT1_Rarefaction_150.rdata")
