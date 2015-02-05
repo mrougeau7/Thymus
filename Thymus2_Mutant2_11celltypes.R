@@ -242,8 +242,8 @@ par(mfrow=c(2,2))
 barplot(b1_S3_Mutant2-b3_S3_Mutant2,main="1-3")
 barplot(b1_S3_Mutant2-b4_S3_Mutant2,main="1-4")
 #barplot(b2_S3_Mutant2-b3_S3_Mutant2,main="2-3")
-barplot(b2_S3_Mutant2-b4_S3_Mutant2,main="2-4")
-#barplot(b3_S3_Mutant2-b4_S3_Mutant2,main="3-4")
+#barplot(b2_S3_Mutant2-b4_S3_Mutant2,main="2-4")
+barplot(b3_S3_Mutant2-b4_S3_Mutant2,main="3-4")
 
 ###Bray Curtis
 
