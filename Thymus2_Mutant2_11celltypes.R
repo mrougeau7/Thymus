@@ -265,10 +265,10 @@ for (j in 2:4){
   df_S1_Mutant2<-rbind(df_S1_Mutant2,tmp_S1_Mutant2)
 }
 
-df_S2_Mutant2<-result2_Mutant2[which(spe.kmeans_S1_Mutant2$cluster==1),] %>% colSums() %>% t()
+df_S2_Mutant2<-result2_Mutant2[which(spe.kmeans_S2_Mutant2$cluster==1),] %>% colSums() %>% t()
 for (j in 2:4){  
-  tmp_S2_Mutant2<-result2_Mutant2[which(spe.kmeans_S1_Mutant2$cluster==j),] %>% colSums() %>% t() 
-  df_S1_Mutant2<-rbind(df_S1_Mutant2,tmp_S1_Mutant2)
+  tmp_S2_Mutant2<-result2_Mutant2[which(spe.kmeans_S2_Mutant2$cluster==j),] %>% colSums() %>% t() 
+  df_S2_Mutant2<-rbind(df_S2_Mutant2,tmp_S2_Mutant2)
 }
 
 df_S3_Mutant2<-result3_Mutant2[which(spe.kmeans_S3_Mutant2$cluster==1),] %>% colSums() %>% t()
@@ -299,4 +299,4 @@ hc_Mutant2<-hclust(BrayCurtis_Mutant2)
 #plot(hc,labels=dfT$rownames)
 plot(hc_Mutant2)
 
-save.image("Mutant2_150.rdata")
+save.image("Mutant2.rdata")

@@ -261,10 +261,10 @@ for (j in 2:4){
   df_S1_WT2_R<-rbind(df_S1_WT2_R,tmp_S1_WT2_R)
 }
 
-df_S2_WT2_R<-result2_WT2_R[which(spe.kmeans_S1_WT2_R$cluster==1),] %>% colSums() %>% t()
+df_S2_WT2_R<-result2_WT2_R[which(spe.kmeans_S2_WT2_R$cluster==1),] %>% colSums() %>% t()
 for (j in 2:4){  
-  tmp_S2_WT2_R<-result2_WT2_R[which(spe.kmeans_S1_WT2_R$cluster==j),] %>% colSums() %>% t() 
-  df_S1_WT2_R<-rbind(df_S1_WT2_R,tmp_S1_WT2_R)
+  tmp_S2_WT2_R<-result2_WT2_R[which(spe.kmeans_S2_WT2_R$cluster==j),] %>% colSums() %>% t() 
+  df_S2_WT2_R<-rbind(df_S2_WT2_R,tmp_S2_WT2_R)
 }
 
 df_S3_WT2_R<-result3_WT2_R[which(spe.kmeans_S3_WT2_R$cluster==1),] %>% colSums() %>% t()

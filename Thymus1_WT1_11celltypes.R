@@ -260,10 +260,10 @@ for (j in 2:4){
   df_S1_WT1<-rbind(df_S1_WT1,tmp_S1_WT1)
 }
 
-df_S2_WT1<-result2_WT1[which(spe.kmeans_S1_WT1$cluster==1),] %>% colSums() %>% t()
+df_S2_WT1<-result2_WT1[which(spe.kmeans_S2_WT1$cluster==1),] %>% colSums() %>% t()
 for (j in 2:4){  
-  tmp_S2_WT1<-result2_WT1[which(spe.kmeans_S1_WT1$cluster==j),] %>% colSums() %>% t() 
-  df_S1_WT1<-rbind(df_S1_WT1,tmp_S1_WT1)
+  tmp_S2_WT1<-result2_WT1[which(spe.kmeans_S2_WT1$cluster==j),] %>% colSums() %>% t() 
+  df_S2_WT1<-rbind(df_S2_WT1,tmp_S2_WT1)
 }
 
 df_S3_WT1<-result3_WT1[which(spe.kmeans_S3_WT1$cluster==1),] %>% colSums() %>% t()
@@ -294,4 +294,4 @@ hc_WT1<-hclust(BrayCurtis_WT1)
 #plot(hc,labels=dfT$rownames)
 plot(hc_WT1)
 
-save.image("WT1_200.rdata")
+save.image("WT1_150.rdata")

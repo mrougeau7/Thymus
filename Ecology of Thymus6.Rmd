@@ -1,5 +1,5 @@
 ---
-title: "Ecology of the Thymus"
+title: "The Cellular Ecology of the Mouse Thymus"
 author: "Mary Browning, John Wares, Andrew Park, Nancy Manley"
 date: '`r format(Sys.time(), "%d %B, %Y")`'
 output: pdf_document
@@ -17,7 +17,7 @@ The correct organization and abundance of cell types is important for optimal or
 ## Introduction
 >>>>>>> origin/master
 
-Within the field of organ biology, there is a distinct lack of quantitative methods for analyzing the organization, as opposed to the composition, of organs and tissues.  Healthy organ function requires more than the appropriate proportions of component parts; these parts must also be arranged in specific ways. Without quantitative methods for assessing organization, a significant aspect of organ and tissue biology is inaccessible to analysis. However, beyond essentially descriptive assays, we have few statistical tools available for interpreting organizational characteristics/patterns. In contrast, the fields of ecology and population genetics have a robust theoretical/mathematical tradition, with multiple quantitative tools available for describing the natural world. Fortunately, a striking comparison can be drawn between the interactions that occur within organ systems and those that occur within ecosystems.  For instance, cell types in an organ, like species in an ecosystem, are influenced by the availability of space and resources as well as by the presence or absence of other cell types. The presence or absence of one cell type may alter the functional role and dominance of another, or the overall service the community provides to the larger system [e.g., @wootton05].  By comparing cell types within a biological organ to species in an ecosystem, quantitative/statistical methods used by ecologists can be directly applied to biological systems. Our overall goal is the development of a cellular ecology, where we can model cellular relationships and patterns in an effort to better understand the "biogeography" of the organ we wish to study. We aim to develop quantitative tools, modeled after the ecological toolkit, to spatially and statistically characterize healthy biological tissues, which is something that has never been done.  The results from this analysis will enable informative comparisons with tissues in states of disequilibrium, including disease or developmental states, in order to identify any recurring organizational differences.   
+Within the field of organ biology, there is a distinct lack of quantitative methods for analyzing the organization, as opposed to the composition, of organs and tissues.  Healthy organs requires more than the appropriate proportions of component parts; these parts must also be arranged in specific ways in order to function properly. Without quantitative methods for assessing organization, a significant aspect of organ and tissue biology is inaccessible to analysis. However, beyond essentially descriptive assays, we have few statistical tools available for interpreting organizational characteristics/patterns. In contrast, the fields of ecology and population genetics have a robust mathematical tradition, with multiple quantitative tools available for describing the natural world. Fortunately, a striking comparison can be drawn between the interactions that occur within organ systems and those that occur within ecosystems.  For instance, cell types in an organ, like species in an ecosystem, are influenced by the availability of space and resources as well as by the presence or absence of other cell types. The presence or absence of one cell type may alter the functional role and dominance of another, or the overall service the community provides to the larger system [e.g., @wootton05].  By comparing cell types within a biological organ to species in an ecosystem, quantitative/statistical methods used by ecologists can be directly applied to biological systems. Our overall goal is the development of a cellular ecology, where we can model cellular relationships and patterns in an effort to better understand the "biogeography" of the organ we wish to study. We aim to develop quantitative tools, modeled after the ecological toolkit, to spatially and statistically characterize healthy biological tissues; this is something that has never been done.  The results from this analysis will enable further informative comparisons with tissues in states of disequilibrium, including disease or developmental states, in order to identify any recurring organizational differences.   
 
 ###John's Paragraph
 First, we aim to model a healthy adult organ. We will accomplish this by identifying cellular location and abundance.  We will then spatially and statistically characterize the organ by applying ecological theory (statistics commonly used in ecology) directly to the produced model (something that has never been done before). By analyzing the exact spatial location and co-location of component cell types across the domain of a particular tissue or organ, we may gain a better understanding of which interactions - indicated by codistribution and sufficient density - can be validated by independent approach and analysis.  To an extent, we recapitulate the spatial scales described above: we explore the differentiation of distinct habitats within the environment (biogeography: identifying regions of endemicity or dramatically shifted abundance), the colocalization of particular sub-groups of cells (community ecology), and we use the tenets of macroecology to the extent that we can generalize that cells need a particular density to be viable interactors, and to the extent that common cells have a larger overall distribution (this is not tautological, this follows from the first: you cannot be rare and widespread in a functional sense).  The co-distribution of constituent species in a community is often used to indicate interaction - whether competitive, trophic, or facilitative [@verberk11;@angel11].
@@ -129,9 +129,19 @@ setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Extra/Reprocessing_Mutan
 setwd("~/Thymus/Datasets/Data with 11 cell types/Mutant1") #Use this one for GitTower
 
 load("Mutant1.rdata")
-load("WT1.Rdata")
-load("WT2.Rdata")
+load("Mutant1_150.rdata")
+load("Mutant1_Rarefaction_150.rdata")
 load("Mutant2.Rdata")
+load("Mutant2_150.Rdata")
+load("Mutant2_Rarefaction_150.Rdata")
+load("WT1.Rdata")
+load("WT1_150.Rdata")
+load("WT1_Rarefaction_150.Rdata")
+load("WT2.Rdata")
+load("WT2_100.Rdata")
+load("WT2_150.Rdata")
+load("WT2_Rarefaction_150.Rdata")
+
 
 library(gplots)
 
@@ -559,7 +569,16 @@ save.image("Mutant1.rdata")
 ```
 
 ```{r, Connected Component labeling}
-my.mat = name of matrix
+#my.mat = name of matrix
+my.mat = v1.1_WT2
+my.mat_M1_S1 = v1.1_Mutant1
+my.mat_M1_S2 = v2.1_Mutant1
+my.mat_M1_S3 = v3.1_Mutant1
+my.mat_WT2 = v0.1_WT2
+my.mat_WT2_S1 = v1.1_WT2
+my.mat_WT2_S2 = v2.1_WT2
+my.mat_WT2_S3 = v3.1_WT2
+
 library(SDMTools)
 ccl.mat<-ConnCompLabel(my.mat)
 image(t(ccl.mat[10:1,]),col=c('grey',rainbow(length(unique(ccl.mat))-1)))
@@ -597,6 +616,7 @@ It is critical to understand how general observed patterns compare across indivi
 
 ##K means clustering reproduces previously identified regions and identifies cryptic information
 
+Is pattern similar throughout thymus/between thymuses
 
 K values of 3 to - were selected based on previously identified information. For K=2, the cortex and medullary regions were reproduced.  Increasing K to 3 resulted in subdividing of the medullary region. What is driving the clustering?  Dendritic cells found in CMJ? Removal of cell types? 
 

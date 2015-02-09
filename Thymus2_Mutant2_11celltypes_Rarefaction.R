@@ -1,7 +1,7 @@
 setwd("~/GitHub/Thymus/Datasets/Data with 11 cell types/Mutant2_R")
 setwd("~/Thymus/Datasets/Data with 11 cell types/Mutant2_R")  
 
-load("Mutant2_R_Rarefaction_150.rdata")
+load("Mutant2_Rarefaction_150.rdata")
 
 library(gplots)
 
@@ -263,10 +263,10 @@ for (j in 2:4){
   df_S1_Mutant2_R<-rbind(df_S1_Mutant2_R,tmp_S1_Mutant2_R)
 }
 
-df_S2_Mutant2_R<-result2_Mutant2_R[which(spe.kmeans_S1_Mutant2_R$cluster==1),] %>% colSums() %>% t()
+df_S2_Mutant2_R<-result2_Mutant2_R[which(spe.kmeans_S2_Mutant2_R$cluster==1),] %>% colSums() %>% t()
 for (j in 2:4){  
-  tmp_S2_Mutant2_R<-result2_Mutant2_R[which(spe.kmeans_S1_Mutant2_R$cluster==j),] %>% colSums() %>% t() 
-  df_S1_Mutant2_R<-rbind(df_S1_Mutant2_R,tmp_S1_Mutant2_R)
+  tmp_S2_Mutant2_R<-result2_Mutant2_R[which(spe.kmeans_S2_Mutant2_R$cluster==j),] %>% colSums() %>% t() 
+  df_S2_Mutant2_R<-rbind(df_S2_Mutant2_R,tmp_S2_Mutant2_R)
 }
 
 df_S3_Mutant2_R<-result3_Mutant2_R[which(spe.kmeans_S3_Mutant2_R$cluster==1),] %>% colSums() %>% t()
@@ -297,4 +297,4 @@ hc_Mutant2_R<-hclust(BrayCurtis_Mutant2_R)
 #plot(hc,labels=dfT$rownames)
 plot(hc_Mutant2_R)
 
-save.image("Mutant2_R_Rarefaction_150.rdata")
+save.image("Mutant2_Rarefaction_150.rdata")

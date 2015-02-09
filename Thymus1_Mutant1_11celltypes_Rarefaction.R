@@ -241,10 +241,10 @@ for (j in 2:4){
   df_S1_Mutant1_R<-rbind(df_S1_Mutant1_R,tmp_S1_Mutant1_R)
 }
 
-df_S2_Mutant1_R<-result2_Mutant1_R[which(spe.kmeans_S1_Mutant1_R$cluster==1),] %>% colSums() %>% t()
+df_S2_Mutant1_R<-result2_Mutant1_R[which(spe.kmeans_S2_Mutant1_R$cluster==1),] %>% colSums() %>% t()
 for (j in 2:4){  
-  tmp_S2_Mutant1_R<-result2_Mutant1_R[which(spe.kmeans_S1_Mutant1_R$cluster==j),] %>% colSums() %>% t() 
-  df_S1_Mutant1_R<-rbind(df_S1_Mutant1_R,tmp_S1_Mutant1_R)
+  tmp_S2_Mutant1_R<-result2_Mutant1_R[which(spe.kmeans_S2_Mutant1_R$cluster==j),] %>% colSums() %>% t() 
+  df_S2_Mutant1_R<-rbind(df_S2_Mutant1_R,tmp_S2_Mutant1_R)
 }
 
 df_S3_Mutant1_R<-result3_Mutant1_R[which(spe.kmeans_S3_Mutant1_R$cluster==1),] %>% colSums() %>% t()
