@@ -1,0 +1,601 @@
+---
+title: "The Cellular Ecology of the Mouse Thymus"
+author: "Mary Browning, John Wares, Andrew Park, Nancy Manley"
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+output: pdf_document
+bibliography: thymus.bib
+---
+
+<<<<<<< HEAD
+## Introduction2
+
+Abstract
+
+The correct organization and abundance of cell types is important for optimal organ performance, but no method currently exists for distinguishing organizational patterns. The ability to identify recurrent or cryptic cellular patterns could help us to better understand tissue function and to make comparisons with diseased tissues. Here, in an attempt to overcome this barrier, we have developed  novel molecular and computational analyses that allow us to study the organ of our choice, the thymus, in a statistical framework. First, we identify cell type abundance and location and use this information to recreate a virtual thymus section.  We then treat cell types like species in an ecosystem, thus enabling us to directly apply quantitative approaches used in ecology to our virtual section. We use K means clustering to computationally produce regions of the thymus a priori, followed by Bray Curtis Dissimilarity Index to determine the degree of dissimilarity between thymus samples and regions of the thymus. The output generated from these analyses can then be used to better understand spatial patterns/biogeography within a healthy functional thymus and will enable us to make informative comparisons of thymic tissues under different developmental, mutant, or disease conditions.
+
+=======
+## Introduction
+>>>>>>> origin/master
+
+Within the field of organ biology, there is a lack of quantitative methods for analyzing the organization, as opposed to the composition, of organs and tissues.  Healthy organs requires more than the appropriate proportions/compositions and amounts/ of component parts; these parts must also be arranged in specific ways in order to function properly. Without quantitative methods for assessing organization, a significant aspect of organ and tissue biology is inaccessible to analysis. However, beyond essentially descriptive assays, we have few statistical tools available for interpreting organizational characteristics/patterns. In contrast, the fields of ecology and population genetics have a robust mathematical tradition, with multiple quantitative tools available for describing the natural world. Fortunately, a striking comparison can be drawn between the interactions that occur within organ systems and those that occur within ecosystems.  For instance, cell types in an organ, like species in an ecosystem, are influenced by the availability of space and resources as well as by the presence or absence of other cell types. The presence or absence of one cell type may alter the functional role and dominance of another, or the overall service the community provides to the larger system [e.g., @wootton05]. Also, tissues are not typically composed with all cell types at equal abundance, which is similar to species in a community [1]; there are a few common "species", and many low abundance "species" that fit a normal distribution curve.  By comparing cell types within a biological organ to species in an ecosystem, statistical methods used by ecologists can be directly applied to biological systems. We seek to make this comparison in an effort to expand the quantitative tools/methods available to organ biologists through the use of a well characterized and respected field.  Our overall goal is the development of a cellular ecology, where we can model cellular relationships and patterns to better understand the "biogeography" of the organ we wish to study. We aim to develop novel quantitative tools, modeled after the ecological toolkit, to spatially and statistically characterize healthy biological tissues.  The results from this analysis will enable further informative comparisons with tissues in states of disequilibrium, including disease or developmental states, in order to identify any recurring organizational differences that can potentially lead to disfunction of the organ of interest.
+
+3. Krebs CJ (1998) Ecological Methodology, 2nd ed. Menlo Park, CA: Benjamin Cummings.
+
+###John's Paragraph
+First, we aim to model a healthy adult organ. We will accomplish this by identifying cellular location and abundance.  We will then spatially and statistically characterize the organ by applying statistical methods commonly used in ecology directly to the produced model. By analyzing the exact spatial location and co-location of component cell types across the domain of a particular tissue or organ, we may gain a better understanding of which interactions - indicated by codistribution and sufficient density - can be validated by independent approach and analysis.  To an extent, we recapitulate the spatial scales described above: we explore the differentiation of distinct habitats within the environment (biogeography: identifying regions of endemicity or dramatically shifted abundance), the colocalization of particular sub-groups of cells (community ecology), and we use the tenets of macroecology to the extent that we can generalize that cells need a particular density to be viable interactors, and to the extent that common cells have a larger overall distribution (this is not tautological, this follows from the first: you cannot be rare and widespread in a functional sense).  The co-distribution of constituent species in a community is often used to indicate interaction - whether competitive, trophic, or facilitative [@verberk11;@angel11].
+
+Specific structural aspects of organs with strong 3-D structures, such as the lung, kidney, and other organs that undergo branching morphogenesis, have been modeled with some success (@Hartmann07, @Miura08, @Oates12) 2-4 below). However, the cellular organization of other types of organs can be particularly difficult to assess quantitatively.  For example, endodermal glandular organs are often organized at the cellular level, with organizational structures that are visible only with the use of molecular or cellular markers; thus detecting differences in organ structure depends in part on having distinct markers for known functional cell subsets.  Examples of this type of organ include the liver, pancreas, and thymus, all of which are of high clinical importance.  Developing a quantitative approach to assessing the structure and function of these organs is thus of direct biomedical relevance.  We performed our analysis on our model organ, the thymus.  The thymus was chosen because it is an excellent example of cellular level organization, with a strong connection between organization and function.  The thymus consists of developing T cells supported by a complex cellular environment containing a variety of resident cell types, including thymic epithelial cells (TECs), dendritic cells, vasculature, and mesenchymal cells.  These cell types comprise multiple microenvironments that direct and support thymocytes to develop from immature progenitors into mature T cells that are both self-tolerant and self-restricted.  T cell development in the thymus requires interactions with the thymic microenvironments that provide signals for their survival, proliferation, and differentiation (@Manley12).  Despite their critical role in the generation of cellular immunity and the clinical importance of thymic regeneration, the composition and organization of thymic microenvironments and the mechanisms that promote their proper development and function are not fully understood, in part due to a lack of technical and theoretical approaches for quantifying tissue-level properties.  Thus, the thymus has many characteristics that make it an excellent system for developing and testing quantitative modeling: a diverse cellular composition that can be identified with cell type-specific markers, regional organization that is required for maximal organ function,  genetic models with diverse effects on organ composition and function, assays for experimentally inducing organ degeneration and regeneration, and high biomedical relevance. To date, there are no statistical models/maps of thymus organ structure and function and no established methods for generating one.  We seek to develop a model of the organization of cell types that can be used to better understand thymic function as well as evaluate states of disequilibrium. The data obtained in this analysis will provide both a valuable resource for understanding the structure of a normal thymus, and a scientific framework and accessible tools for the analysis of mutant phenotypes in this project and in the field of organ biology. The new computational/statistical/mathematical approaches that we will defive from these studies will also provide novel methods for assessing tissue organization in other organs, tissues, and disease states.
+
+5. Manley NR, Richie ER, Blackburn CC, Condie BG, Sage J (2012) Structure and function of the thymic
+microenvironment. Front Biosci 17: 2461-2477.
+
+The first step of our analysis was to determine whether there are consistent patterns of organization throughout a single thymus as well as between different thymii. If they are, then we will be able to develop a baseline model of the thymus that will be comparable between different samples.  We must keep in mind that samples, both within and between individuals, will not be identical but could instead be very similar.  Next, we want to use a mutant to see if we can determine if organization is similar (quantify if and to what extent mutants are significantly less structured than WT.) 
+ 
+ Cell Types Used in Analysis
+ SHOULD I INCLUDE PARAFFIN ANTIBODIES?
+ ----------- ---------- -------------------------
+  CELL TYPE    MARKER
+  
+  cTEC       CD205     
+
+  mTEC       UEA1, Claudin3
+             Claudin4, K14
+             K5, Claudin5 
+              
+  Blood vessel Claudin5, CD31 
+  
+  Mesenchyme  PDGFRb
+  
+  Dendritic  CD11c
+  
+  Tcells     Foxp3, CD25  
+                                       
+----------- ---------- -------------------------
+ 
+### Hypotheses
+
+I predict that the distribution and abundance of cell types is sufficient for automated clustering of thymic regions.  The organization of a wild-type, mature thymus will either organize into more discrete regions than a mutant thymus, or the regionalization will be more variable and less discrete.
+Next, we will examine cellular absence/presence with respect to other cell types to see if any patterns emerge
+By using a well characterized dissimilarity index (Bray Curtis Dissimilarity Index), we will determine the degree of similarity between different regions and subregions.
+We will apply the above approaches to a mutant thymus in order to see if orgazinational differences can be detected.
+
+ 
+## Methods
+
+### Terminology
+----------- ---------- -------------------------
+  quadrat    spatial     sampled unit within
+                          domain; cell types in
+                          quadrats used to find
+                          regions of similar
+                          composition
+
+  transect    spatial     linear array of 
+                          sampled units 
+                          (quadrats), may be
+                          comprehensively or
+                          randomly sampled
+                          
+  layer      tissue       actual tissue sample
+                          used to assay 
+                          single-cell thickness
+                          composition
+                          
+  section               10 micron thick tissue sample
+  
+  virtual section       3 sections collapsed into 1 section
+  
+  virtual slice         3 virtual sections collapsed into 1 section
+----------- ---------- -------------------------
+
+### System and Data Collection
+
+#### Mice
+C57BL/6 male mice (N=4) at 5-6 weeks of age were purchased from Jackson Laboratories (Bar Harbor, Maine). Aire knockout (N=2) and WT male (N=2) mice at 5-6 weeks of age were obtained from Dr. Mark Anderson's lab at the University of California, San Francisco.
+
+#### Tissue Preparation
+
+Intact thymuses from the Anderson lab were removed and the right and left lobes were separated, placed in OCT compound, and immediately frozen before being shipped to the Manley lab. Mice thymii from Jackson Laboratories were dissected and frozen in the Manley lab.
+
+#### Antibodies
+
+Primary antibodies used in this work include the biotinylated hamster CD11c (Cat#, 1:200), rabbit Claudin 3 (Cat#:  , 1:200), rabbit Claudin 4 (Cat#: , 1:200), supernatant hamster CD31 (Cat#, 1:50), rat CD25 (Cat#: , 1:50), biotinylated UEA1 (Cat#: , 1:200), conjugated mouse Claudin5 (Cat#: , 1:200), rabbit Keratin5 (Cat#, 1:200), biotin rat Foxp3 (Cat#, 1:50), goat Keratin14 (Cat#, 1:200), goat PDGFRb (Cat#, 1:200), and rat CD205 (Cat#, 1:200). 
+Secondary antibodies were purchased from Invitrogen.
+ 
+#### Frozen Sample Preparation
+The entire left lobe was cut into 10-micron serial sagittal sections using a Leica CM3050 S cryostat. Sections were collected on glass slides and assigned a number corresponding to their location.  The middle third of these slides were selected for IHC.  Of these middle third, 9 sections from each sample that passed quality control standards were used for IHC.  These sections were fixed in -20 degree C acetone for 20 seconds immediately prior to application of blocking solution (10% donkey serum/PBS) for 30 minutes at room temperature.
+
+#### IHC
+Primary antibodies were mixed in PBS and slides were covered with the antibody solution and incubated/stored overnight at 4C.  The slides were rinsed with PBS 2x5 minutes and the secondary antibodies were mixed in PBS (1:800) and applied to the slides for 30 minutes.  Slides were rinsed with PBS 2x5 minutes, mounted in FluorGel (EMS) and coverslipped.   Marker combinations were determined by availability,  biological and technical considerations such as anticipated abundance, distribution of cell types, and reagent compatibility (antibody species of origin). 
+
+#### Microscopy, PTGui, and CellProfiler
+Multiple sections from each sample were used in the analysis (9 sections from each sample from the Anderson Lab; 8 sections from WT2, 6 from WT1).  The sections were assessed by specific quality control criteria such as lack of section flaws, clarity of image collection, and signal to noise ratio. Sections that passed the QC measures  were imaged at 20x as tiled, overlapping quadrats on the Zeiss  microscope and reconstructed using PTGui.  The image produced was optimized in Adobe Photoshop to reduce background and increase signal intensity so that cell counts could be taken as quickly and accurately as possible in CellProfiler.  The reconstructed image from PTGui was too large to work in CellProfiler, so the size of the image was decreased by taking the image width and dividing by 4. CellProfiler was chosen because it has the capability to quickly and accurately identify cells and output locations (x and y coordinates) in an excel file.  Results from the cell counts were  manually checked for accuracy and input into R for the spatial analysis.  Cell counts from serial sagittal sections stained with different marker combinations were collapsed into a single virtual section.  Our experimental appraoch is essentially 2-D.  Although the 3-D nature of the stromal network is an important aspect of its functionality [cite], a 2-D picture will provide an informative, if not complete view of the thymus.  After all, the qualitative assays currently used are all viewed in 2D sections and are the basis of our current views of thymus organization and function.   
+
+####Spatial Analysis with R 
+Files containing the X and Y coordinates from CellProfiler were uploaded into R and reformatted (hist2D) into a community matrix.  The K-means function in R's stats package was used to cluster the data according to cell type, abundance, and location. The  Bray-Curtis function in the Vegan package was used to calculate the Bray-Curtis dissimilarity index for the different regions produced from K-means clustering.  
+
+```{r use a shell type command to read in any *.txt, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'}
+
+setwd("~/GitHub/Thymus/Workspace") ###Set the working directory to Workspace
+
+load("Mutant1.rdata")
+load("Mutant1_150.rdata")
+load("Mutant1_Rarefaction_150.rdata")
+load("Mutant2.Rdata")
+load("Mutant2_150.Rdata")
+load("Mutant2_Rarefaction_150.Rdata")
+load("WT1.Rdata")
+load("WT1_150.Rdata")
+load("WT1_Rarefaction_150.Rdata")
+load("WT2.Rdata")
+load("WT2_100.Rdata")
+load("WT2_150.Rdata")
+load("WT2_Rarefaction_150.Rdata")
+
+library(gplots)
+
+msz=200  #matrix size in hist2d
+cluster=4  #number of clusters produced for K means
+txtfiles=list.files(pattern="*.txt")  #loads in order all files within folder
+
+mat<-matrix(data=NA,nrow=40000,ncol=33) #this will change with size of matrix and # of sections/cell types
+
+toFill<-as.data.frame(mat)  #changes to data frame
+
+toUse0<-seq(1,33,1) #uses all 33 columns
+toUse1<-seq(1,33,3) #uses columns that correspond to Section1
+toUse2<-seq(2,33,3) #Section2
+toUse3<-seq(3,33,3) #Section3
+
+for(i in toUse0){
+  tmp = read.table(txtfiles[i], sep="\t", head=T)
+  X=tmp[[1]]  #[,1]
+  Y=tmp[[2]]
+  my.xy<-hist2d(X,Y,nbins=c(msz,msz))
+  obj <- my.xy$counts
+  
+  obj[1,1] = obj[1,1]-1
+  obj[200,1] = obj[200,1]-1
+  obj[1,200] = obj[1,200]-1
+  obj[200,200]=obj[200,200]-1
+  
+  count<- as.vector(obj)
+  toFill[,i]<-count
+    
+    }
+
+for(i in toUse1){
+  tmp = read.table(txtfiles[i], sep="\t", head=T)
+  X=tmp[[1]]  #[,1]
+  Y=tmp[[2]]
+  my.xy<-hist2d(X,Y,nbins=c(msz,msz))
+  obj <- my.xy$counts
+  
+  obj[1,1] = obj[1,1]-1
+  obj[200,1] = obj[200,1]-1
+  obj[1,200] = obj[1,200]-1
+  obj[200,200]=obj[200,200]-1
+  
+  count<- as.vector(obj)
+  toFill[,i]<-count
+    
+    }
+
+for(i in toUse2){
+  tmp = read.table(txtfiles[i], sep="\t", head=T)
+  X=tmp[[1]]  #[,1]
+  Y=tmp[[2]]
+  my.xy<-hist2d(X,Y,nbins=c(msz,msz))
+  obj <- my.xy$counts
+  
+  obj[1,1] = obj[1,1]-1
+  obj[200,1] = obj[200,1]-1
+  obj[1,200] = obj[1,200]-1
+  obj[200,200]=obj[200,200]-1
+  
+  count<- as.vector(obj)
+  toFill[,i]<-count
+    
+    }
+
+for(i in toUse3){
+  tmp = read.table(txtfiles[i], sep="\t", head=T)
+  X=tmp[[1]]  #[,1]
+  Y=tmp[[2]]
+  my.xy<-hist2d(X,Y,nbins=c(msz,msz))
+  obj <- my.xy$counts
+  
+  obj[1,1] = obj[1,1]-1
+  obj[200,1] = obj[200,1]-1
+  obj[1,200] = obj[1,200]-1
+  obj[200,200]=obj[200,200]-1
+  
+  count<- as.vector(obj)
+  toFill[,i]<-count
+    
+    }
+
+result0<-toFill[,toUse0]
+result1<-toFill[,toUse1]
+result2<-toFill[,toUse2]
+result3<-toFill[,toUse3]
+
+#print(results)
+
+```
+### Identification of Scale
+
+As thymic epithelial cells vary in size from X to X', we considered the problem of how to generate sampled regions (quadrats) that contained sufficient information about the local community of cells that these regions could be classified. In other words, we need to have lots of data in each quadrat to have statistical power for clustering; we need lots of quadrats to improve the spatial resolution. Identifying the best scale is done how?
+
+5. Quadrat Selection and Rarefaction: you need to explain how you did this, and the next chunk can include the code you used to achieve this. That way, our results can include one plot and a brief discussion about the selection of that size quadrat and what it means for inclusion of cell types in a given quadrat
+
+``````{r WT1-rarefaction, echo=FALSE, warning=FALSE, message=FALSE, results='hide',fig.show='hide'}
+
+####Must use total cell types. I take the community matrix and save it as a table. I open the table in Excel, use the If Then function to account for if a cell type is present. I then reformat it into a matrix, remove the space outside the section (if bin contains 0), save it as a txt file and then use the code below. 
+
+mat <-read.table("Totalcounts200_Thymus1_2.txt", head=T, sep="\t")
+
+# an example 10x10 matrix
+#mat <- matrix(1:200, 10)
+nc <- ncol(mat) # number of columns
+nr <- nrow(mat) # number of rows
+
+size <- 5 # size of the subset matrix
+nmat <- 8 # number of submatrices
+
+# sample indices of submatrices
+#set.seed(1)
+idxc <- sample(seq(2, nc - size), size = nmat, replace = TRUE)
+idxr <- sample(seq(2, nr - size), size = nmat, replace = TRUE)
+
+# create a list of 8 submatrices
+res <- mapply(function(x, y) mat[seq(x, x + size - 1), seq(y, y + size - 1)],
+              idxr, idxc, SIMPLIFY = FALSE)
+
+# calculate the average cell values
+mean(unlist(res))
+
+####I run this multiple times and take the average of that.
+
+```
+
+```{r clustering, cache=TRUE, echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+library (vegan)
+library(labdsv)
+
+# This step normalizes your data and is optional.
+#spe.std <- decostand(spe, "normalize")  #You can also use "standardize". See 'help' for details.
+
+# Do the k-means clustering [read 'help' for the 'kmeans' function to see what the arguments "centers" (clusters or k) and "nstart" (randomizations) mean].
+
+spe.kmeans_Mutant1_All <- kmeans(result0, centers=cluster, nstart=1000)
+spe.kmeans_Mutant1_S1 <- kmeans(result1, centers=cluster, nstart=1000)
+spe.kmeans_Mutant1_S2 <- kmeans(result2, centers=cluster, nstart=1000)
+spe.kmeans_Mutant1_S3 <- kmeans(result3, centers=cluster, nstart=1000)
+
+```
+
+```{r assigning clusters}
+
+library(gplots) ###Call 1 set at a time; produces image of section
+
+v0_Mutant1 = spe.kmeans_Mutant1_All$cluster
+v1_Mutant1 = spe.kmeans_Mutant1_S1$cluster 
+v2_Mutant1 = spe.kmeans_Mutant1_S2$cluster
+v3_Mutant1 = spe.kmeans_Mutant1_S3$cluster
+
+v0.1_Mutant1=matrix(v0_Mutant1,nrow=200,ncol=200)
+v1.1_Mutant1=matrix(v1_Mutant1,nrow=200,ncol=200)
+v2.1_Mutant1=matrix(v2_Mutant1,nrow=200,ncol=200)
+v3.1_Mutant1=matrix(v3_Mutant1,nrow=200,ncol=200)
+
+heatmap.2( v0.1_Mutant1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v0.1_Mutant1,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
+
+heatmap.2( v1.1_Mutant1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v1.1_Mutant1,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
+
+heatmap.2( v2.1_Mutant1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2.1_Mutant1,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
+
+heatmap.2( v3.1_Mutant1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v3.1_Mutant1,
+           notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
+           margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
+
+#change the colors to reflect the number of clusters.  Can also reorder so colors are consistent between sections.
+
+```
+
+```{r cluster subplots, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans_Mutant1_All$cluster)){ 
+  barplot(colSums(result0[which(spe.kmeans_Mutant1_All$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans_Mutant1_S1$cluster)){ 
+  barplot(colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans_Mutant1_S2$cluster)){ 
+  barplot(colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+my.order<-c(1,2,3,4) # define the order we want to plot panels
+par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
+for (i in 1:max(spe.kmeans_Mutant1_S3$cluster)){ 
+  barplot(colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==i),]),main=i,ylim=c(0,12000)) 
+  # we pick out desired cluster and plot
+}
+
+```
+
+Looking at cellular relationships between clusters
+We can make a running sum of all the counts of all cell types by cluster
+
+```{r counts, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
+b1<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==1),])
+b2<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==2),])
+b3<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==3),])
+b4<-colSums(result0[which(spe.kmeans_Mutant1_All$cluster==4),])
+
+b1_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==1),])
+b2_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==2),])
+b3_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==3),])
+b4_S1<-colSums(result1[which(spe.kmeans_Mutant1_S1$cluster==4),])
+
+b1_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==1),])
+b2_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==2),])
+b3_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==3),])
+b4_S2<-colSums(result2[which(spe.kmeans_Mutant1_S2$cluster==4),])
+
+b1_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==1),])
+b2_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==2),])
+b3_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==3),])
+b4_S3<-colSums(result3[which(spe.kmeans_Mutant1_S3$cluster==4),])
+
+###and normalize these so that each cluster type has the same total amount of cells (in other words, we're ###getting the proportion of cell types in each cluster)
+
+###```{r normalize, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
+b1<-b1/sum(b1)
+b2<-b2/sum(b2)
+b3<-b3/sum(b3)
+b4<-b4/sum(b4)
+
+b1_S1<-b1/sum(b1_S1)
+b2_S1<-b2/sum(b2_S1)
+b3_S1<-b3/sum(b3_S1)
+b4_S1<-b4/sum(b4_S1)
+
+b1_S2<-b1/sum(b1_S2)
+b2_S2<-b2/sum(b2_S2)
+b3_S2<-b3/sum(b3_S2)
+b4_S2<-b4/sum(b4_S2)
+
+b1_S3<-b1/sum(b1_S3)
+b2_S3<-b2/sum(b2_S3)
+b3_S3<-b3/sum(b3_S3)
+b4_S3<-b4/sum(b4_S3)
+
+#We can look at the difference between pairs of clusters to see which cell types are most different between #clusters
+
+par(mfrow=c(3,2))  ##All
+barplot(b1-b2,main="1-2")
+barplot(b1-b3,main="1-3")
+barplot(b1-b4,main="1-4")
+barplot(b2-b3,main="2-3")
+barplot(b2-b4,main="2-4")
+barplot(b3-b4,main="3-4")
+
+par(mfrow=c(3,2))  ##All
+barplot(b1_S1-b2_S1,main="1-2")
+barplot(b1_S1-b3_S1,main="1-3")
+barplot(b1_S1-b4_S1,main="1-4")
+barplot(b2_S1-b3_S1,main="2-3")
+barplot(b2_S1-b4_S1,main="2-4")
+barplot(b3_S1-b4_S1,main="3-4")
+
+par(mfrow=c(3,2))  ##All
+barplot(b1_S2-b2_S2,main="1-2")
+barplot(b1_S2-b3_S2,main="1-3")
+barplot(b1_S2-b4_S2,main="1-4")
+barplot(b2_S2-b3_S2,main="2-3")
+barplot(b2_S2-b4_S2,main="2-4")
+barplot(b3_S2-b4_S2,main="3-4")
+
+par(mfrow=c(3,2))  ##All
+barplot(b1_S3-b2_S3,main="1-2")
+barplot(b1_S3-b3_S3,main="1-3")
+barplot(b1_S3-b4_S3,main="1-4")
+barplot(b2_S3-b3_S3,main="2-3")
+barplot(b2_S3-b4_S3,main="2-4")
+barplot(b3_S3-b4_S3,main="3-4")
+
+The way to read the last plots is for something like "2-3", positive bars mean that cell type is more common in cluster 2 (than 3); negative bars mean the opposite. The higher the absolute number on the y-axis, the greater the difference is in that cell count between the two clusters. I think (as John suggested), that we can move ahead and be more formal with this analysis (e.g. Bray Curtis dissimilarity), but this is a useful first step.
+```
+
+## Bray Curtis
+
+```{r braycurtis, message=FALSE, comment="", echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+library(vegan) 
+library(dplyr) # used for chaining and manipulation  
+# http://blog.rstudio.org/2014/01/17/introducing-dplyr/
+#reads as: take only cluster 1 data from 'spe', then take column sums (i.e. total cell type count) 
+#then transpose (swap rows/cols needed for bray curtis calc)
+
+df<-result0[which(spe.kmeans_Mutant1_All$cluster==1),] %>% colSums() %>% t()   # example of chaining. 
+for (j in 2:4){  
+  tmp<-result0[which(spe.kmeans_Mutant1_All$cluster==j),] %>% colSums() %>% t() 
+  df<-rbind(df,tmp)
+}
+
+df_S1<-result1[which(spe.kmeans_Mutant1_S1$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp_S1<-result1[which(spe.kmeans_Mutant1_S1$cluster==j),] %>% colSums() %>% t() 
+  df_S1<-rbind(df_S1,tmp_S1)
+}
+
+df_S2<-result2[which(spe.kmeans_Mutant1_S2$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp_S2<-result2[which(spe.kmeans_Mutant1_S2$cluster==j),] %>% colSums() %>% t() 
+  df_S2<-rbind(df_S2,tmp_S2)
+}
+
+df_S3<-result3[which(spe.kmeans_Mutant1_S3$cluster==1),] %>% colSums() %>% t()
+for (j in 2:4){  
+  tmp_S3<-result3[which(spe.kmeans_Mutant1_S3$cluster==j),] %>% colSums() %>% t() 
+  df_S3<-rbind(df_S3,tmp_S3)
+}
+
+#df<-apply(df,2,as.integer) %>% as.data.frame()
+#df_S1<-apply(df_S1,2,as.integer) %>% as.data.frame()
+#df_S2<-apply(df_S2,2,as.integer) %>% as.data.frame()
+#df_S3<-apply(df_S3,2,as.integer) %>% as.data.frame()
+```
+
+```{r dendrogram}
+#need same number of columns to bind them.
+#colnames(df2)<-colnames(df)
+colnames(df_S2)=colnames(df_S1)
+colnames(df_S3)<-colnames(df_S1)
+
+###This is where I import the other files.  Upload the other workspaces. I don't think I will be able to compare the sections with ALL
+
+#dfTOTAL=rbind(df_S1,df_S2,df_S3)
+
+dfTOTAL<-rbind(df_S1_WT1,df_S2_WT1, df_S3_WT1, df_S1_WT2, df_S2_WT2, df_S3_WT2, df_S1_Mutant1,
+df_S2_Mutant1, df_S3_Mutant1, df_S1_Mutant2, df_S2_Mutant2, df_S3_Mutant2)
+
+dfTOTAL_R<-rbind(df_S1_WT1_R,df_S2_WT1_R, df_S3_WT1_R, df_S1_WT2_R, df_S2_WT2_R, df_S3_WT2_R, df_S1_Mutant1_R,
+df_S2_Mutant1_R, df_S3_Mutant1_R, df_S1_Mutant2_R, df_S2_Mutant2_R, df_S3_Mutant2_R)
+
+
+BrayCurtis<-vegdist(dfTOTAL,method="bray")
+hc<-hclust(BrayCurtis)
+plot(hc)
+
+#save.image("Mutant1.rdata")
+```
+
+```{r, Connected Component labeling}
+#my.mat = name of matrix
+my.mat = v1.1_WT2
+my.mat_M1_S1 = v1.1_Mutant1
+my.mat_M1_S2 = v2.1_Mutant1
+my.mat_M1_S3 = v3.1_Mutant1
+my.mat_WT2 = v0.1_WT2
+my.mat_WT2_S1 = v1.1_WT2
+my.mat_WT2_S2 = v2.1_WT2
+my.mat_WT2_S3 = v3.1_WT2
+
+library(SDMTools)
+ccl.mat<-ConnCompLabel(my.mat)
+image(t(ccl.mat[10:1,]),col=c('grey',rainbow(length(unique(ccl.mat))-1)))
+max(ccl.mat) #how many clusters
+table(ccl.mat) #size distribution
+
+my.cents<-NULL    #calculate cluster centriods
+for (j in 1:max(ccl.mat)){
+  tmp<-(which(ccl.mat==j,arr.ind=T))
+  my.cents<-rbind(my.cents,colMeans(tmp))
+}
+my.cents
+
+library(raster)  #how far apart centroids are from each other
+dist.cents<-pointDistance(my.cents,my.cents,lonlat=F,allpairs=T)
+dist.cents
+
+mean(dist.cents[which(dist.cents>0)]) #avg distance to other clusters
+
+```
+
+7. also Andrew Sornborger's approach for separating out the geometry/geography of clusters., and/or using connected component labeling to identify size, centroid, distance of centroids among clusters
+
+8. jackknifing : removing one cell type at a time
+
+# Results
+
+##K means clustering reproduces previously identified regions and identifies cryptic information
+
+Dendritic cells found in CMJ? Removal of cell types? Cite paper that agrees if true.
+
+We used the K means clustering algorithm to identify geographical clusters of cell types based on compositional similarities and abundance. We used a range of K values to compare to previously identified regions of the thymus and to identify cryptic organization. K=3 reproduced the cortical and medullary regions.  K=4 results in clusters forming throughout the cortex and medulla.  Increasing K further results in clusters forming throughout both the cortex and medulla. We focused on K=4 because we were interested in the formation of 2 clusters (subdivision) in the medullary region.
+
+We produced 2 sets of graphs in an effort to determine what cell types were driving the clustering.  The first looked at the amount of cells per cell type in each cluster. The second compared the proportions of cells across clusters. Compared to mutant.    
+
+##Bray Curtis Identifies Degree of Similarity
+
+Bray Curtis values ranged from BLAH to BLAH.  Talk about which samples, regions, subregions were most similar, which sections, did mutants group together? etc.
+
+ Using BC to validate how different clusters are, importance of composite versus individual layers.
+ 
+ Compare to ecosystem so that non-organ biologists have something to relate value to.
+
+##Connected Component Labeling
+
+How do the mutant and WT differ orgazationally? Can we prove they are different statistically? Want to quantify extent to which mutants are significantly less structured than wild-type. connected component labeling-distributional interactions
+
+ Michael B. Dillencourt and Hannan Samet and Markku Tamminen (1992). "A general approach to connected-component labeling for arbitrary image representations". J. ACM.
+ 
+# Discussion
+Is pattern similar throughout thymus/between thymuses; can we recreate previously identified information?It is critical to understand how general observed patterns compare across individuals of the same age and genotype. 
+
+Our approach is designed to take advantage of the cellular complexity of the thymus to provide a sensitive statistical method to measure changes in organ state. We use immunostaining on sagittal serial sections of a wildtype mouse thymus in order to identify distinct cellular subsets, followed by the use of novel computational approaches in order to quantitatively identify known and cryptic cellular spatial relationships. These methods are designed to replace the largely descriptive histological and IHC-based analysis currently available in the field, and to provide a more accurate and unbiased view of thymus biogeography.  First, we used the K means clustering algorithm to identify geographical clusters of cell types based on compositional similarities, position, and abundance. This approach has previously been successful in delineating distinct cell sub-population in tissue samples (@Veronika09,@Cataldo09). K means clustering allows us to test the structure of thymus in a statistical framework that can provide unambiguous support for the number of compositionally distinct thymic regions which we can then compare to previously identified regions of the thymus. We then used a range of K values to identify potentially cryptic organization. Our goal is not only to identify whether groups of 2 or more cell types have similar relative distributions (between regions or within the same regions), but also to quantify the extent to which mutants or diseased thymuses are significantly less structured than wild-type. This clustering algorithm generates a posterior probability that any subsample (quadrat) belongs to each of the k different groups, while maximizing the ratio of compositional differences between groups to compositional variation within groups.  The k groups produced are presumably functionally distinct, and a key hypothesis we will test is whether Kmutant is significantly less than kwildtype for each comparison. Identifying the aggregation characteristics of particular cell types or groups of cell types will allow us to quantify and validate results from the predictive models of thymus "cellular ecology" as described above.  
+
+7. Cataldo S, Ficarra E, Macii E (2009) Automated Discrimination of Pathological Regions in Tissue Images:
+Unsupervised Clustering vs. Supervised SVM Classification. In: Fred A, Filipe J, Gamboa H, editors.
+Biomedical Engineering Systems and Technologies: Springer Berlin Heidelberg. pp. 344-356.)
+
+
+In ecology, the identity and relative abundance of species can be compared across communities using various dissimilarity indicies (@Magurran04) The Bray Curtis Dissimilarity Index in particular is a well characterized statistical method used to quantify the compositional dissimilarity between two sites, based on counts at each site (@Bray57). We applied Bray Curtis to our samples to determine the degree of dissimilarity between clusters produced from K means clustering based on cell count. Bray Curtis was also used to make comparisons between different thymic samples and subsamples, and the amount of distinctiveness can also be compared to ecosystems/natural systems/ecological communities and subregions.
+
+(10. Magurran AE (2004) Measuring Biological Diversity. Malden, MA: Blackwell Publishing.)
+ [ Bray, J. R. and J. T. Curtis. 1957. An ordination of upland forest communities of southern Wisconsin. Ecological Monographs 27:325-349.]
+
+We take this approach one step further by applying the same approaches described above to a mutant mouse thymus in order to determine if there are any detectable organizational differences compared to the wildtype. We selected the Aire knockout Mouse (@Anderson02) for several reasons.  First, the Aire knockout is well characterized: DESCRIBE PHENOTYPE HERE?? there is debate as to whether mutant mice double in mTEC number (particularly with respect to K14) [@Gillard07].  There is also debate as to whether dendritic cell organization and number is altered [@Yano08,@Lei11]. From an ecological standpoint, we are interested in determining the degree to which Aire plays a role in maintaining proper organization of the thymus. Although we know Aire is functionally important, does it act as a Keystone species? Will the removal of Aire affect stromal of lymphocyte organization, Or will there be no discernable organizational differences? We used an well characterized mutant with specific effects on individual cell populations to test the effect on thymus organization. Null mutations in the Aire gene, which marks a specific subpopulation of mTECs, cause defective negative selection and multi-organ autoimmunity.  Analyses of TEC phenotypes have been performed, and there are reports that Aire mutants have defects in mTEC composition and organization (cite).  A recent report has also shown displaced dendritic cells in Aire mutant thymus (cite). These results have functional consequences for different models of Aire function as either a regulator of tissue-restricted antigens in the thymus or as a key modulator of mTEC differentiation and mechanistic implications for autoimmunity in these mice.  All of these reports point to the need for more robust quantitative methods to evaluate cellular organization.  The parallel in ecology is removal of a species from a community, which can lead to two distinct outcomes: the relative species abundance may not be affected if species are independently utilizing available resources, or the rand abundance of species may change dramatically, suggesting strong interactions depending on missing components [CITE].  This type of species is known as a keystone species, and its availability has strong implications on the survival and function of community it belongs to.
+
+
+To an extent, as K goes up it may be that spatial weighting is important, but we choose to avoid the problems that weighting brings up; it may also be possible that some of the areas defined as K approaches 10+ are legitimate microenvironments and this will be addressed in a later paper.
+
+1. I can generate a map of the thymus that supports previous discussion of the geography of the thymus, but it is automatic and dependent on objective criteria of sorting the functional cell types in a spatially explicit way.
+2. We believe we have identified subregions in the medulla. This is cool.
+3. Though our replication is minimal, we can say that there is/is not quantifiable distinction between the spatial organization of WT and Aire- mice. This has been debated in the literature and we resolve it.
+4. There is much more we can do with this approach. 
+5. Ecologically, it is unusual to have the problem of such complete sampling of an ecosystem. Our approach to sampling this has strengths and concerns, generally associated with K-means clustering which has its subjective/ambiguous problems but is the best we can do!
+
+
+Why this approach is novel 
+Coolest thing we found, how to explain it
+If we did not find a big shift in organization between treatment, it is probably because what was turned off in mutant was not a 'foundational species' in this system (see http://bioscience.oxfordjournals.org/content/61/10/782.full ) as such is a minor perturbation for organization of system, even if ecosystem service ie functionality of thymus is affected. We have to separate these effects after all! It is also important to note that the cell types are not independent arrivals in the thymic ecosystem. As a developmental process, the analogy is not complete: this would be like a coral reef developing with functionally distinct polyps spatially arranged to improve net fitness (i.e. reproductive capacity); this of course does happen in certain colonial species (hydrozoans for example) and as such this may generate its own numerical/mathematical patterns distinct from the standards of community ecology (e.g. species-area hypothesis).
+Second coolest thing
+Concern we would like to address
+
+Next step for application of this approach - also bigger picture stuff.
+Comparison - a manipulated salt marsh ecosystem and how B-C was used to compare treatment and sites
+http://www.mass.gov/eea/docs/czm/habitat/wetlands/cape-cod-report-v2.pdf
+another
+http://books.google.com/books?id=Kpi9TjDQO8QC&pg=PA28&lpg=PA28&dq=bray-curtis+salt+marsh&source=bl&ots=iiISZsY9Jf&sig=YGSLp0cG06oKxB1Ung56AS2EQgw&hl=en&sa=X&ei=M44yVP-_CYylyASMioLgCQ&ved=0CDgQ6AEwAw#v=onepage&q=bray-curtis%20salt%20marsh&f=false
+useful comparison because of similar taxonomic diveristy (?)
+http://www.scielo.br/scielo.php?pid=S1516-89132009000600013&script=sci_arttext
+
+http://www.researchgate.net/publication/259146839_Dissimilarity_in_plant_species_diversity_between_salt_marsh_and_neighboring_environments_decreases_as_environmental_harshness_increases
+
+http://www.tandfonline.com/doi/full/10.1080/19425120.2014.893467#.VDKQQkuoVss
+there are many more. we can learn from the methods..
+
+# Literature Cited
+
+assume we have vector (e.g. 20000 pixels, numbered)
+
+
+# Future Directions
