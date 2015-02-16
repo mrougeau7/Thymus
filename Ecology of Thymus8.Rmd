@@ -490,48 +490,178 @@ plot(hc)
 ```
 
 ```{r, Connected Component labeling}
-#my.mat = name of matrix
+## Procedures
+
+#Load in relevant data
+
+
+load("WT1_150.rdata")
 my.mat = v1.1_WT1
+my.mat = v2.1_WT1
+my.mat = v3.1_WT1
 
-my.mat_M1 = v0.1_Mutant1
-my.mat_M1_S1 = v1.1_Mutant1
-my.mat_M1_S2 = v2.1_Mutant1
-my.mat_M1_S3 = v3.1_Mutant1
+load("WT2_150.rdata")
+my.mat = v1.1_WT2
+my.mat = v2.1_WT2
+my.mat = v3.1_WT2
+  
+load("Mutant1_150.rdata")
+my.mat = v1.1_Mutant1
+my.mat = v2.1_Mutant1
+my.mat = v3.1_Mutant1
 
-my.mat_M2 = v0.1_Mutant2
-my.mat_M2_S1 = v1.1_Mutant2
-my.mat_M2_S2 = v2.1_Mutant2
-my.mat_M2_S3 = v3.1_Mutant2
+load("Mutant2_150.rdata")
+my.mat = v1.1_Mutant2
+my.mat = v2.1_Mutant2
+my.mat = v3.1_Mutant2
 
-my.mat_WT1 = v0.1_WT1
-my.mat_WT1_S1 = v1.1_WT1
-my.mat_WT1_S2 = v2.1_WT1
-my.mat_WT1_S3 = v3.1_WT1
 
-my.mat_WT2 = v0.1_WT2
-my.mat_WT2_S1 = v1.1_WT2
-my.mat_WT2_S2 = v2.1_WT2
-my.mat_WT2_S3 = v3.1_WT2
+#Suggested notation (I realize this is a bit awkward - but let's start with this and revise notation based on #group feedback)
+
+#* cluster type (labelled 1,2,3,4) = medullary (2 types), etc
+#* cluster (labelled 1,2,3,...,n) = a physical assemblage of pixels of the same cluster type
+
+#Each image is first analyzed by k-means clustering to form four cluster types, of which two are distinct parts #of the medullary region. For now, we take as given that one of these is type 2 (but we're working on automating #that so that cluster types are numbered consistently across images). First we isolate type-2 pixels in the #matrix of cluster types (`my.mat`). This means every pixel of type 2 becomes a "1" and every other pixel #becomes a "0". This new matrix is called `type.2`
+
+
+type.2<-ifelse(my.mat==4,1,0)
+type.3<-ifelse(my.mat==3,1,0)
+
+
+#Next we run a CCL analysis on `type.2` to assign each pixel to membership of one of 1:n clusters. This is #stored in a matrix called `clus.2`
+
 
 library(SDMTools)
-ccl.mat<-ConnCompLabel(my.mat)
-image(ccl.mat)
-image(t(ccl.mat[10:1,]),col=c('grey',rainbow(length(unique(ccl.mat))-1)))
-max(ccl.mat) #how many clusters
-table(ccl.mat) #size distribution
+clus.2<-ConnCompLabel(type.2)
+clus.3<-ConnCompLabel(type.3)
 
-my.cents<-NULL    #calculate cluster centriods
-for (j in 1:max(ccl.mat)){
-  tmp<-(which(ccl.mat==j,arr.ind=T))
-  my.cents<-rbind(my.cents,colMeans(tmp))
+
+#To visualize, we can just plot where pixels of type-2 are
+
+
+image(type.2)
+image(type.3)
+
+
+#We can also color code them according to cluster membership
+
+my.colors<-rainbow(length(unique(as.vector(clus.2))))
+my.colors[1]<-"black"
+image(clus.2,col=my.colors)
+
+my.colors3<-rainbow(length(unique(as.vector(clus.3))))
+my.colors3[1]<-"black"
+image(clus.3,col=my.colors3)
+
+
+### Summary statistics of clusters
+
+#The number of clusters of a given type is just the biggest number in `clus.2`
+
+print(max(clus.2))
+
+print(max(clus.3))
+
+#We can visualize the size distribution (number of pixels in clusters) with a histogram
+
+hist(clus.2[which(clus.2>0)])
+
+hist(clus.3[which(clus.3>0)])
+
+
+#And we can also view this as a table
+
+tbl2<-table(clus.2[which(clus.2>0)])
+tbl2
+
+tbl3<-table(clus.3[which(clus.3>0)])
+tbl3
+
+
+#We may also choose to ignore clusters that are very small (e.g. only one or two pixels)
+
+
+tiny.clusters<-which(tbl2<4)
+clus.2b<-clus.2
+clus.2b[which(clus.2b%in%tiny.clusters)]<-0
+image(clus.2b,col=my.colors)
+print(max(clus.2b))
+
+tiny.clusters<-which(tbl3<4)
+clus.3b<-clus.3
+clus.3b[which(clus.3b%in%tiny.clusters)]<-0
+image(clus.3b,col=my.colors)
+print(max(clus.3b))
+
+
+#We can make a table of this new data (with tiny clusters removed) and look and mean and variance of cluster #size
+
+
+tbl.2b<-table(clus.2b[which(clus.2b>0)])
+mean.cluster.size.2<-mean(tbl.2b)
+var.cluster.size.2<-var(tbl.2b)
+mean.cluster.size.2
+var.cluster.size.2
+
+tbl.3b<-table(clus.3b[which(clus.3b>0)])
+mean.cluster.size.3<-mean(tbl.3b)
+var.cluster.size.3<-var(tbl.3b)
+mean.cluster.size.3
+var.cluster.size.3
+
+
+#The variance to mean ratio is a simple way to consider aggregation (the tendency for pixels to be shared #unequally among clusters). A ratio <1 means clusters are all more or less the same size, a ratio of 1.0 means #the sizes are random, and a ratio >1 means they are aggregated (most pixels belonging to few clusters).
+
+
+v2m.ratio.2<-var.cluster.size.2/mean.cluster.size.2
+v2m.ratio.2
+
+v2m.ratio.3<-var.cluster.size.3/mean.cluster.size.3
+v2m.ratio.3
+
+
+#Centroids of clusters can be calculated (and visualized) relatively easily (I may have made a minor math typo - #but the plot suggests these centroids are more or less right)
+
+
+cntr.2b<-NULL
+for (i in 1:length(tbl.2b)){
+  idx2<-which(clus.2b==as.integer(names(tbl.2b)[i]),arr.ind=T)
+  cntr.2b<-rbind(cntr.2b,c(as.integer(names(tbl.2b)[i]),apply(idx2,2,mean)))
 }
-my.cents
+image(clus.2b,col=my.colors)
+for (i in 1:dim(cntr.2b)[1]){
+  text(cntr.2b[i,2]/(1+dim(my.mat)[1]),cntr.2b[i,3]/(1+dim(my.mat)[1]),"*",col="white")
+}
 
-library(raster)  #how far apart centroids are from each other
-dist.cents<-pointDistance(my.cents,my.cents,lonlat=F,allpairs=T)
-dist.cents
+cntr.3b<-NULL
+for (i in 1:length(tbl.3b)){
+  idx3<-which(clus.3b==as.integer(names(tbl.3b)[i]),arr.ind=T)
+  cntr.3b<-rbind(cntr.3b,c(as.integer(names(tbl.3b)[i]),apply(idx3,2,mean)))
+}
+image(clus.3b,col=my.colors)
+for (i in 1:dim(cntr.3b)[1]){
+  text(cntr.3b[i,2]/(1+dim(my.mat)[1]),cntr.3b[i,3]/(1+dim(my.mat)[1]),"*",col="white")
+}
 
-mean(dist.cents[which(dist.cents>0)]) #avg distance to other clusters
+
+#We can look at distances between centroids as well. This is most easily done using the `raster` package
+
+
+library(raster)
+dist.2b<-pointDistance(cbind(cntr.2b[,2],cntr.2b[,3]),cbind(cntr.3b[,2],cntr.3b[,3]),lonlat=F,allpairs=T)
+rownames(dist.2b)<-colnames(dist.2b)<-names(tbl.2b)
+dist.2b[1:5,1:5]
+
+
+#Shortest distance from each centroid to nearest neighbor centroid, can be calculated
+
+
+dist.2b[which(dist.2b==0)]<-NA
+short.dist.2b<-apply(dist.2b,1,min,na.rm=T)
+short.dist.2b
+
+mean(short.dist.2b)
+var(short.dist.2b)
 
 ```
 
@@ -621,21 +751,3 @@ assume we have vector (e.g. 20000 pixels, numbered)
 
 The next step of this project will be to examine how removal of specific cell types from the dataset will alter clustering as well as the ecological indicies.  We are also interested in further examining the clusters that appear when K is increased.  These clusters may have functional significance (for instance, they could be microenvironments that have not previously been identified).  We are also interested in looking at the process of involution, and how the organization differs from that of a WT thymus. We could also look at other mutants.
 The methods utilized in this study can be adapted to other organ systems.
-
-
-
-```{r}
-ccl.mat2<-ifelse(my.mat==2,1,0)
-ccl.mat3<-ccl.mat2*ccl.mat
-image(ccl.mat3)
-length(unique(as.vector(ccl.mat3))-1)
-image(ccl.mat3[20:30,70:80])
-
-
-my.mat2<-ccl.mat2*my.mat
-new.ccl<-ConnCompLabel(ccl.mat2)
-image(new.ccl,col=rev(gray.colors(30)))
-new.ccl2<-ifelse(new.ccl>0,1,0)
-image(new.ccl2)
-length(unique(as.vector(new.ccl))-1)
-```
