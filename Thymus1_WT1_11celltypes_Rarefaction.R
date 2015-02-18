@@ -5,7 +5,7 @@ load("WT1_Rarefaction.rdata")
 load("WT1_Rarefaction_150.rdata")
 
 msz=150  #matrix size in hist2d
-cluster=4  #number of clusters produced for K means
+cluster=6  #number of clusters produced for K means
 txtfiles_WT1_R=list.files(pattern="*.txt")  #loads in order all files within folder
 
 mat_WT1_R<-matrix(data=NA,nrow=22500,ncol=33) #this will change with size of matrix and # of sections/cell types
@@ -108,6 +108,8 @@ spe.kmeans_S1_WT1_R <- kmeans(spe.std1, centers=cluster, nstart=1000)
 spe.kmeans_S2_WT1_R <- kmeans(spe.std2, centers=cluster, nstart=1000)
 spe.kmeans_S3_WT1_R <- kmeans(spe.std3, centers=cluster, nstart=1000)
 
+save.image("WT1_Rarefaction_150_6.rdata")
+
 v0_WT1_R=spe.kmeans_All_WT1_R$cluster
 v1_WT1_R=spe.kmeans_S1_WT1_R$cluster  
 v2_WT1_R=spe.kmeans_S2_WT1_R$cluster
@@ -124,15 +126,15 @@ heatmap.2( v0.1_WT1_R, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v0.1_
 
 heatmap.2( v1.1_WT1_R, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v1.1_WT1_R,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
+           margins = c(0,0),col=c("red", "yellow", "blue", "green", "purple", "orange")) 
 
 heatmap.2( v2.1_WT1_R, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v2.1_WT1_R,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
+           margins = c(0,0),col=c("red", "yellow", "blue", "green", "purple", "orange")) 
 
 heatmap.2( v3.1_WT1_R, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v3.1_WT1_R,
            notecol="black", trace='none', key=FALSE,lwid = c(.01,0.99),lhei = c(.01,.99),
-           margins = c(0,0),col=c("red", "yellow", "blue", "green")) 
+           margins = c(0,0),col=c("red", "yellow", "blue", "green", "purple", "orange")) 
 
 
 # Do the k-means clustering [read 'help' for the 'kmeans' function to see what the arguments "centers" (clusters or k) and "nstart" (randomizations) mean].
