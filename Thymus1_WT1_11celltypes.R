@@ -4,11 +4,11 @@ library(gplots)
 load("WT1.rdata")
 load("WT1_150.rdata")
 
-msz=200  #matrix size in hist2d
-cluster=4  #number of clusters produced for K means
+msz=150  #matrix size in hist2d
+ #number of clusters produced for K means
 txtfiles_WT1=list.files(pattern="*.txt")  #loads in order all files within folder
 
-mat_WT1<-matrix(data=NA,nrow=40000,ncol=33) #this will change with size of matrix and # of sections/cell types
+mat_WT1<-matrix(data=NA,nrow=22500,ncol=33) #this will change with size of matrix and # of sections/cell types
 
 toFill_WT1<-as.data.frame(mat_WT1)  #changes to data frame
 
@@ -25,9 +25,9 @@ for(i in toUse0_WT1){
   obj_WT1 <- my.xy_WT1$counts
   
   obj_WT1[1,1] = obj_WT1[1,1]-1
-  obj_WT1[200,1] = obj_WT1[200,1]-1
-  obj_WT1[1,200] = obj_WT1[1,200]-1
-  obj_WT1[200,200]=obj_WT1[200,200]-1
+  obj_WT1[150,1] = obj_WT1[150,1]-1
+  obj_WT1[1,150] = obj_WT1[1,150]-1
+  obj_WT1[150,150]=obj_WT1[150,150]-1
   
   count_WT1<- as.vector(obj_WT1)
   toFill_WT1[,i]<-count_WT1
@@ -44,9 +44,9 @@ for(i in toUse1_WT1){
   obj_WT1 <- my.xy_WT1$counts
   
   obj_WT1[1,1] = obj_WT1[1,1]-1
-  obj_WT1[200,1] = obj_WT1[200,1]-1
-  obj_WT1[1,200] = obj_WT1[1,200]-1
-  obj_WT1[200,200]=obj_WT1[200,200]-1
+  obj_WT1[150,1] = obj_WT1[150,1]-1
+  obj_WT1[1,150] = obj_WT1[1,150]-1
+  obj_WT1[150,150]=obj_WT1[150,150]-1
   
   count_WT1<- as.vector(obj_WT1)
   toFill_WT1[,i]<-count_WT1
@@ -63,9 +63,9 @@ for(i in toUse2_WT1){
   obj_WT1 <- my.xy_WT1$counts
   
   obj_WT1[1,1] = obj_WT1[1,1]-1
-  obj_WT1[200,1] = obj_WT1[200,1]-1
-  obj_WT1[1,200] = obj_WT1[1,200]-1
-  obj_WT1[200,200]=obj_WT1[200,200]-1
+  obj_WT1[150,1] = obj_WT1[150,1]-1
+  obj_WT1[1,150] = obj_WT1[1,150]-1
+  obj_WT1[150,150]=obj_WT1[150,150]-1
   
   count_WT1<- as.vector(obj_WT1)
   toFill_WT1[,i]<-count_WT1
@@ -82,9 +82,9 @@ for(i in toUse3_WT1){
   obj_WT1 <- my.xy_WT1$counts
   
   obj_WT1[1,1] = obj_WT1[1,1]-1
-  obj_WT1[200,1] = obj_WT1[200,1]-1
-  obj_WT1[1,200] = obj_WT1[1,200]-1
-  obj_WT1[200,200]=obj_WT1[200,200]-1
+  obj_WT1[150,1] = obj_WT1[150,1]-1
+  obj_WT1[1,150] = obj_WT1[1,150]-1
+  obj_WT1[150,150]=obj_WT1[150,150]-1
   
   count_WT1<- as.vector(obj_WT1)
   toFill_WT1[,i]<-count_WT1
@@ -98,11 +98,19 @@ library (vegan)
 library(labdsv)
 
 # Do the k-means clustering [read 'help' for the 'kmeans' function to see what the arguments "centers" (clusters or k) and "nstart" (randomizations) mean].
-
+cluster=10 
 spe.kmeans_All_WT1 <- kmeans(result0_WT1, centers=cluster, nstart=1000)
 spe.kmeans_S1_WT1 <- kmeans(result1_WT1, centers=cluster, nstart=1000)
 spe.kmeans_S2_WT1 <- kmeans(result2_WT1, centers=cluster, nstart=1000)
 spe.kmeans_S3_WT1 <- kmeans(result3_WT1, centers=cluster, nstart=1000)
+
+save.image("WT1_150_5.rdata")
+save.image("WT1_150_6.rdata")
+save.image("WT1_150_7.rdata")
+save.image("WT1_150_8.rdata")
+save.image("WT1_150_9.rdata")
+save.image("WT1_150_10.rdata")
+
 
 library(gplots) ###Call 1 set at a time; produces image of section
 v0_WT1=spe.kmeans_All_WT1$cluster
@@ -112,12 +120,12 @@ v3_WT1=spe.kmeans_S3_WT1$cluster
 
 #load("thymus.Rdata")
 #image(v2) # make pic
-v0.1_WT1=matrix(v0_WT1,nrow=200,ncol=200)
-v1.1_WT1=matrix(v1_WT1,nrow=200,ncol=200)
-v2.1_WT1=matrix(v2_WT1,nrow=200,ncol=200)
-v3.1_WT1=matrix(v3_WT1,nrow=200,ncol=200)
+v0.1_WT1=matrix(v0_WT1,nrow=150,ncol=150)
+v1.1_WT1=matrix(v1_WT1,nrow=150,ncol=150)
+v2.1_WT1=matrix(v2_WT1,nrow=150,ncol=150)
+v3.1_WT1=matrix(v3_WT1,nrow=150,ncol=150)
 
-#v2_WT1<-v2_WT1[1:40,1:200] # trim
+#v2_WT1<-v2_WT1[1:40,1:150] # trim
 #image(v2_WT1) # make new pic
 
 heatmap.2( v0.1_WT1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v0.1_WT1,
@@ -139,28 +147,28 @@ heatmap.2( v3.1_WT1, Rowv=FALSE, Colv=FALSE, dendrogram='none', cellnote=v3.1_WT
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans_All_WT1$cluster)){ 
-  barplot(colSums(result0_WT1[which(spe.kmeans_All_WT1$cluster==i),]),main=i,ylim=c(0,12000)) 
+  barplot(colSums(result0_WT1[which(spe.kmeans_All_WT1$cluster==i),]),main=i,ylim=c(0,11500)) 
   # we pick out desired cluster and plot
 }
 
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans_S1_WT1$cluster)){ 
-  barplot(colSums(result1_WT1[which(spe.kmeans_S1_WT1$cluster==i),]),main=i,ylim=c(0,12000)) 
+  barplot(colSums(result1_WT1[which(spe.kmeans_S1_WT1$cluster==i),]),main=i,ylim=c(0,11500)) 
   #we pick out desired cluster and plot
 }
 
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans_S2_WT1$cluster)){ 
-  barplot(colSums(result2_WT1[which(spe.kmeans_S2_WT1$cluster==i),]),main=i,ylim=c(0,12000)) 
+  barplot(colSums(result2_WT1[which(spe.kmeans_S2_WT1$cluster==i),]),main=i,ylim=c(0,11500)) 
   # we pick out desired cluster and plot
 }
 
 my.order<-c(1,2,3,4) # define the order we want to plot panels
 par(mfrow=c(2,2)) # make 4 subplots in 2x2 style
 for (i in 1:max(spe.kmeans_S3_WT1$cluster)){ 
-  barplot(colSums(result3_WT1[which(spe.kmeans_S3_WT1$cluster==i),]),main=i,ylim=c(0,12000)) 
+  barplot(colSums(result3_WT1[which(spe.kmeans_S3_WT1$cluster==i),]),main=i,ylim=c(0,11500)) 
   # we pick out desired cluster and plot
 }
 
