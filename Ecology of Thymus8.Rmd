@@ -476,6 +476,8 @@ colnames(df_S3)<-colnames(df_S1)
 
 #dfTOTAL=rbind(df_S1,df_S2,df_S3)
 
+dfWT=rbind(df_S1_WT1,df_S2_WT1, df_S3_WT1, df_S1_WT2, df_S2_WT2, df_S3_WT2)
+
 dfTOTAL<-rbind(df_S1_WT1,df_S2_WT1, df_S3_WT1, df_S1_WT2, df_S2_WT2, df_S3_WT2, df_S1_Mutant1,
 df_S2_Mutant1, df_S3_Mutant1, df_S1_Mutant2, df_S2_Mutant2, df_S3_Mutant2)
 
@@ -483,7 +485,7 @@ dfTOTAL_R<-rbind(df_S1_WT1_R,df_S2_WT1_R, df_S3_WT1_R, df_S1_WT2_R, df_S2_WT2_R,
 df_S2_Mutant1_R, df_S3_Mutant1_R, df_S1_Mutant2_R, df_S2_Mutant2_R, df_S3_Mutant2_R)
 
 
-BrayCurtis<-vegdist(dfTOTAL,method="bray")
+BrayCurtis<-vegdist(dfWT,method="bray")
 hc<-hclust(BrayCurtis)
 plot(hc)
 
@@ -495,6 +497,8 @@ plot(hc)
 
 #Load in relevant data
 
+load("WT1_100_4.rdata")
+my.mat = v1.1_WT1
 
 load("WT1_150.rdata")
 my.mat = v1.1_WT1
@@ -525,8 +529,8 @@ my.mat = v3.1_Mutant2
 #Each image is first analyzed by k-means clustering to form four cluster types, of which two are distinct parts #of the medullary region. For now, we take as given that one of these is type 2 (but we're working on automating #that so that cluster types are numbered consistently across images). First we isolate type-2 pixels in the #matrix of cluster types (`my.mat`). This means every pixel of type 2 becomes a "1" and every other pixel #becomes a "0". This new matrix is called `type.2`
 
 
-type.2<-ifelse(my.mat==2,1,0)
-type.3<-ifelse(my.mat==3,1,0)
+type.2<-ifelse(my.mat==3,1,0)
+type.3<-ifelse(my.mat==4,1,0)
 
 
 #Next we run a CCL analysis on `type.2` to assign each pixel to membership of one of 1:n clusters. This is #stored in a matrix called `clus.2`
