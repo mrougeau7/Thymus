@@ -2,20 +2,16 @@
 title: "The Cellular Ecology of the Mouse Thymus"
 author: "Mary Browning, John Wares, Andrew Park, Nancy Manley"
 date: '`r format(Sys.time(), "%d %B, %Y")`'
-output: word_document
+output: pdf_document
 bibliography: thymus.bib
 ---
 
-<<<<<<< HEAD
-## Introduction2
-
-Abstract
+## Abstract
 
 The correct organization and abundance of cell types is important for optimal organ performance, but no quantitative methods currently exist for distinguishing organizational patterns. The ability to identify recurrent or cryptic cellular patterns could help us to better understand tissue function and to make comparisons with diseased tissues. Here, in an attempt to overcome this barrier, we have developed  novel molecular and computational analyses that allow us to study the organ of our choice, the thymus, in a statistical framework. First, we identify cell type abundance and location and use this information to recreate a virtual thymus section.  We then treat cell types like species in an ecosystem, thus enabling us to directly apply quantitative approaches used in ecology to our virtual section. We use K means clustering to computationally produce regions of the thymus a priori, followed by Bray Curtis Dissimilarity Index to determine the degree of dissimilarity between thymus samples and regions of the thymus. The output generated from these analyses can then be used to better understand spatial patterns/biogeography within a healthy functional thymus and will enable us to make informative comparisons of thymic tissues under different developmental, mutant, or disease conditions.
 
-=======
+
 ## Introduction
->>>>>>> origin/master
 
 Within the field of organ biology, there is a lack of quantitative methods for analyzing the organization, as opposed to the composition, of organs and tissues. Healthy organs require more than the appropriate proportions of component parts; these parts must also be arranged in specific ways in order to function properly. Without quantitative methods for assessing organization, a significant aspect of organ biology is inaccessible to analysis. However, beyond essentially descriptive assays, there are few statistical tools available for interpreting organizational characteristics. In contrast, the fields of ecology and population genetics have a robust mathematical tradition, with multiple quantitative tools available for describing the natural world. Fortunately, and surprisingly, a striking comparison can be drawn between the interactions that occur within organ systems and those that occur within ecosystems.  For instance, cell types in an organ, like species in an ecosystem, are influenced by the availability of space and resources as well as by the presence or absence of other cell types. The presence or absence of one cell type may alter the functional role and dominance of another, or the overall service the community provides to the larger system [@Wootton05]. Also, tissues are not typically composed with all cell types at equal abundance, which is similar to species in a community [@Krebs99]; there are a few common "species", and many low abundance "species" that fit a normal distribution curve.  By comparing cell types within a biological organ to species in an ecosystem, statistical methods used by ecologists can be directly applied to biological systems. We seek to make this comparison in an effort to expand the quantitative tools/methods available to organ biologists through the use of a well characterized and respected field.  Our overall goal is the development of a cellular ecology, where we can model cellular relationships and patterns to better understand the "biogeography" of the organ we wish to study. We aim to develop novel quantitative tools, modeled after the ecological toolkit, to spatially and statistically characterize healthy biological tissues. The results from this analysis will enable further informative comparisons with tissues in states of disequilibrium, including disease or developmental states, in order to identify any recurring organizational differences that can potentially lead to disfunction of the organ of interest.
 
@@ -45,6 +41,18 @@ Specific structural aspects of organs with strong 3-D structures, such as the lu
   Tcells     Foxp3, CD25  
                                        
 ----------- ---------- -------------------------
+
+\begin{table}[h]
+\begin{tabular}{ll}
+\multicolumn{1}{c}{CELL TYPE} & \multicolumn{1}{c}{MARKER} \\
+          cTEC           &            CD205          \\
+          mTEC           &            UEA1, Claudin3, Claudin4, K14, K5, Claudin5          \\
+           Blood vessel          &         Claudin5, CD31             \\
+          Mesenchyme           &            PDGFRb          \\
+           Dendritic          &          CD11c            \\
+    T-cells                 &                Foxp3, CD25     
+\end{tabular}
+\end{table}
  
 ## Methods
 
@@ -104,15 +112,15 @@ Files containing the X and Y coordinates from CellProfiler were uploaded into R 
 load("WT1_150.rdata")
 ```
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
 load("WT2_150.rdata")
 ```
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
 load("Mutant1_150.rdata")
 ```
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, results='hide', fig.show='hide'}
 load("Mutant2_150.rdata")
 ```
 
